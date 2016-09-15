@@ -13,7 +13,10 @@ int SinasFunction(){
 	x++;
 
 	return x;
+}
 
+int giofunc(){
+return 0;
 }
 
 <<<<<<< HEAD
