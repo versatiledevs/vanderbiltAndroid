@@ -19,39 +19,6 @@ int giofunc(){
 return 0;
 }
 
-<<<<<<< HEAD
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 int PJFunctions()
 {
 	int y = 10;
