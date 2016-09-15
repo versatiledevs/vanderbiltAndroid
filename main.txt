@@ -1,0 +1,17 @@
+int main(){
+	jordensFuntion();
+	SinasFunction();
+	LuisFuntion();
+	GeoFunction();
+	PJFunctions();
+
+}
+
+int SinasFunction(){
+
+	int x = 0;
+	x++;
+
+	return x;
+
+}
