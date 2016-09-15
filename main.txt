@@ -15,3 +15,13 @@ int SinasFunction(){
 	return x;
 
 }
+
+
+
+int PJFunctions()
+{
+	int y = 10;
+	string = "pj is awesome";
+
+
+}
