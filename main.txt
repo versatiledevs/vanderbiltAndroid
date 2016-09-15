@@ -15,3 +15,8 @@ int SinasFunction(){
 	return x;
 
 }
+
+void jordensFunction(){
+	cout<<"Does this work"<<"\n"
+	
+}
