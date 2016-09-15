@@ -16,7 +16,48 @@ int SinasFunction(){
 
 }
 
+<<<<<<< HEAD
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+int PJFunctions()
+{
+	int y = 10;
+	string = "pj is awesome";
+
+
+=======
 void jordensFunction(){
 	cout<<"Does this work"<<"\n";
 	cout<<"I think i can i think i can"<<"\n";	
+>>>>>>> master
 }
