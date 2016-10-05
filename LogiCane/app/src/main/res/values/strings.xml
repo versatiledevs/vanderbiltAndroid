@@ -1,0 +1,15 @@
+<resources>
+
+    <string name="app_name">Logicane</string>
+    <string name="stringEnterEmail">Email</string>
+    <string name="stringEnterPassword">Password</string>
+    <string name="stringSingUPButton">SingUp</string>
+    <string name="stringLoginButton">Login</string>
+    <string name="stringSignOUT">SignOut</string>
+    <string name="stringNoAccount">create a new account</string>
+    <string name="minimum_password">Enter at least 6 characters!</string>
+    <string name="auth_failed">Authentication failed</string>
+    <string name="message">Hello, Your are sign in!</string>
+
+
+</resources>
