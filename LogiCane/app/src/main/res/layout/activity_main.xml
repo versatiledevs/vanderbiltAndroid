@@ -26,7 +26,8 @@
         android:background="@color/colorPrimary"
         android:text="@string/stringSignOUT"
         android:textColor="@android:color/white"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_alignParentBottom="true"/>
 
 
 

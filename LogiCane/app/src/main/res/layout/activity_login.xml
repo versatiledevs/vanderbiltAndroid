@@ -44,7 +44,9 @@
             android:background="@color/colorPrimary"
             android:textColor="@android:color/white"/>
 
-        <Button
+        <!-- removing the option to create users
+
+         <Button
             android:id="@+id/buttonSignup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -52,7 +54,7 @@
             android:text="@string/stringNoAccount"
             android:background="@color/colorPrimary"
             android:textColor="@android:color/white"/>
-
+            -->
 
 
         <ProgressBar
