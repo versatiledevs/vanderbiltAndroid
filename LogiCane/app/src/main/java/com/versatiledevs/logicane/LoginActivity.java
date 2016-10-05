@@ -21,7 +21,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText editText_Email;
     private EditText editText_Password;
     private Button button_SignIN;
-    private Button button_Register;
+    //private Button button_Register;
 
     private FirebaseAuth firebaseAuth;
     private ProgressBar progressBar;
@@ -40,11 +40,11 @@ public class LoginActivity extends AppCompatActivity {
         editText_Email = (EditText) findViewById(R.id.editTextEmail);
         editText_Password = (EditText) findViewById(R.id.editTextPassword);
         button_SignIN = (Button) findViewById(R.id.buttonSignIN);
-        button_Register = (Button) findViewById(R.id.buttonSignup);
+        //button_Register = (Button) findViewById(R.id.buttonSignup);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         firebaseAuth = FirebaseAuth.getInstance();
-
+/*
         button_Register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-
+*/
 
         button_SignIN.setOnClickListener(new View.OnClickListener() {
             @Override
