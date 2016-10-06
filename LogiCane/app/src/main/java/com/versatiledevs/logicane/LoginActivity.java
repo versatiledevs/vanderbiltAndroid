@@ -2,7 +2,7 @@
     Android app is developed by VersatileDevs
         LUis Chunga
         Sina Serati
-        Jorden
+        Jordan Dowling
         PJ
         Geo
 
