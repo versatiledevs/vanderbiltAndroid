@@ -12,58 +12,39 @@
 
 
     <LinearLayout
-        android:layout_centerVertical="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
         android:orientation="vertical">
 
 
         <EditText
-            android:id="@+id/editTextEmail"
+            android:id="@+id/edit_email_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            android:hint="@string/stringEnterEmail"
+            android:hint="@string/hint_enter_email"
             android:inputType="textEmailAddress" />
 
         <EditText
-            android:id="@+id/editTextPassword"
+            android:id="@+id/edit_password_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            android:hint="@string/stringEnterPassword"
+            android:hint="@string/hint_enter_password"
             android:inputType="textPassword" />
 
 
         <Button
-            android:id="@+id/buttonSignIN"
+            android:id="@+id/sign_in_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            android:text="@string/stringLoginButton"
             android:background="@color/colorPrimary"
-            android:textColor="@android:color/white"/>
+            android:onClick="login"
+            android:text="@string/login_button_text"
+            android:textColor="@android:color/white" />
 
-        <!-- removing the option to create users
-
-         <Button
-            android:id="@+id/buttonSignup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:text="@string/stringNoAccount"
-            android:background="@color/colorPrimary"
-            android:textColor="@android:color/white"/>
-            -->
-
-
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center|bottom"
-            android:layout_marginBottom="20dp"
-            android:visibility="gone" />
 
 
     </LinearLayout>

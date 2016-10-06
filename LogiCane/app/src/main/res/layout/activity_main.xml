@@ -11,25 +11,23 @@
     tools:context="com.versatiledevs.logicane.MainActivity">
 
 
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/message"
-        android:textStyle="bold"/>
+        android:text="@string/welcome_message"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/buttonSignOut"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_marginTop="16dp"
         android:background="@color/colorPrimary"
-        android:text="@string/stringSignOUT"
+        android:onClick="signOut"
+        android:text="@string/signout_button_text"
         android:textColor="@android:color/white"
-        android:textStyle="bold"
-        android:layout_alignParentBottom="true"/>
-
-
+        android:textStyle="bold" />
 
 
 </RelativeLayout>
