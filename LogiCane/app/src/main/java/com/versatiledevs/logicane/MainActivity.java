@@ -1,12 +1,13 @@
 /*
     Android app is developed by VersatileDevs
-        Lewis
+        Luis chunga
         Sina Serati
         Jorden
         PJ
         Geo
 
         Latest update on Oct/6/2016
+        Description: This is the profile activity that allows to sign out the user
 
  */
 
