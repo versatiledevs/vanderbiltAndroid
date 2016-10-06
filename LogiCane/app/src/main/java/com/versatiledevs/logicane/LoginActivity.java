@@ -1,10 +1,12 @@
 /*
     Android app is developed by VersatileDevs
-        Lewis
+        LUis Chunga
         Sina Serati
         Jorden
         PJ
         Geo
+
+        Description : This is the login activity that allows only authorized users
 
         Latest update on Oct/6/2016
 
