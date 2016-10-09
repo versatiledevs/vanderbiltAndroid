@@ -35,7 +35,6 @@ public class LoginActivity extends AppCompatActivity {
     private EditText editTextEmail;
     private EditText editTextPassword;
     private Button buttonSignIN;
-
     private FirebaseAuth firebaseAuth;
     private ProgressDialog progressDialog;
 
@@ -50,18 +49,22 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
             finish();
         }
+        firebaseAuth = FirebaseAuth.getInstance();
+    }
+
+    public void loginPublic(View view){
+        login();
+    }
+
+
+
+    // this method will log user into firebase
+    private void login() {
 
         editTextEmail = (EditText) findViewById(R.id.edit_email_text);
         editTextPassword = (EditText) findViewById(R.id.edit_password_text);
         buttonSignIN = (Button) findViewById(R.id.sign_in_button);
         progressDialog = new ProgressDialog(this);
-
-        firebaseAuth = FirebaseAuth.getInstance();
-
-
-    }
-    // this method will log user into firebase
-    public void login(View view) {
         String email = editTextEmail.getText().toString();
         final String password = editTextPassword.getText().toString();
 

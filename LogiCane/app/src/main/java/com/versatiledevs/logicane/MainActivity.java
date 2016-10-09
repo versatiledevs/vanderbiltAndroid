@@ -43,11 +43,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
 
-
                 FirebaseUser user = firebaseAuth.getCurrentUser();
+                // user auth state is changed - user is null
+                // it launches the login activity
                 if (user == null) {
-                    // user auth state is changed - user is null
-                    // it launches the login activity
                     startActivity(new Intent(MainActivity.this, LoginActivity.class));
                     finish();
 
@@ -57,8 +56,13 @@ public class MainActivity extends AppCompatActivity {
         };
     }
 
+    public void signOutPublic(View view)
+    {
+        signOut();
+    }
+
     //sign out method
-    public void signOut(View view) {
+    private void signOut() {
         firebaseAuth.signOut();
         Toast.makeText(MainActivity.this, "Goodbye.", Toast.LENGTH_SHORT).show();
         startActivity(new Intent(MainActivity.this, LoginActivity.class));
