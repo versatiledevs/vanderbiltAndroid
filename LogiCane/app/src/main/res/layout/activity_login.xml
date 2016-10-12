@@ -41,10 +41,9 @@
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
             android:background="@color/colorPrimary"
-            android:onClick="login"
+            android:onClick="loginPublic"
             android:text="@string/login_button_text"
             android:textColor="@android:color/white" />
-
 
 
     </LinearLayout>

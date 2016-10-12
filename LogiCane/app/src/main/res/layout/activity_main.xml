@@ -24,10 +24,9 @@
         android:layout_alignParentBottom="true"
         android:layout_marginTop="16dp"
         android:background="@color/colorPrimary"
-        android:onClick="signOut"
+        android:onClick="signOutPublic"
         android:text="@string/signout_button_text"
         android:textColor="@android:color/white"
         android:textStyle="bold" />
-
 
 </RelativeLayout>
