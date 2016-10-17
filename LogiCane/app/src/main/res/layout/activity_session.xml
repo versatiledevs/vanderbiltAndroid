@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:rsb="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:columnCount="2"
@@ -20,9 +21,31 @@
             android:background="@color/headers"
             android:layout_alignParentTop="true"
             />
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/sessionInfoLayout"
+            android:layout_below="@+id/sessionTextView"
+
+            >
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    />
+
+            </TableRow>
+
+
+        </TableLayout>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="150dp"
+            android:id="@+id/sessionInfoLayout"
             android:layout_alignParentBottom="true"
             >
             <TextView
@@ -157,38 +180,18 @@
                 />
         </LinearLayout>
 
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_marginTop="20dp"
-            android:layout_above="@+id/timerLayout"
+
+        <org.florescu.android.rangeseekbar.RangeSeekBar
             android:layout_width="match_parent"
+            android:layout_above="@+id/timerLayout"
             android:layout_height="wrap_content"
-            >
-            <TextView
-                android:id="@+id/text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Range Set Double value"
-            android:textSize="22dp"
+            rsb:absoluteMaxValue="86400"
+            rsb:absoluteMinValue="0"
+            rsb:textAboveThumbsColor="@android:color/holo_purple"
+            rsb:thumbShadow="true"
+            rsb:showLabels="false"
             />
 
-            <org.florescu.android.rangeseekbar.RangeSeekBar
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/seekBar"
-                rsb:absoluteMaxValue="30"
-                rsb:absoluteMinValue="0"
-                rsb:thumbDisabled="@drawable/custom_slider_thumb"
-                rsb:thumbNormal="@drawable/custom_slider_thumb"
-                rsb:thumbPressed="@drawable/custom_slider_thumb"
-                rsb:thumbShadow="true"
-                rsb:thumbShadowBlur="3dp"
-                rsb:thumbShadowColor="@color/primary_material_light"
-                rsb:thumbShadowXOffset="1dp"
-                rsb:thumbShadowYOffset="2dp"
-                android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true"
-                />
-        </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="120dp"

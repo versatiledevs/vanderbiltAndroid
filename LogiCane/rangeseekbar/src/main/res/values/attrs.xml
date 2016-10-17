@@ -47,10 +47,8 @@
         <attr name="thumbShadowYOffset" format="dimension"/>
         <attr name="thumbShadowBlur" format="dimension"/>
 
-        <attr name="minDefValue" format="integer|float"/>
-
-        <!-- the maximum of the range -->
-        <attr name="maxDefValue" format="integer|float"/>
+        <!-- to activate the thumbs and texts when the min and max values are the default ones (defaults to false) -->
+        <attr name="activateOnDefaultValues" format="boolean"/>
     </declare-styleable>
 
 </resources>
