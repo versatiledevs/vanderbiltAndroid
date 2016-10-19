@@ -1,0 +1,7 @@
+#Sat Oct 15 16:29:03 CDT 2016
+base.0=C\:\\Users\\jdowl\\Desktop\\VersatileDevs\\vanderbiltAndroid\\MyApplication\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run_cf3bc7bd106d46148a74d7c3f24537d662ae0c7b
+renamed.1=classes2.dex
+renamed.0=classes.dex
+file.1=C\:\\Users\\jdowl\\Desktop\\VersatileDevs\\vanderbiltAndroid\\MyApplication\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run-bootstrap_c89564974e86132a39326ad7f7fe8b00bb5c465d\\classes.dex
+base.1=C\:\\Users\\jdowl\\Desktop\\VersatileDevs\\vanderbiltAndroid\\MyApplication\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run-bootstrap_c89564974e86132a39326ad7f7fe8b00bb5c465d
+file.0=C\:\\Users\\jdowl\\Desktop\\VersatileDevs\\vanderbiltAndroid\\MyApplication\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run_cf3bc7bd106d46148a74d7c3f24537d662ae0c7b\\classes.dex

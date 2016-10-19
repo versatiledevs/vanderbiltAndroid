@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="C:\Users\jdowl\Desktop\VersatileDevs\vanderbiltAndroid\MyApplication\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="867dad63c33388ff8c7644b236579355036d075f">
+        <dex dex="C:\Users\jdowl\Desktop\VersatileDevs\vanderbiltAndroid\MyApplication\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_f40f487e1c1222d968b5a59f624d0fb724076659\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\jdowl\Desktop\VersatileDevs\vanderbiltAndroid\MyApplication\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="5f64d657e838e8375135c0f6057a7ff8fab6a50e">
+        <dex dex="C:\Users\jdowl\Desktop\VersatileDevs\vanderbiltAndroid\MyApplication\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_243119a59fbb26b103ba22d5fbc4d5d02f98423f\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\jdowl\Desktop\VersatileDevs\vanderbiltAndroid\MyApplication\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="94bc1dfb84dcc8b6f6f8f7cc726d7b2dd39c1574">
+        <dex dex="C:\Users\jdowl\Desktop\VersatileDevs\vanderbiltAndroid\MyApplication\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-24.2.1_43b87470b2f99e1c05a0689ebf93be736fbcd949\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\jdowl\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\24.2.1\support-annotations-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="8de3aafecbdf98a61db6427f008f2d515bcd2544">
+        <dex dex="C:\Users\jdowl\Desktop\VersatileDevs\vanderbiltAndroid\MyApplication\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-24.2.1_2b11d7c4ff9c153e23a7ddff48146c93524a5169\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\jdowl\Desktop\VersatileDevs\vanderbiltAndroid\MyApplication\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="e4ad94fa49614852aea7ea8d485cf9a02cfe5548">
+        <dex dex="C:\Users\jdowl\Desktop\VersatileDevs\vanderbiltAndroid\MyApplication\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_c89564974e86132a39326ad7f7fe8b00bb5c465d\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\jdowl\Desktop\VersatileDevs\vanderbiltAndroid\MyApplication\app\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="7e4389bd133359a2ff88623ff1e4ff93d6e6f780">
+        <dex dex="C:\Users\jdowl\Desktop\VersatileDevs\vanderbiltAndroid\MyApplication\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_acb2893424ae1a9ee29fae9b3cf6c3753c2917e0\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\jdowl\Desktop\VersatileDevs\vanderbiltAndroid\MyApplication\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="d44bdf986526edcce7368ca06bddda7c113a9219">
+        <dex dex="C:\Users\jdowl\Desktop\VersatileDevs\vanderbiltAndroid\MyApplication\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_cf3bc7bd106d46148a74d7c3f24537d662ae0c7b\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\jdowl\Desktop\VersatileDevs\vanderbiltAndroid\MyApplication\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="43b2dba6b5a0b14527961b75329d0b90025f15ea">
+        <dex dex="C:\Users\jdowl\Desktop\VersatileDevs\vanderbiltAndroid\MyApplication\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-24.2.1_b2eeb222709ff9ede9eb2085c56a69a242ac8643\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\jdowl\Desktop\VersatileDevs\vanderbiltAndroid\MyApplication\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="9c4c3bc902450c39ed54de170db4fb12aea20a35">
+        <dex dex="C:\Users\jdowl\Desktop\VersatileDevs\vanderbiltAndroid\MyApplication\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-utils-24.2.1_12721ab8b87db849cdf068f3c68fc52427d86703\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\jdowl\Desktop\VersatileDevs\vanderbiltAndroid\MyApplication\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="b9a1ac78ad7ef3abedc4a4b30cd92bcacb939d1f">
+        <dex dex="C:\Users\jdowl\Desktop\VersatileDevs\vanderbiltAndroid\MyApplication\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-fragment-24.2.1_31d99d77a9f9e4d71951213ac5d72ff824a8165b\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\jdowl\Desktop\VersatileDevs\vanderbiltAndroid\MyApplication\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="fbf8da429efd5ad21e02e3e5ecaa1efc4167878d">
+        <dex dex="C:\Users\jdowl\Desktop\VersatileDevs\vanderbiltAndroid\MyApplication\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_819708ec25bf80d8db649b958471f1c677753ec8\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\jdowl\Desktop\VersatileDevs\vanderbiltAndroid\MyApplication\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="09b462bbcb77650284bd6614f1a32f360ef369f8">
+        <dex dex="C:\Users\jdowl\Desktop\VersatileDevs\vanderbiltAndroid\MyApplication\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-media-compat-24.2.1_7ccd60d0f5ad3774cb041e33d758bffe782164d5\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\jdowl\Desktop\VersatileDevs\vanderbiltAndroid\MyApplication\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="935a969265b2a166b2d20415423f5f6e90fe16e0">
+        <dex dex="C:\Users\jdowl\Desktop\VersatileDevs\vanderbiltAndroid\MyApplication\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_14ac0773696ab66366e77e7e7c9408066f4577e2\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\jdowl\Desktop\VersatileDevs\vanderbiltAndroid\MyApplication\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="C:\Users\jdowl\Desktop\VersatileDevs\vanderbiltAndroid\MyApplication\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-24.2.1_26ba72f8d730f6dd34316e43ac2db19c50611dd2\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\jdowl\Desktop\VersatileDevs\vanderbiltAndroid\MyApplication\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="e7f3132168957eefc46229fc32c3bd464642b71e">
+        <dex dex="C:\Users\jdowl\Desktop\VersatileDevs\vanderbiltAndroid\MyApplication\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-ui-24.2.1_b893009b3cc7e06955fc0d30db5dae861c9c6cad\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\jdowl\Desktop\VersatileDevs\vanderbiltAndroid\MyApplication\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="d5c731fc64c03dfe04d51134955b483551c35849">
+        <dex dex="C:\Users\jdowl\Desktop\VersatileDevs\vanderbiltAndroid\MyApplication\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-24.2.1_aa1920ef1b74e741fa29b81bdb8a87878a28d61f\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\jdowl\Desktop\VersatileDevs\vanderbiltAndroid\MyApplication\app\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="0ecb4b595fa0f0f8018a149ace3ea6525624f94e">
+        <dex dex="C:\Users\jdowl\Desktop\VersatileDevs\vanderbiltAndroid\MyApplication\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-compat-24.2.1_e64ce7931657764061ca27f98fac5913681e5506\classes.dex" />
+    </item>
+
+</items>
