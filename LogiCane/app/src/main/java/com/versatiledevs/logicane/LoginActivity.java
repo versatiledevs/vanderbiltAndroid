@@ -53,11 +53,6 @@ public class LoginActivity extends AppCompatActivity {
     private Button buttonSignIN;
     private FirebaseAuth firebaseAuth;
     private ProgressDialog progressDialog;
-    public static int admin = 1;
-    public static int patient = 2;
-    public static int therapist = 3;
-    public static int role = 0;
-
 
     // This fuction is called when the App is opened, aka its the apps constructor
     @Override
@@ -132,12 +127,10 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.makeText(LoginActivity.this, "WELCOME!", Toast.LENGTH_SHORT).show();
 
                             /************************
-                             * This is the beginning of getting the role objects value from the Database.
-                             * I'm currently able to get the information from the database but
-                             * I'm unable to get the true value on the if statement below.
+                             *This is the class that is getting the role information from the database.
+                             *
                              */
                             final FirebaseUser user = firebaseAuth.getCurrentUser();
-                            //Is this NULL?
                             String uid = user.getUid();
 
                             final FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -146,47 +139,33 @@ public class LoginActivity extends AppCompatActivity {
                             fName.addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
+                                    String admin = "admin";
+                                    String role = "";
+                                    role = dataSnapshot.getValue(String.class);
 
-                                    String temp = new String(dataSnapshot.getValue(String.class));
-                                    if(temp.equals("admin"))
+                                    if (role.equals(admin)) //if user == admin go to admin activity
                                     {
-                                        LoginActivity.role = LoginActivity.admin;
+                                        Intent intent = new Intent(LoginActivity.this, Admin.class);
+                                        startActivity(intent);
+                                        finish();
+                                    //This is still in progress.
+                                    }else if(false) //User is a patient
+                                    {
+
+                                    }else //User is a doctor.
+                                    {
+                                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                        startActivity(intent);
+                                        finish();
                                     }
-                                    //Log.d("Role:",role);
-                                    //Log.d("Admin?: ", admin);
                                 }
 
                                 @Override
                                 public void onCancelled(DatabaseError databaseError) {
+                                    //Error handling need to go in here.
 
                                 }
                             });
-
-                            //Log.d("Role1",role);
-                            //Log.d("Admin1", admin);
-                            /*
-                            *The if statement below is not producing the correct true value.
-                            * I'm still trying to figure this out.
-                            *
-                             */
-                            if (LoginActivity.role == LoginActivity.admin) //if user == admin go to admin activity
-                            {
-                                Intent intent = new Intent(LoginActivity.this, Admin.class);
-                                startActivity(intent);
-                                finish();
-
-                            }else if(false) //User is a patient
-                            {
-
-                            }else //User is a doctor.
-                            {
-                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                startActivity(intent);
-                                finish();
-                            }
-
-
-
                         }
                     }
                 });
