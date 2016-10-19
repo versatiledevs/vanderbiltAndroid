@@ -9,7 +9,7 @@
     <string name="no_account_error">create a new account</string>
     <string name="minimum_password">Enter at least 6 characters!</string>
     <string name="auth_failed">Authentication failed</string>
-    <string name="welcome_message">Hello, Your are sign in!</string>
+    <string name="welcome_message">Hello, Your are signed in!</string>
 
 
 </resources>

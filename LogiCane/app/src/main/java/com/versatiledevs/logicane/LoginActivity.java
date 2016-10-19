@@ -27,8 +27,13 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -46,8 +51,13 @@ public class LoginActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
         if (firebaseAuth.getCurrentUser() != null) {
+            //PJ: I commented this code out because if I was already logged in
+            // it would take me back to this activity which is not what we want.
+            //However, with it commented out it takes us back to the login screen which I think
+            // is more appropriate.
+            /*
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
-            finish();
+            finish();*/
         }
         firebaseAuth = FirebaseAuth.getInstance();
     }
@@ -102,9 +112,34 @@ public class LoginActivity extends AppCompatActivity {
                             progressDialog.dismiss();
                             // MainActivity = sign out
                             Toast.makeText(LoginActivity.this, "WELCOME!", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            startActivity(intent);
-                            finish();
+
+                            //I need to put some if statements here to check and see what
+                            // the role of the user is.
+
+                            DatabaseReference ref = new DatabaseReference("https://myfirebaseurl.firebaseio.com/android/saving-data/fireblog");
+
+
+                            FirebaseUser user = firebaseAuth.getCurrentUser();
+                            String uid = user.getUid();
+
+                            if (true) //if user == admin go to admin activity
+                            {
+                                Intent intent = new Intent(LoginActivity.this, Admin.class);
+                                startActivity(intent);
+                                finish();
+
+                            }else if(false) //User is a patient
+                            {
+
+                            }else //User is a doctor.
+                            {
+                                /*Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                startActivity(intent);
+                                finish();*/
+                            }
+
+
+
                         }
                     }
                 });
