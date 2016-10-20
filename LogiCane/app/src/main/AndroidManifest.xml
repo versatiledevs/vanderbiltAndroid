@@ -21,6 +21,7 @@
         <activity android:name=".Admin" />
         <activity android:name=".newUserActivity" />
         <activity android:name=".deleteUserActivity" />
+        <activity android:name=".patient_activity"/>
         <activity android:name=".deleteDataActivity"></activity>
     </application>
 

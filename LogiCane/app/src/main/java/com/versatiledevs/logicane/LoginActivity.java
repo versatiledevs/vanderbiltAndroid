@@ -124,51 +124,61 @@ public class LoginActivity extends AppCompatActivity {
                         } else {
                             progressDialog.dismiss();
                             // MainActivity = sign out
+
+                            DetermineRole();
                             Toast.makeText(LoginActivity.this, "WELCOME!", Toast.LENGTH_SHORT).show();
-
-                            /************************
-                             *This is the class that is getting the role information from the database.
-                             *
-                             */
-                            final FirebaseUser user = firebaseAuth.getCurrentUser();
-                            String uid = user.getUid();
-
-                            final FirebaseDatabase database = FirebaseDatabase.getInstance();
-                            DatabaseReference myRef = database.getReference("Users").child(uid);
-                            DatabaseReference fName = myRef.child("role");
-                            fName.addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(DataSnapshot dataSnapshot) {
-                                    String admin = "admin";
-                                    String role = "";
-                                    role = dataSnapshot.getValue(String.class);
-
-                                    if (role.equals(admin)) //if user == admin go to admin activity
-                                    {
-                                        Intent intent = new Intent(LoginActivity.this, Admin.class);
-                                        startActivity(intent);
-                                        finish();
-                                    //This is still in progress.
-                                    }else if(false) //User is a patient
-                                    {
-
-                                    }else //User is a doctor.
-                                    {
-                                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                        startActivity(intent);
-                                        finish();
-                                    }
-                                }
-
-                                @Override
-                                public void onCancelled(DatabaseError databaseError) {
-                                    //Error handling need to go in here.
-
-                                }
-                            });
                         }
                     }
                 });
+    }
+
+    /************************
+     *This is the class that is getting the role information from the database.
+     *
+     */
+    private void DetermineRole()
+    {
+        final FirebaseUser user = firebaseAuth.getCurrentUser();
+        String uid = user.getUid();
+
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("Users").child(uid);
+        DatabaseReference fName = myRef.child("role");
+        fName.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String admin = "admin";
+                String doctor = "doctor";
+                String patient = "patient";
+                String role = "";
+                role = dataSnapshot.getValue(String.class);
+
+                if (role.equals(admin)) //Admin Activity
+                {
+                    Intent intent = new Intent(LoginActivity.this, Admin.class);
+                    startActivity(intent);
+                    finish();
+
+                }else if(role.equals(patient))  //Patient Activity
+                {
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }else if(role.equals(doctor)) //Doctor Activity
+                {
+                    Intent intent = new Intent(LoginActivity.this, patient_activity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                //Error handling need to go in here.
+
+            }
+        });
+
     }
 
 
