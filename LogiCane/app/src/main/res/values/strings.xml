@@ -25,5 +25,17 @@
     <string name="sessionLocationLabelTextView">Session Location</string>
     <string name="patientIdLabelTextView">Patient ID</string>
 
+    <string name="transverseAccelerationLabelTextView">Transverse \n Acceleration</string>
+    <string name="absoluteAccelerationLabelTextView">Absolute \n Acceleration</string>
+
+    <string name="meanLabelTextView">Mean</string>
+    <string name="sdLabelTextView">SD</string>
+    <string name="medianLabelTextView">Median</string>
+    <string name="skewnessLabelTextView">Skewness</string>
+    <string name="KurtosisLabelTextView">Kurtosis</string>
+    <string name="minLabelTextView">Min</string>
+    <string name="maxLabelTextView">Max</string>
+
+
 
 </resources>

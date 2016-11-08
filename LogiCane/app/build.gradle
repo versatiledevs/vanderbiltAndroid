@@ -29,6 +29,7 @@ dependencies {
     compile 'com.google.firebase:firebase-auth:9.6.1'
     testCompile 'junit:junit:4.12'
     compile 'org.florescu.android.rangeseekbar:rangeseekbar-library:0.3.0'
+    compile 'com.jjoe64:graphview:4.2.1'
 
 }
 apply plugin: 'com.google.gms.google-services'

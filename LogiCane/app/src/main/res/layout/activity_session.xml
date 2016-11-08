@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:rsb="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:columnCount="2"
-    android:rowCount="1"
+    android:orientation="horizontal"
     >
     <RelativeLayout
-        android:layout_width="420dp"
+        android:layout_width="550dp"
         android:layout_height="match_parent"
-        android:layout_column="0"
-        android:layout_rowSpan="1"
+        android:layout_weight="1"
         >
         <TextView
             android:layout_width="match_parent"
@@ -21,32 +19,373 @@
             android:background="@color/headers"
             android:layout_alignParentTop="true"
             />
-        <TableLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/sessionInfoLayout"
             android:layout_below="@+id/sessionTextView"
-
             >
-            <TableRow
+            <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:stretchColumns="*"
                 >
-                <TextView
+                <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
 
-                    />
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
 
-            </TableRow>
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        />
+
+                </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        />
+
+                </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/meanLabelTextView"
+                        android:text="@string/meanLabelTextView"
+                        android:gravity="center"
+                        android:padding="@dimen/defaultPadding"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="@dimen/defaultPadding"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="@dimen/defaultPadding"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="@dimen/defaultPadding"
+
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="@dimen/defaultPadding"
+
+                        />
+
+                </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/sdLabelTextView"
+                        android:text="@string/sdLabelTextView"
+                        android:gravity="center"
+                        android:padding="@dimen/defaultPadding"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="@dimen/defaultPadding"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="@dimen/defaultPadding"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="@dimen/defaultPadding"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="@dimen/defaultPadding"
+                        />
+
+                </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/medianLabelTextView"
+                        android:text="@string/medianLabelTextView"
+                        android:gravity="center"
+                        android:padding="@dimen/defaultPadding"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="@dimen/defaultPadding"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="@dimen/defaultPadding"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/defaultPadding"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="@dimen/defaultPadding"
+                        />
+
+                </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/skewnessLabelTextView"
+                        android:text="@string/skewnessLabelTextView"
+                        android:gravity="center"
+                        android:padding="@dimen/defaultPadding"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="@dimen/defaultPadding"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="@dimen/defaultPadding"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="@dimen/defaultPadding"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="@dimen/defaultPadding"
+                        />
+
+                </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/KurtosisLabelTextView"
+                        android:text="@string/KurtosisLabelTextView"
+                        android:gravity="center"
+                        android:padding="@dimen/defaultPadding"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="@dimen/defaultPadding"
+
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="@dimen/defaultPadding"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="@dimen/defaultPadding"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="@dimen/defaultPadding"
+                        />
+
+                </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/minLabelTextView"
+                        android:text="@string/minLabelTextView"
+                        android:gravity="center"
+                        android:padding="@dimen/defaultPadding"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="@dimen/defaultPadding"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="@dimen/defaultPadding"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="@dimen/defaultPadding"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="@dimen/defaultPadding"
+                        />
+
+                </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:id="@+id/maxLabelTextView"
+                        android:text="@string/maxLabelTextView"
+                        android:padding="@dimen/defaultPadding"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="@dimen/defaultPadding"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="@dimen/defaultPadding"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="@dimen/defaultPadding"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="@dimen/defaultPadding"
+                        />
+
+                </TableRow>
 
 
-        </TableLayout>
+            </TableLayout>
+        </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:id="@+id/sessionInfoLayout"
             android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
             >
             <TextView
                 android:layout_width="match_parent"
@@ -58,75 +397,92 @@
                 android:background="@color/headers"
                 />
             <LinearLayout
-                android:layout_width="150dp"
-                android:layout_height="110dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:id="@+id/sessionLabel"
                 android:orientation="vertical"
                 android:layout_below="@+id/sessionInfoTextView"
-                android:layout_alignParentStart="true"
                 >
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="28dp"
-                    android:id="@+id/sessionIdLabelTextView"
-                    android:text="@string/sessionIdLabelTextView"
-                    android:gravity="left|center"
-                    />
-                <TextView
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dp"
+                        android:id="@+id/sessionIdLabelTextView"
+                        android:text="@string/sessionIdLabelTextView"
+                        android:gravity="left|center"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="28dp"
+                        android:id="@+id/sessionIdTextView"
+                        android:gravity="left|center"
+                        />
+                </LinearLayout>
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="28dp"
-                    android:id="@+id/sessionDateLabelTextView"
-                    android:text="@string/sessionDateLabelTextView"
-                    android:gravity="left|center"
-                    />
-                <TextView
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dp"
+                        android:id="@+id/sessionDateLabelTextView"
+                        android:text="@string/sessionDateLabelTextView"
+                        android:gravity="left|center"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="28dp"
+                        android:id="@+id/sessionDateTextView"
+                        android:gravity="left|center"
+                        />
+                </LinearLayout>
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="28dp"
-                    android:id="@+id/sessionLocationLabelTextView"
-                    android:text="@string/sessionLocationLabelTextView"
-                    android:gravity="left|center"
-                    />
-                <TextView
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dp"
+                        android:id="@+id/sessionLocationLabelTextView"
+                        android:text="@string/sessionLocationLabelTextView"
+                        android:gravity="left|center"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="28dp"
+                        android:id="@+id/sessionLocationTextView"
+                        android:gravity="left|center"
+                        />
+                </LinearLayout>
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="28dp"
-                    android:id="@+id/patientLabelTextView"
-                    android:text="@string/patientIdLabelTextView"
-                    android:gravity="left|center"
-                    />
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dp"
+                        android:id="@+id/patientLabelTextView"
+                        android:text="@string/patientIdLabelTextView"
+                        android:gravity="left|center"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="28dp"
+                        android:id="@+id/patientIdTextView"
+                        android:gravity="left|center"
+                        />
+                </LinearLayout>
+
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="270dp"
-                android:layout_height="110dp"
-                android:id="@+id/sessionDisplayTextView"
-                android:orientation="vertical"
-                android:layout_below="@+id/sessionInfoTextView"
-                android:layout_alignParentEnd="true"
-                >
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="28dp"
-                    android:id="@+id/sessionIdTextView"
-                    android:gravity="left|center"
-                    />
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="28dp"
-                    android:id="@+id/sessionDateTextView"
-                    android:gravity="left|center"
-                    />
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="28dp"
-                    android:id="@+id/sessionLocationTextView"
-                    android:gravity="left|center"
-                    />
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="28dp"
-                    android:id="@+id/patientIdTextView"
-                    android:gravity="left|center"
-                    />
-            </LinearLayout>
+
 
 
         </RelativeLayout>
@@ -134,64 +490,76 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/visualLayout"
-        android:layout_width="590dp"
+        android:layout_width="fill_parent"
         android:layout_height="match_parent"
-        android:layout_column="1"
-
+        android:id="@+id/visualLayout"
+        android:layout_weight="2"
         >
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_alignParentTop="true"
+            android:id="@+id/graphProperties"
             >
             <Button
-                android:layout_width="148dp"
+                android:layout_width="fill_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/weightBearingTextView"
                 android:text="@string/weightBearingText"
                 android:gravity="center"
-                android:layout_alignParentLeft="true"
+                android:layout_weight="1"
                 />
             <Button
-                android:layout_width="148dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/orientationTextView"
                 android:text="@string/orientationText"
                 android:gravity="center"
-                android:layout_toEndOf="@+id/weightBearingTextView"
+                android:layout_weight="1"
                 />
             <Button
-                android:layout_width="148dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/speedTextView"
                 android:text="@string/SpeedText"
                 android:gravity="center"
-                android:layout_toEndOf="@+id/orientationTextView"
+                android:layout_weight="1"
                 />
             <Button
-                android:layout_width="148dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/predictionText"
                 android:id="@+id/predictionTextView"
                 android:gravity="center"
-                android:layout_alignParentEnd="true"
+                android:layout_weight="1"
                 />
         </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_above="@+id/rangerSelector"
+            android:layout_below="@+id/graphProperties"
+            >
+            <com.jjoe64.graphview.GraphView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/displayView"
+                />
 
+        </RelativeLayout>
 
         <org.florescu.android.rangeseekbar.RangeSeekBar
             android:layout_width="match_parent"
-            android:layout_above="@+id/timerLayout"
             android:layout_height="wrap_content"
+            android:layout_above="@+id/timerLayout"
+            android:id="@+id/rangerSelector"
             rsb:absoluteMaxValue="86400"
             rsb:absoluteMinValue="0"
-            rsb:textAboveThumbsColor="@android:color/holo_purple"
             rsb:thumbShadow="true"
             rsb:showLabels="false"
             />
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="120dp"
@@ -228,7 +596,7 @@
                     />
             </LinearLayout>
             <LinearLayout
-                android:layout_width="295dp"
+                android:layout_width="fill_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:layout_toEndOf="@+id/windowColumn"
@@ -256,8 +624,6 @@
             </LinearLayout>
         </RelativeLayout>
 
-
-
-
     </RelativeLayout>
-</GridLayout>
+
+</LinearLayout>
