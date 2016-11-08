@@ -1,2 +1,2 @@
-include ':app',':rangeseekbar','GraphView-master'
+include ':app'
 
