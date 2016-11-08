@@ -9,8 +9,32 @@
     <string name="no_account_error">create a new account</string>
     <string name="minimum_password">Enter at least 6 characters!</string>
     <string name="auth_failed">Authentication failed</string>
-    <string name="welcome_message">Hello, Your are signed in!</string>
+    <string name="welcome_message">Hello, Your are sign in!</string>
+    <string name="sessionTextView">Session 8</string>
+    <string name="weightBearingText">Weight-Bearing</string>
+    <string name="orientationText">Orientation</string>
+    <string name="SpeedText">Speed</string>
+    <string name="predictionText">Prediction</string>
+    <string name="windowLocationLabelTextView">Window Location</string>
+    <string name="timeLabelTextView">Time</string>
+    <string name="startLabelTextView">Start</string>
+    <string name="endLabelTextView">End</string>
+    <string name="sessionInfoTextView">Session Information</string>
+    <string name="sessionIdLabelTextView">Session ID</string>
+    <string name="sessionDateLabelTextView">Session Date</string>
+    <string name="sessionLocationLabelTextView">Session Location</string>
+    <string name="patientIdLabelTextView">Patient ID</string>
 
+    <string name="transverseAccelerationLabelTextView">Transverse \n Acceleration</string>
+    <string name="absoluteAccelerationLabelTextView">Absolute \n Acceleration</string>
+
+    <string name="meanLabelTextView">Mean</string>
+    <string name="sdLabelTextView">SD</string>
+    <string name="medianLabelTextView">Median</string>
+    <string name="skewnessLabelTextView">Skewness</string>
+    <string name="KurtosisLabelTextView">Kurtosis</string>
+    <string name="minLabelTextView">Min</string>
+    <string name="maxLabelTextView">Max</string>
 
     //action bar strings
     <string name="action_settings">Settings</string>
