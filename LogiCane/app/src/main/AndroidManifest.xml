@@ -6,7 +6,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/versdevs2b"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -17,7 +17,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".Admin" />
+        <activity android:name=".newUserActivity" />
+        <activity android:name=".deleteUserActivity" />
+
+        <activity android:name=".patient_activity"
+            android:label="@string/app_name"
+            android:parentActivityName="com.versatiledevs.logicane.LoginActivity" >
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.versatiledevs.logicane.LoginActivity" />
+        </activity>
+
+        <activity android:name=".deleteDataActivity"></activity>
     </application>
 
 </manifest>
