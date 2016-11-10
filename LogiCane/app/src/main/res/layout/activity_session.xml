@@ -201,23 +201,27 @@
                         android:padding="@dimen/defaultPadding"
                         />
                     <TextView
+                        android:id="@+id/medianHandleTransverse"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:padding="@dimen/defaultPadding"
                         />
                     <TextView
+                        android:id="@+id/medianHandleAbsolute"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:padding="@dimen/defaultPadding"
                         />
                     <TextView
+                        android:id="@+id/medianBaseTransverse"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/defaultPadding"
                         />
                     <TextView
+                        android:id="@+id/medianBaseAbsolute"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"

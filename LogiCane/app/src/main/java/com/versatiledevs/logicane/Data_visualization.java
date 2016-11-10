@@ -78,7 +78,7 @@ public class Data_visualization extends AppCompatActivity {
 
     /** mean **/
     private TextView meanHandleTrans;
-    private TextView meanHandleAbsolulte;
+    private TextView meanHandleAbsolute;
     private TextView meanBaseTrans;
     private TextView meanBaseAbsolute;
 
@@ -88,6 +88,13 @@ public class Data_visualization extends AppCompatActivity {
     private TextView sdBaseTrans;
     private TextView sdBaseAbsolute;
 
+    private TextView medianHandleTrans;
+    private TextView medianHandleAbsolute;
+    private TextView medianBaseTrans;
+    private TextView medianBaseAbsolute;
+
+
+    /***  min  ***/
     private TextView minHandleTrans;
     private TextView minHandleAbsolute;
     private TextView minBaseTrans;
@@ -121,7 +128,7 @@ public class Data_visualization extends AppCompatActivity {
 
         // initialize
         meanHandleTrans     = (TextView) findViewById(R.id.meanHandleTransverse);
-        meanHandleAbsolulte = (TextView) findViewById(R.id.meanHandleAbsolute);
+        meanHandleAbsolute = (TextView) findViewById(R.id.meanHandleAbsolute);
         meanBaseTrans       = (TextView) findViewById(R.id.meanBaseTransverse);
         meanBaseAbsolute    = (TextView) findViewById(R.id.meanBaseAbsolute);
 
@@ -129,6 +136,11 @@ public class Data_visualization extends AppCompatActivity {
         sdHandleAbsolute    = (TextView) findViewById(R.id.sdHandleAbsolute);
         sdBaseTrans         = (TextView) findViewById(R.id.sdBaseTransverse);
         sdBaseAbsolute      = (TextView) findViewById(R.id.sdBaseAbsolute);
+
+        medianHandleTrans      = (TextView) findViewById(R.id.medianHandleTransverse);
+        medianHandleAbsolute   = (TextView) findViewById(R.id.medianHandleAbsolute);
+        medianBaseTrans        = (TextView) findViewById(R.id.medianBaseTransverse);
+        medianBaseAbsolute     = (TextView) findViewById(R.id.medianBaseAbsolute);
 
         minHandleTrans      = (TextView) findViewById(R.id.minHandleTransverse);
         minHandleAbsolute   = (TextView) findViewById(R.id.minHandleAbsolute);
@@ -139,6 +151,8 @@ public class Data_visualization extends AppCompatActivity {
         maxHandleAbsolute   = (TextView) findViewById(R.id.maxHandleAbsolute);
         maxBaseTrans        = (TextView) findViewById(R.id.maxBaseTransverse);
         maxBaseAbsolute     = (TextView) findViewById(R.id.maxBaseAbsolute);
+
+
         //GraphView graph = (GraphView) findViewById(R.id.displayView);
 
     }
@@ -148,9 +162,7 @@ public class Data_visualization extends AppCompatActivity {
     protected void onStart(){
         super.onStart();
 
-
         DatabaseReference myRefDouble = database.getReferenceFromUrl("https://logicane-cf98b.firebaseio.com/Data/M11/DGI/item1");
-
 
         myRefDouble.addChildEventListener(new ChildEventListener() {
             @Override
@@ -294,8 +306,6 @@ public class Data_visualization extends AppCompatActivity {
                             array_def.add(key);
 
 
-
-
                     }
                 }
             }
@@ -325,28 +335,63 @@ public class Data_visualization extends AppCompatActivity {
         /***  Traverse Plane Acceleration Magnitude ( Traverse Acceleration "blue")  ***/
         /***  Acceleration Magnitude  ( Absolute Acceleration "Green" ) ***/
 
+        //function calls
         convertTimeMilliseconds();
         accelerationMagnitude();
         rotationalVelocityMagnitude();
+        transversePlaneAccelerationMagnitude();
         gripPressureSum();
-        TransPlaneRotatVelocMag ();
+        TransPlaneRotatVelocMag();
 
 
+        // mean
+        meanHandleTrans.setText(decimalFormat.format(mean(array_HA_TransvPlaneAccelMagn)));
 
-        double m = mean(array_HA_TransvPlaneAccelMagn);
+        meanHandleAbsolute.setText(decimalFormat.format(mean(array_HA_AccelMagnitude)));
 
-        meanHandleTrans.setText(decimalFormat.format(m));
+        meanBaseTrans.setText(decimalFormat.format(mean(array_BA_TransvPlaneAccelMagn)));
 
-        m = mean(array_BA_TransvPlaneAccelMagn);
+        meanBaseAbsolute.setText(decimalFormat.format(mean(array_BA_AccelMagnitude)));
 
-        meanHandleAbsolulte.setText(decimalFormat.format(m));
+        //SD
+        sdHandleTrans.setText(decimalFormat.format(standardDeviation(array_HA_TransvPlaneAccelMagn)));
 
-        m = mean(array_BA_TransvPlaneAccelMagn);
+        sdHandleAbsolute.setText(decimalFormat.format(standardDeviation(array_HA_AccelMagnitude)));
 
-        meanBaseTrans.setText(decimalFormat.format(m));
-        m = mean(array_BA_TransvPlaneAccelMagn);
+        sdBaseTrans.setText(decimalFormat.format(standardDeviation(array_BA_TransvPlaneAccelMagn)));
 
-        meanBaseAbsolute.setText(decimalFormat.format(m));
+        sdBaseAbsolute.setText(decimalFormat.format(standardDeviation(array_BA_AccelMagnitude)));
+
+
+        // median
+        medianHandleTrans.setText(decimalFormat.format(median(array_HA_TransvPlaneAccelMagn)));
+
+        medianHandleAbsolute.setText(decimalFormat.format(median(array_HA_AccelMagnitude)));
+
+        medianBaseTrans.setText(decimalFormat.format(median(array_BA_TransvPlaneAccelMagn)));
+
+        medianBaseAbsolute.setText(decimalFormat.format(median(array_BA_AccelMagnitude)));
+
+
+        // min
+        minHandleTrans.setText(decimalFormat.format(min(array_HA_TransvPlaneAccelMagn)));
+
+        minHandleAbsolute.setText(decimalFormat.format(min(array_HA_AccelMagnitude)));
+
+        minBaseTrans.setText(decimalFormat.format(min(array_BA_TransvPlaneAccelMagn)));
+
+        minBaseAbsolute.setText(decimalFormat.format(min(array_BA_AccelMagnitude)));
+
+        // max
+        maxHandleTrans.setText(decimalFormat.format(max(array_HA_TransvPlaneAccelMagn)));
+
+        maxHandleAbsolute.setText(decimalFormat.format(max(array_HA_AccelMagnitude)));
+
+        maxBaseTrans.setText(decimalFormat.format(max(array_BA_TransvPlaneAccelMagn)));
+
+        maxBaseAbsolute.setText(decimalFormat.format(max(array_BA_AccelMagnitude)));
+
+
 
         //meanHandleTrans.setText(decimalFormat.format( mean(array_HA_TransvPlaneAccelMagn) ));
         //meanHandleAbsolulte.setText(decimalFormat.format(mean(array_BA_TransvPlaneAccelMagn)));
@@ -461,23 +506,6 @@ public class Data_visualization extends AppCompatActivity {
 
     }
 
-    //  the Collection min and max returns a maximum or minimum number of the array list.
-    public double min (ArrayList arrayMin){
-
-        double min;
-        min = (Double) Collections.max(arrayMin);
-        return min;
-    }
-
-
-    public double max (ArrayList arrayMax){
-
-        double max;
-        max = (Double) Collections.max(arrayMax);
-        return max;
-    }
-
-
 
 
     public double mean (ArrayList arrayMean){
@@ -505,6 +533,41 @@ public class Data_visualization extends AppCompatActivity {
 
         return (Math.sqrt(num/n));
     }
+
+
+    public double median(ArrayList arrayMedian){
+
+        Collections.sort(arrayMedian);
+
+        int size = arrayMedian.size()/2;
+
+        if (arrayMedian.size() % 2 == 0)
+
+           return ((Double) arrayMedian.get(size) + (Double)arrayMedian.get(size - 1));
+
+        else
+            return ((Double)arrayMedian.get(size));
+
+    }
+
+
+
+    //  the Collection min and max returns a maximum or minimum number of the array list.
+    public double min (ArrayList arrayMin){
+
+        double min;
+        min = (Double) Collections.min(arrayMin);
+        return min;
+    }
+
+
+    public double max (ArrayList arrayMax){
+
+        double max;
+        max = (Double) Collections.max(arrayMax);
+        return max;
+    }
+
 
 
 
