@@ -3,8 +3,9 @@
     xmlns:rsb="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
-    >
+    xmlns:app="http://schemas.android.com/tools"
+    android:orientation="horizontal">
+
     <RelativeLayout
         android:layout_width="550dp"
         android:layout_height="match_parent"
@@ -104,21 +105,27 @@
                         android:id="@+id/meanLabelTextView"
                         android:text="@string/meanLabelTextView"
                         android:gravity="center"
+                        android:onClick="data"
                         android:padding="@dimen/defaultPadding"
                         />
                     <TextView
+                        android:id="@+id/meanHandleTransverse"
+                        android:text=""
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:padding="@dimen/defaultPadding"
                         />
                     <TextView
+                        android:id="@+id/meanHandleAbsolute"
+                        android:text=""
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:padding="@dimen/defaultPadding"
                         />
                     <TextView
+                        android:id="@+id/meanBaseTransverse"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -126,6 +133,7 @@
 
                         />
                     <TextView
+                        android:id="@+id/meanBaseAbsolute"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -149,24 +157,28 @@
                         android:padding="@dimen/defaultPadding"
                         />
                     <TextView
+                        android:id="@+id/sdHandleTransverse"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:padding="@dimen/defaultPadding"
                         />
                     <TextView
+                        android:id="@+id/sdHandleAbsolute"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:padding="@dimen/defaultPadding"
                         />
                     <TextView
+                        android:id="@+id/sdBaseTransverse"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:padding="@dimen/defaultPadding"
                         />
                     <TextView
+                        android:id="@+id/sdBaseAbsolute"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -311,24 +323,28 @@
                         />
 
                     <TextView
+                        android:id="@+id/minHandleTransverse"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:padding="@dimen/defaultPadding"
                         />
                     <TextView
+                        android:id="@+id/minHandleAbsolute"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:padding="@dimen/defaultPadding"
                         />
                     <TextView
+                        android:id="@+id/minBaseTransverse"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:padding="@dimen/defaultPadding"
                         />
                     <TextView
+                        android:id="@+id/minBaseAbsolute"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -351,24 +367,28 @@
                         android:padding="@dimen/defaultPadding"
                         />
                     <TextView
+                        android:id="@+id/maxHandleTransverse"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:padding="@dimen/defaultPadding"
                         />
                     <TextView
+                        android:id="@+id/maxHandleAbsolute"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:padding="@dimen/defaultPadding"
                         />
                     <TextView
+                        android:id="@+id/maxBaseTransverse"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:padding="@dimen/defaultPadding"
                         />
                     <TextView
+                        android:id="@+id/maxBaseAbsolute"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -546,6 +566,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/displayView"
+                app:seriesColor="#ee0000"
                 />
 
         </RelativeLayout>

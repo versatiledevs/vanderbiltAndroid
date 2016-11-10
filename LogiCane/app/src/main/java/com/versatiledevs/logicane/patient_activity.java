@@ -62,7 +62,7 @@ public class patient_activity extends AppCompatActivity {
     public void DataVisualizationPublic(View view) {
 
         Toast.makeText(this, "Data Visualization ", Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(this, MainActivity.class));
+        startActivity(new Intent(this, Data_visualization.class));
         finish();
 
     }

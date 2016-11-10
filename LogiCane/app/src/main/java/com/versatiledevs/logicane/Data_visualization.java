@@ -10,23 +10,22 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
 
+import org.w3c.dom.Text;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
-/**
- * Created by Luis on 11/9/2016.
- */
 
 
 
 public class Data_visualization extends AppCompatActivity {
 
 
-
-    private TextView dataTime;
-    private TextView dataMax;
 
     // Array for the handle vector
     private ArrayList<Double> array_HAx = new ArrayList<>();
@@ -76,11 +75,42 @@ public class Data_visualization extends AppCompatActivity {
     private ArrayList<String> Stest = new ArrayList<>();
 
 
+
+    /** mean **/
+    private TextView meanHandleTrans;
+    private TextView meanHandleAbsolulte;
+    private TextView meanBaseTrans;
+    private TextView meanBaseAbsolute;
+
+    /*** SD ***/
+    private TextView sdHandleTrans;
+    private TextView sdHandleAbsolute;
+    private TextView sdBaseTrans;
+    private TextView sdBaseAbsolute;
+
+    private TextView minHandleTrans;
+    private TextView minHandleAbsolute;
+    private TextView minBaseTrans;
+    private TextView minBaseAbsolute;
+
+    private TextView maxHandleTrans;
+    private TextView maxHandleAbsolute;
+    private TextView maxBaseTrans;
+    private TextView maxBaseAbsolute;
+
+
+    private GraphView graph;
+
+
+
+
     // this is for debugging purpose
     private ArrayList<String> array_def = new ArrayList<>();
 
     // firebase database
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+    DecimalFormat decimalFormat = new DecimalFormat("#.###");
 
 
 
@@ -90,8 +120,26 @@ public class Data_visualization extends AppCompatActivity {
         setContentView(R.layout.activity_session);
 
         // initialize
-        //dataTime = (TextView) findViewById(R.id.data_Time);
-        //dataMax  = (TextView) findViewById(R.id.data_max);
+        meanHandleTrans     = (TextView) findViewById(R.id.meanHandleTransverse);
+        meanHandleAbsolulte = (TextView) findViewById(R.id.meanHandleAbsolute);
+        meanBaseTrans       = (TextView) findViewById(R.id.meanBaseTransverse);
+        meanBaseAbsolute    = (TextView) findViewById(R.id.meanBaseAbsolute);
+
+        sdHandleTrans       = (TextView) findViewById(R.id.sdHandleTransverse);
+        sdHandleAbsolute    = (TextView) findViewById(R.id.sdHandleAbsolute);
+        sdBaseTrans         = (TextView) findViewById(R.id.sdBaseTransverse);
+        sdBaseAbsolute      = (TextView) findViewById(R.id.sdBaseAbsolute);
+
+        minHandleTrans      = (TextView) findViewById(R.id.minHandleTransverse);
+        minHandleAbsolute   = (TextView) findViewById(R.id.minHandleAbsolute);
+        minBaseTrans        = (TextView) findViewById(R.id.minBaseTransverse);
+        minBaseAbsolute     = (TextView) findViewById(R.id.minBaseAbsolute);
+
+        maxHandleTrans      = (TextView) findViewById(R.id.maxHandleTransverse);
+        maxHandleAbsolute   = (TextView) findViewById(R.id.maxHandleAbsolute);
+        maxBaseTrans        = (TextView) findViewById(R.id.maxBaseTransverse);
+        maxBaseAbsolute     = (TextView) findViewById(R.id.maxBaseAbsolute);
+        //GraphView graph = (GraphView) findViewById(R.id.displayView);
 
     }
 
@@ -123,10 +171,7 @@ public class Data_visualization extends AppCompatActivity {
 
                 for (int x = 0; x < count; x++) {
 
-
                     key = ((DataSnapshot) iter.next()).getKey();   // it gets the children for 0
-
-
 
                     switch (key) {
 
@@ -249,11 +294,10 @@ public class Data_visualization extends AppCompatActivity {
                             array_def.add(key);
 
 
+
+
                     }
-
                 }
-
-
             }
 
             @Override
@@ -269,18 +313,57 @@ public class Data_visualization extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {   }
         });
 
-    }
+
+    }// end of onStart
 
 
-    public void gripPressureSum (View view){
+    public void data (View view){
+
+
+        /***  FILLING THE TABLE: HANDLE ****/
+
+        /***  Traverse Plane Acceleration Magnitude ( Traverse Acceleration "blue")  ***/
+        /***  Acceleration Magnitude  ( Absolute Acceleration "Green" ) ***/
+
+        convertTimeMilliseconds();
+        accelerationMagnitude();
+        rotationalVelocityMagnitude();
+        gripPressureSum();
+        TransPlaneRotatVelocMag ();
 
 
 
-        // read the time and convert it to double
+        double m = mean(array_HA_TransvPlaneAccelMagn);
 
-       // dataMax.append("total number of children "+array_StringTS.size()+"\n");
-        String[]time;
+        meanHandleTrans.setText(decimalFormat.format(m));
 
+        m = mean(array_BA_TransvPlaneAccelMagn);
+
+        meanHandleAbsolulte.setText(decimalFormat.format(m));
+
+        m = mean(array_BA_TransvPlaneAccelMagn);
+
+        meanBaseTrans.setText(decimalFormat.format(m));
+        m = mean(array_BA_TransvPlaneAccelMagn);
+
+        meanBaseAbsolute.setText(decimalFormat.format(m));
+
+        //meanHandleTrans.setText(decimalFormat.format( mean(array_HA_TransvPlaneAccelMagn) ));
+        //meanHandleAbsolulte.setText(decimalFormat.format(mean(array_BA_TransvPlaneAccelMagn)));
+
+
+
+
+
+    } //end of data
+
+    public void convertTimeMilliseconds(){
+
+        String[]time; //it store the split string
+
+
+        // This for loop converts the hours that is in string to double
+        // so, it can be convert it to milliseconds
         for (int i = 0; i < array_StringTS.size(); i++)
         {
             //split the string every time it find the token ":"
@@ -291,136 +374,52 @@ public class Data_visualization extends AppCompatActivity {
                 array_DoubleTS.add(Double.parseDouble(time[j]));
         }
 
-        // dataMax.append(array_StringTS.get(0) + " \n");
-
 
         // convert the time in milliseconds
         for (int i = 0; i < array_DoubleTS.size(); i+=4)
             Dtest.add((array_DoubleTS.get(i)*60*60*60 )+(array_DoubleTS.get(i+1) * 60*60) +(array_DoubleTS.get(i+2) *60 ) + array_DoubleTS.get(i+3));
-        // dataMax.append(array_DoubleTS.get(i) +" "+array_DoubleTS.get(i+1) +" "+array_DoubleTS.get(i+2) +" "+array_DoubleTS.get(i+3) +" \n");
 
-        //for (int i = 0; i < Dtest.size(); i++)
-        //    dataMax.append(Dtest.get(i)+ "\n");
+    }
 
-/*        double HAt_total;
-        double BAt_total;
+    public void accelerationMagnitude() {
 
-        dataMax.append(array_HAy.size()+"\n");
-
-        for (int i =0; i < array_HAx.size(); i++){
-
-            HAt_total = Math.sqrt( (Math.pow(array_HAy.get(i), 2)) + (Math.pow(array_HAy.get(i), 2))  );
-            BAt_total = Math.sqrt( (Math.pow(array_BAy.get(i), 2)) + (Math.pow(array_BAy.get(i), 2))  );
-
-            // add to the array
-            array_HA_TransvPlaneAccelMagn.add(HAt_total);
-            array_BA_TransvPlaneAccelMagn.add(BAt_total);
-        }
-
-
-
-        for (int i =0; i < test.size(); i++) {
-
-             dataMax.append(test.get(i)+ "\n");
-        }
-
-        //  the Collection min and max returns a maximum or minimum number of the array list.
-        dataMax.append("max  "+ Collections.max(array_BA_TransvPlaneAccelMagn) +"  mim "+ Collections.min(array_BA_TransvPlaneAccelMagn) +"\n");
-        dataMax.append("SD  "+ standardDeviation(array_BA_TransvPlaneAccelMagn) +"\n");
-
-
-
-        for (int i =0; i < array_HAx.size(); i++) {
-
-            dataMax.append(array_HA_TransvPlaneAccelMagn.get(i)+"    "+ array_BA_TransvPlaneAccelMagn.get(i) +"\n");
-        }
- */
-
-/*
-        double Gt_total;
-
-        dataMax.append(array_Gx.size()+"\n");
-
-        for (int i =0; i < array_Gx.size(); i++) {
-            Gt_total = Math.sqrt((Math.pow(array_Gx.get(i), 2)) + (Math.pow(array_Gy.get(i), 2)) );
-
-            array_TranvPlaneRotVelocMag.add(Gt_total);
-
-        }
-
-        for (int i = 0; i < array_Gx.size(); i++){
-            dataMax.append(array_TranvPlaneRotVelocMag.get(i)+"   \n");
-        }
-
-*/
-
-        //Rotational Velocity Magnitude
-   /*     double G_total;
-
-        dataMax.append(array_Gx.size()+"\n");
-        for (int i =0; i < array_Gx.size(); i++) {
-            G_total = Math.sqrt((Math.pow(array_Gx.get(i), 2)) + (Math.pow(array_Gy.get(i), 2)) + (Math.pow(array_Gz.get(i), 2)));
-
-            // it converts the negative number to a positive
-            G_total= Math.abs(G_total);
-
-            array_RotationalVelocityMag.add(G_total);
-
-        }
-
-        double min = array_RotationalVelocityMag.get(0);
-        double max = array_RotationalVelocityMag.get(0);
-
-        for(Integer i: array_RotationalVelocityMag ) {
-            if(i < min) min = i;
-            if(i > max) max = i;
-        }
-
-
-        for (int i = 0; i < array_Gx.size(); i++){
-            dataMax.append(array_RotationalVelocityMag.get(i)+"   \n");
-        }
-*/
-
-/*
         double HA_total;
         double BA_total;
 
+        for (int i = 0; i < array_HAz.size(); i++) {
 
-        dataMax.append(array_f0.size()+"\n");
+            HA_total = Math.sqrt((Math.pow(array_HAx.get(i), 2)) + (Math.pow(array_HAy.get(i), 2)) + (Math.pow(array_HAz.get(i), 2)));
 
-        for (int i =0; i < array_HAz.size(); i++){
-
-            HA_total = Math.sqrt( (Math.pow(array_HAy.get(i), 2)) + (Math.pow(array_HAy.get(i), 2)) + (Math.pow(array_HAz.get(i), 2)) );
-
-            BA_total = Math.sqrt( (Math.pow(array_BAy.get(i), 2)) + (Math.pow(array_BAy.get(i), 2)) + (Math.pow(array_BAz.get(i), 2)) );
-
+            BA_total = Math.sqrt((Math.pow(array_BAx.get(i), 2)) + (Math.pow(array_BAy.get(i), 2)) + (Math.pow(array_BAz.get(i), 2)));
 
             // add to the array
             array_HA_AccelMagnitude.add(HA_total);
             array_BA_AccelMagnitude.add(BA_total);
+
         }
-
-
-        for (int i =0; i < array_f0.size(); i++) {
-
-            dataMax.append(array_HA_AccelMagnitude.get(i)+"    "+ array_BA_AccelMagnitude.get(i) +"\n");
-        }
-
-*/
     }
 
 
 
+    //Rotational Velocity Magnitude
+    public void rotationalVelocityMagnitude(){
+
+        double G_total;
+
+        for (int i =0; i < array_Gx.size(); i++){
+
+            G_total = Math.sqrt((Math.pow(array_Gx.get(i), 2)) + (Math.pow(array_Gy.get(i), 2)) + (Math.pow(array_Gz.get(i), 2)));
+            array_RotationalVelocityMag.add(G_total);
+        }
+    }
 
 
 
     //  gripPressureSum
- /*   public void gripPressureSum (View view){
+    public void gripPressureSum (){
 
         double sum;
 
-        dataMax.append(array_f0.size()+"\n");
         for (int i =0; i < array_f0.size(); i++){
 
             sum = array_f0.get(i) + array_f1.get(i) + array_f2.get(i) + array_f3.get(i) + array_f4.get(i) + array_f5.get(i) + array_f6.get(i) + array_f7.get(i);
@@ -428,13 +427,55 @@ public class Data_visualization extends AppCompatActivity {
             array_gripPressureSum.add(sum);
         }
 
-        /*for (int i =0; i < array_f0.size(); i++) {
+    }
 
-            dataMax.append(array_gripPressureSum.get(i) +"\n");
-        }*/
 
-    //}
 
+    public void TransPlaneRotatVelocMag (){
+
+        double Gt_total;
+
+        for (int i =0; i < array_Gx.size(); i++) {
+
+            Gt_total = Math.sqrt((Math.pow(array_Gx.get(i), 2)) + (Math.pow(array_Gy.get(i), 2)) );
+            array_TranvPlaneRotVelocMag.add(Gt_total);
+        }
+    }
+
+
+
+    public void transversePlaneAccelerationMagnitude(){
+
+        double HAt_total;
+        double BAt_total;
+
+        for (int i =0; i < array_HAx.size(); i++){
+
+            HAt_total = Math.sqrt( (Math.pow(array_HAx.get(i), 2)) + (Math.pow(array_HAy.get(i), 2))  );
+            BAt_total = Math.sqrt( (Math.pow(array_BAx.get(i), 2)) + (Math.pow(array_BAy.get(i), 2))  );
+
+            // add to the array
+            array_HA_TransvPlaneAccelMagn.add(HAt_total);
+            array_BA_TransvPlaneAccelMagn.add(BAt_total);
+        }
+
+    }
+
+    //  the Collection min and max returns a maximum or minimum number of the array list.
+    public double min (ArrayList arrayMin){
+
+        double min;
+        min = (Double) Collections.max(arrayMin);
+        return min;
+    }
+
+
+    public double max (ArrayList arrayMax){
+
+        double max;
+        max = (Double) Collections.max(arrayMax);
+        return max;
+    }
 
 
 
@@ -446,8 +487,8 @@ public class Data_visualization extends AppCompatActivity {
         for (int i = 0; i < arrayMean.size(); i++) {
 
             array += (Double) arrayMean.get(i);
-
         }
+
         return (array/arrayMean.size());
     }
 
@@ -467,6 +508,4 @@ public class Data_visualization extends AppCompatActivity {
 
 
 
-
-
-}
+}// end of data_visualisation
