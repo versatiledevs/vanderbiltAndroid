@@ -4,6 +4,7 @@
     <string name="hint_enter_email">Email</string>
     <string name="hint_enter_password">Password</string>
     <string name="signin_button_text">SingUp</string>
+    <string name="data_button_text">data</string>
     <string name="login_button_text">Login</string>
     <string name="signout_button_text">SignOut</string>
     <string name="no_account_error">create a new account</string>
