@@ -56,6 +56,16 @@ public class MainActivity extends AppCompatActivity {
         };
     }
 
+
+    public void DataVisualizationPublic(View view) {
+
+        Toast.makeText(MainActivity.this, "Data Visualization ", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(MainActivity.this, Data_visualization.class));
+        finish();
+
+    }
+
+
     public void signOutPublic(View view)
     {
         signOut();
