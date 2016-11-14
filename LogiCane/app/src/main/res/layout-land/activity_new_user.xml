@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="8dp"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
+    android:paddingTop="8dp"
     android:weightSum="1"
     tools:context="com.versatiledevs.logicane.newUserActivity">
 
@@ -16,10 +16,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:padding="16dp"
+        android:padding="8dp"
         android:text="New User"
         android:textAllCaps="true"
-        android:textSize="36dp"
+        android:textSize="16dp"
         />
     <EditText
         android:id="@+id/fName"
@@ -47,8 +47,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:text="Role"
         android:textAllCaps="true"
         android:layout_gravity="center"
@@ -58,30 +58,29 @@
     <RadioGroup
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="horizontal">
         <RadioButton android:id="@+id/physical_therapist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Physical Therapist"
-            android:onClick="onRadioButtonClicked"/>
+            android:text="Physical Therapist  "
+            />
         <RadioButton android:id="@+id/patient"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Patient"
-            android:onClick="onRadioButtonClicked"/>
+            android:text="Patient  "
+            />
         <RadioButton
             android:id="@+id/admin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Admin"
+            android:text="Admin  "
 
             />
     </RadioGroup>
-
     <Button
         android:layout_marginTop="16dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:text="Submit"/>
 
 
