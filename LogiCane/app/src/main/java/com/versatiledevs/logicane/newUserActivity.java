@@ -39,6 +39,7 @@ import static android.R.attr.name;
 
 public class newUserActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
+    private FirebaseAuth firebaseAuth;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
