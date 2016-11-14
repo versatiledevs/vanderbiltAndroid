@@ -36,22 +36,30 @@
 
         />
 
+
     <EditText
-        android:id="@+id/email"
+        android:id="@+id/newUserEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Email"
 
+
         />
+    <EditText
+        android:id="@+id/newUserPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        android:inputType="textVisiblePassword"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_gravity="center"
         android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
         android:text="Role"
         android:textAllCaps="true"
-        android:layout_gravity="center"
         android:textSize="16dp"
         />
 
@@ -63,12 +71,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Physical Therapist"
-            android:onClick="onRadioButtonClicked"/>
+            />
         <RadioButton android:id="@+id/patient"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Patient"
-            android:onClick="onRadioButtonClicked"/>
+            />
         <RadioButton
             android:id="@+id/admin"
             android:layout_width="wrap_content"
@@ -79,9 +87,11 @@
     </RadioGroup>
 
     <Button
-        android:layout_marginTop="16dp"
+        android:id="@+id/buttonCreateUser"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:onClick="createNewUser"
         android:text="Submit"/>
 
 

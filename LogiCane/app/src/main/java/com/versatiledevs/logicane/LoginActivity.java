@@ -169,6 +169,13 @@ public class LoginActivity extends AppCompatActivity {
                     Intent intent = new Intent(LoginActivity.this, patient_activity.class);
                     startActivity(intent);
                     finish();
+                }else
+                {
+                    //Need an error here that tells the user that the role is not set.
+                    //Because the app crashes right here if there is no role.
+                    Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
             }
 
