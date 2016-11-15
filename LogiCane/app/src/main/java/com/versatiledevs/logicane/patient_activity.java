@@ -7,8 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class patient_activity extends AppCompatActivity {
 
@@ -57,6 +59,13 @@ public class patient_activity extends AppCompatActivity {
         }
     }
 
+    public void DataVisualizationPublic(View view) {
+
+        Toast.makeText(this, "Data Visualization ", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(this, Data_visualization.class));
+        finish();
+
+    }
 
 }
 /*
