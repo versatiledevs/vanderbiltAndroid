@@ -1,5 +1,6 @@
 package com.versatiledevs.logicane;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +17,7 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 
 import org.w3c.dom.Text;
 
+import java.lang.reflect.Array;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,62 +27,51 @@ import java.util.Iterator;
 
 public class Data_visualization extends AppCompatActivity {
 
+    //struct to hold data
+    private final class Signal{
+        //time
+        public double time;
+        //Handle properties
+        public double m_HAx, m_HAy, m_HAz,
+                m_HA_AccelMagnitude,
+                m_HA_TransvPlaneAccelMag;
 
 
-    // Array for the handle vector
-    private ArrayList<Double> array_HAx = new ArrayList<>();
-    private ArrayList<Double> array_HAy = new ArrayList<>();
-    private ArrayList<Double> array_HAz = new ArrayList<>();
-    private ArrayList<Double> array_HA_AccelMagnitude = new ArrayList<>();
-    private ArrayList<Double> array_HA_TransvPlaneAccelMagn = new ArrayList<>();
+        //Ground vector properties
+        public double m_BAx, m_BAy, m_BAz,
+                m_BA_AccelMagnitude,
+                m_BA_TransvPlaneAccelMag;
 
-    // Array for the bottom vector
-    private ArrayList<Double> array_BAx = new ArrayList<>();
-    private ArrayList<Double> array_BAy = new ArrayList<>();
-    private ArrayList<Double> array_BAz = new ArrayList<>();
-    private ArrayList<Double> array_BA_AccelMagnitude = new ArrayList<>();
-    private ArrayList<Double> array_BA_TransvPlaneAccelMagn = new ArrayList<>();
+        //Velocity signal properties
+        public double m_Gx, m_Gy, m_Gz,
+                m_RotationalVelocityMag,
+                m_TranvPlaneRotVelocMag;
 
-    // Array for the velocity signal
-    private ArrayList<Double> array_Gx = new ArrayList<>();
-    private ArrayList<Double> array_Gy = new ArrayList<>();
-    private ArrayList<Double> array_Gz = new ArrayList<>();
-    private ArrayList<Double> array_RotationalVelocityMag = new ArrayList<>();
-    private ArrayList<Double> array_TranvPlaneRotVelocMag = new ArrayList<>();
-
-    // Array for the time
-    private ArrayList<String> array_StringTS = new ArrayList<>();
-    private ArrayList<Double> array_DoubleTS = new ArrayList<>();
-
-    // Array for the force signal
-    private ArrayList<Double> array_f0 = new ArrayList<>();
-    private ArrayList<Double> array_f1 = new ArrayList<>();
-    private ArrayList<Double> array_f2 = new ArrayList<>();
-    private ArrayList<Double> array_f3 = new ArrayList<>();
-    private ArrayList<Double> array_f4 = new ArrayList<>();
-    private ArrayList<Double> array_f5 = new ArrayList<>();
-    private ArrayList<Double> array_f6 = new ArrayList<>();
-    private ArrayList<Double> array_f7 = new ArrayList<>();
-    private ArrayList<Double> array_gripPressureSum = new ArrayList<>();
+        //Force properties
+        public double m_F0,m_F1, m_F2, m_F3, m_F4, m_F5, m_F6, m_F7,
+                m_V_US,
+                m_V_LC,
+                m_Pitch,
+                m_Sstat,
+                m_GripPressureSum;
+    }
 
 
-    private ArrayList<Double> array_V_US = new ArrayList<>();
-    private ArrayList<Double> array_V_LC = new ArrayList<>();
-    private ArrayList<Double> array_roll = new ArrayList<>();
-    private ArrayList<Double> array_pitch = new ArrayList<>();
-    private ArrayList<Double> array_sstat = new ArrayList<>();
+
+    //create an array of signal
+    private ArrayList<Signal> patientInfo= new ArrayList<>();
 
     // temporary array
-    private ArrayList<Double> Dtest = new ArrayList<>();
-    private ArrayList<String> Stest = new ArrayList<>();
+    // private ArrayList<Double> Dtest = new ArrayList<>();
+    //private ArrayList<String> Stest = new ArrayList<>();
 
 
 
     /** mean **/
-    private TextView meanHandleTrans;
-    private TextView meanHandleAbsolute;
-    private TextView meanBaseTrans;
-    private TextView meanBaseAbsolute;
+    private TextView meanHandleTrans,
+            meanHandleAbsolute,
+            meanBaseTrans,
+            meanBaseAbsolute;
 
     /*** SD ***/
     private TextView sdHandleTrans;
@@ -155,6 +146,12 @@ public class Data_visualization extends AppCompatActivity {
 
         //GraphView graph = (GraphView) findViewById(R.id.displayView);
 
+
+
+
+
+
+
     }
 
 
@@ -173,141 +170,186 @@ public class Data_visualization extends AppCompatActivity {
                 Long count = dataSnapshot.getChildrenCount();
                 Iterator iter = dataSnapshot.getChildren().iterator(); //
 
-
+                //temporary vars
                 String key;
                 String stringValue;
                 Double value;
+                String[] timeToDoubleStr; //used for conversion of time
+                double [] timeToDouble=new double[4];
+
+                Signal userSignal= new Signal();
+                Signal userSignalCopy= new Signal();
+
+                double HA_total,
+                        BA_total,
+                        G_total,
+                        grip_sum,
+                        Gt_total,
+                        HAtrans_total,
+                        BAtrans_total;
 
 
                 //dataTime.setText(count.toString());
 
                 for (int x = 0; x < count; x++) {
-
                     key = ((DataSnapshot) iter.next()).getKey();   // it gets the children for 0
 
                     switch (key) {
 
                         case "TS":
                             stringValue  = dataSnapshot.child(key).getValue(String.class);
-                            array_StringTS.add(stringValue);
+                            //convert the time from string to double
+                            timeToDoubleStr = stringValue.split(":");
+                            for (int j = 0; j < timeToDoubleStr.length; j++ )
+                                timeToDouble[j]=Double.parseDouble(timeToDoubleStr[j]);
+
+                            userSignal.time= ((timeToDouble[0]*60*60*60)+(timeToDouble[1] * 60*60) +(timeToDouble[2] *60 ) + timeToDouble[3]);
                             break;
 
                         case "HAx":
                             value = dataSnapshot.child(key).getValue(Double.class);
-                            array_HAx.add(value);
+                            userSignal.m_HAx= value;
                             break;
 
                         case "HAy":
                             value = dataSnapshot.child(key).getValue(Double.class);
-                            array_HAy.add(value);
+                            userSignal.m_HAy=value;
                             break;
 
                         case "HAz":
                             value = dataSnapshot.child(key).getValue(Double.class);
-                            array_HAz.add(value);
+                            userSignal.m_HAz= value;
                             break;
 
                         case "BAx":
                             value = dataSnapshot.child(key).getValue(Double.class);
-                            array_BAx.add(value);
+                            userSignal.m_BAx= value;
                             break;
 
                         case "BAy":
                             value = dataSnapshot.child(key).getValue(Double.class);
-                            array_BAy.add(value);
+                            userSignal.m_BAy=value;
                             break;
 
                         case "BAz":
                             value = dataSnapshot.child(key).getValue(Double.class);
-                            array_BAz.add(value);
+                            userSignal.m_BAz= value;
                             break;
 
                         case "Gx":
                             value = dataSnapshot.child(key).getValue(Double.class);
-                            array_Gx.add(value);
+                            userSignal.m_Gx= value;
                             break;
 
                         case "Gy":
                             value = dataSnapshot.child(key).getValue(Double.class);
-                            array_Gy.add(value);
-
+                            userSignal.m_Gy=value;
                             break;
                         case "Gz":
                             value = dataSnapshot.child(key).getValue(Double.class);
-                            array_Gz.add(value);
+                            userSignal.m_Gz= value;
                             break;
 
                         case "f0":
                             value = dataSnapshot.child(key).getValue(Double.class);
-                            array_f0.add(value);
+                            userSignal.m_F0= value;
                             break;
 
                         case "f1":
                             value = dataSnapshot.child(key).getValue(Double.class);
-                            array_f1.add(value);
+                            userSignal.m_F1= value;
                             break;
 
                         case "f2":
                             value = dataSnapshot.child(key).getValue(Double.class);
-                            array_f2.add(value);
+                            userSignal.m_F2= value;
                             break;
 
                         case "f3":
                             value = dataSnapshot.child(key).getValue(Double.class);
-                            array_f3.add(value);
+                            userSignal.m_F3= value;
                             break;
 
                         case "f4":
                             value = dataSnapshot.child(key).getValue(Double.class);
-                            array_f4.add(value);
+                            userSignal.m_F4= value;
                             break;
 
                         case "f5":
                             value = dataSnapshot.child(key).getValue(Double.class);
-                            array_f5.add(value);
+                            userSignal.m_F5= value;
                             break;
 
                         case "f6":
                             value = dataSnapshot.child(key).getValue(Double.class);
-                            array_f6.add(value);
+                            userSignal.m_F6= value;
                             break;
 
                         case "f7":
                             value = dataSnapshot.child(key).getValue(Double.class);
-                            array_f7.add(value);
+                            userSignal.m_F7= value;
                             break;
 
                         case "V_US":
                             value = dataSnapshot.child(key).getValue(Double.class);
-                            array_V_US.add(value);
+                            userSignal.m_F7= value;
                             break;
 
                         case "V_LC":
                             value = dataSnapshot.child(key).getValue(Double.class);
-                            array_V_LC.add(value);
+                            userSignal.m_V_LC= value;
                             break;
 
                         case "roll":
                             value = dataSnapshot.child(key).getValue(Double.class);
-                            array_roll.add(value);
+                            userSignal.m_V_US= value;
                             break;
 
                         case "pitch":
                             value = dataSnapshot.child(key).getValue(Double.class);
-                            array_pitch.add(value);
+                            userSignal.m_Pitch= value;
                             break;
 
                         case "sstar":
                             value = dataSnapshot.child(key).getValue(Double.class);
-                            array_sstat.add(value);
+                            userSignal.m_Sstat= value;
                             break;
 
                         default:
                             array_def.add(key);
+                    }// and of switch statement
+                }//end of for-loop
 
+                //Computer the Base and Handle Acceleration
+                HA_total = Math.sqrt((Math.pow(userSignal.m_HAx, 2)) + (Math.pow(userSignal.m_HAy, 2)) + (Math.pow(userSignal.m_HAz, 2)));
+                BA_total = Math.sqrt((Math.pow(userSignal.m_BAx, 2)) + (Math.pow(userSignal.m_BAy, 2)) + (Math.pow(userSignal.m_BAz, 2)));
 
-                    }
-                }
+                userSignal.m_HA_AccelMagnitude = HA_total;
+                userSignal.m_BA_AccelMagnitude = BA_total;
+
+                //Compute the Rotational Velocity Magnitude
+                G_total = Math.sqrt((Math.pow(userSignal.m_Gx, 2)) + (Math.pow(userSignal.m_Gy, 2)) + (Math.pow(userSignal.m_Gz, 2)));
+
+                userSignal.m_RotationalVelocityMag = G_total;
+
+                //Compute Transverse Plane Rotation  Velocity Magnitude
+                Gt_total = Math.sqrt((Math.pow(userSignal.m_Gx, 2)) + (Math.pow(userSignal.m_Gy, 2)));
+                userSignal.m_TranvPlaneRotVelocMag= Gt_total;
+
+                //Compute Transverse Plane Acceleration  Velocity Magnitude
+                HAtrans_total = Math.sqrt((Math.pow(userSignal.m_HAx, 2)) + (Math.pow(userSignal.m_HAy, 2)));
+                BAtrans_total = Math.sqrt((Math.pow(userSignal.m_BAx, 2)) + (Math.pow(userSignal.m_BAy, 2)));
+
+                userSignal.m_HA_TransvPlaneAccelMag= HAtrans_total;
+                userSignal.m_BA_TransvPlaneAccelMag= BAtrans_total;
+
+                //compute gripPressureSum
+                grip_sum = (userSignal.m_F0 + userSignal.m_F1 + userSignal.m_F2 + userSignal.m_F3 + userSignal.m_F4 + userSignal.m_F5 + userSignal.m_F6 +userSignal.m_F7);
+
+                userSignal.m_GripPressureSum= grip_sum;
+
+                //Add the object to the list
+                patientInfo.add(userSignal);
             }
 
             @Override
@@ -334,62 +376,72 @@ public class Data_visualization extends AppCompatActivity {
 
         /***  Traverse Plane Acceleration Magnitude ( Traverse Acceleration "blue")  ***/
         /***  Acceleration Magnitude  ( Absolute Acceleration "Green" ) ***/
+        ArrayList<Double> sortedBy_BA_Aceel= new ArrayList<>();
+        ArrayList<Double> sortedBy_BA_TAceel= new ArrayList<>();
+        ArrayList<Double> sortedBy_HA_Aceel= new ArrayList<>();
+        ArrayList<Double> sortedBy_HA_TAceel= new ArrayList<>();
 
-        //function calls
-        convertTimeMilliseconds();
-        accelerationMagnitude();
-        rotationalVelocityMagnitude();
-        transversePlaneAccelerationMagnitude();
-        gripPressureSum();
-        TransPlaneRotatVelocMag();
+        //make a copy ...
+        for(int i=0; i< patientInfo.size(); i++){
+            sortedBy_BA_Aceel.add(patientInfo.get(i).m_BA_AccelMagnitude);
+            sortedBy_BA_TAceel.add(patientInfo.get(i).m_BA_TransvPlaneAccelMag);
+            sortedBy_HA_Aceel.add(patientInfo.get(i).m_HA_AccelMagnitude);
+            sortedBy_HA_TAceel.add(patientInfo.get(i).m_HA_TransvPlaneAccelMag);
+        }
+        Collections.sort(sortedBy_BA_Aceel);
+        Collections.sort(sortedBy_BA_TAceel);
+        Collections.sort(sortedBy_HA_Aceel);
+        Collections.sort(sortedBy_HA_TAceel);
+
+
 
 
         // mean
-        meanHandleTrans.setText(decimalFormat.format(mean(array_HA_TransvPlaneAccelMagn)));
+        meanHandleTrans.setText(decimalFormat.format(mean(sortedBy_HA_TAceel)));
 
-        meanHandleAbsolute.setText(decimalFormat.format(mean(array_HA_AccelMagnitude)));
+        meanHandleAbsolute.setText(decimalFormat.format(mean(sortedBy_HA_Aceel)));
 
-        meanBaseTrans.setText(decimalFormat.format(mean(array_BA_TransvPlaneAccelMagn)));
+        meanBaseTrans.setText(decimalFormat.format(mean(sortedBy_BA_TAceel)));
 
-        meanBaseAbsolute.setText(decimalFormat.format(mean(array_BA_AccelMagnitude)));
+        meanBaseAbsolute.setText(decimalFormat.format(mean(sortedBy_BA_Aceel)));
 
         //SD
-        sdHandleTrans.setText(decimalFormat.format(standardDeviation(array_HA_TransvPlaneAccelMagn)));
+        sdHandleTrans.setText(decimalFormat.format(standardDeviation(sortedBy_HA_TAceel)));
 
-        sdHandleAbsolute.setText(decimalFormat.format(standardDeviation(array_HA_AccelMagnitude)));
+        sdHandleAbsolute.setText(decimalFormat.format(standardDeviation(sortedBy_HA_Aceel)));
 
-        sdBaseTrans.setText(decimalFormat.format(standardDeviation(array_BA_TransvPlaneAccelMagn)));
+        sdBaseTrans.setText(decimalFormat.format(standardDeviation(sortedBy_BA_TAceel)));
 
-        sdBaseAbsolute.setText(decimalFormat.format(standardDeviation(array_BA_AccelMagnitude)));
+        sdBaseAbsolute.setText(decimalFormat.format(standardDeviation(sortedBy_BA_Aceel)));
 
 
         // median
-        medianHandleTrans.setText(decimalFormat.format(median(array_HA_TransvPlaneAccelMagn)));
+        medianHandleTrans.setText(decimalFormat.format(median(sortedBy_HA_TAceel)));
 
-        medianHandleAbsolute.setText(decimalFormat.format(median(array_HA_AccelMagnitude)));
+        medianHandleAbsolute.setText(decimalFormat.format(median(sortedBy_HA_Aceel)));
 
-        medianBaseTrans.setText(decimalFormat.format(median(array_BA_TransvPlaneAccelMagn)));
+        medianBaseTrans.setText(decimalFormat.format(median(sortedBy_BA_TAceel)));
 
-        medianBaseAbsolute.setText(decimalFormat.format(median(array_BA_AccelMagnitude)));
+        medianBaseAbsolute.setText(decimalFormat.format(median(sortedBy_BA_Aceel)));
 
 
         // min
-        minHandleTrans.setText(decimalFormat.format(min(array_HA_TransvPlaneAccelMagn)));
+        minHandleTrans.setText(decimalFormat.format(sortedBy_HA_TAceel.get(0)));
 
-        minHandleAbsolute.setText(decimalFormat.format(min(array_HA_AccelMagnitude)));
+        minHandleAbsolute.setText(decimalFormat.format(sortedBy_HA_Aceel.get(0)));
 
-        minBaseTrans.setText(decimalFormat.format(min(array_BA_TransvPlaneAccelMagn)));
+        minBaseTrans.setText(decimalFormat.format(sortedBy_BA_TAceel.get(0)));
 
-        minBaseAbsolute.setText(decimalFormat.format(min(array_BA_AccelMagnitude)));
+        minBaseAbsolute.setText(decimalFormat.format(sortedBy_BA_Aceel.get(0)));
 
         // max
-        maxHandleTrans.setText(decimalFormat.format(max(array_HA_TransvPlaneAccelMagn)));
+        maxHandleTrans.setText(decimalFormat.format(sortedBy_HA_TAceel.get(sortedBy_HA_TAceel.size()-1)));
 
-        maxHandleAbsolute.setText(decimalFormat.format(max(array_HA_AccelMagnitude)));
+        maxHandleAbsolute.setText(decimalFormat.format(sortedBy_HA_Aceel.get(sortedBy_HA_Aceel.size()-1)));
 
-        maxBaseTrans.setText(decimalFormat.format(max(array_BA_TransvPlaneAccelMagn)));
+        maxBaseTrans.setText(decimalFormat.format(sortedBy_BA_TAceel.get(sortedBy_BA_TAceel.size()-1)));
 
-        maxBaseAbsolute.setText(decimalFormat.format(max(array_BA_AccelMagnitude)));
+        maxBaseAbsolute.setText(decimalFormat.format(sortedBy_BA_Aceel.get(sortedBy_BA_Aceel.size()-1)));
 
 
 
@@ -398,115 +450,81 @@ public class Data_visualization extends AppCompatActivity {
 
 
 
+        GraphView graph = (GraphView) findViewById(R.id.displayView);
+
+
+        LineGraphSeries <DataPoint> series1 = new LineGraphSeries<>();
+        for(int i =0; i< sortedBy_HA_TAceel.size(); i++) {
+
+           // new DataPoint(i, sig m_BA_AccelMagnitude )
+            series1.appendData(new DataPoint(i, patientInfo.get(i).m_BA_AccelMagnitude), true, 100);
+
+        }
+
+
+        LineGraphSeries <DataPoint> series2 = new LineGraphSeries<>();
+        for(int i =0; i<sortedBy_HA_Aceel.size(); i++) {
+
+            series2.appendData(new DataPoint(i, patientInfo.get(i).m_BA_TransvPlaneAccelMag), true, 100);
+
+        }
+
+
+        LineGraphSeries <DataPoint> series3 = new LineGraphSeries<>();
+        for(int i =0; i<sortedBy_BA_TAceel.size(); i++) {
+
+            series3.appendData(new DataPoint(i, patientInfo.get(i).m_HA_AccelMagnitude), true, 100);
+
+        }
+
+
+        LineGraphSeries <DataPoint> series4 = new LineGraphSeries<>();
+        for(int i =0; i<sortedBy_BA_Aceel.size(); i++) {
+
+            series4.appendData(new DataPoint(i, patientInfo.get(i).m_HA_TransvPlaneAccelMag), true, 100);
+
+        }
+
+
+
+
+        // set manual X bounds
+        graph.getViewport().setYAxisBoundsManual(true);
+        graph.getViewport().setMinY(0);
+        graph.getViewport().setMaxY(3);
+
+        graph.getViewport().setXAxisBoundsManual(true);
+        graph.getViewport().setMinX(0);
+        graph.getViewport().setMaxX(sortedBy_BA_Aceel.size()+20);
+
+
+        // This option does not work on my laptop
+        graph.getViewport().setScrollable(true);    // enables horizontal scrolling
+        graph.getViewport().setScrollableY(true);   // enables vertical scrolling
+        graph.getViewport().setScalable(true);      // enables horizontal zooming and scrolling
+        graph.getViewport().setScalableY(true);     // enables vertical zooming and scrolling
+
+        series1.setTitle(" Curve 1");
+
+        series2.setColor(Color.BLACK);
+        series1.setColor(Color.RED);
+        series3.setColor(Color.BLUE);
+        series4.setColor(Color.GREEN);
+
+        series1.setThickness(3);
+        series2.setThickness(3);
+        series3.setThickness(3);
+        series4.setThickness(3);
+
+        graph.addSeries(series1);
+        graph.addSeries(series2);
+        graph.addSeries(series3);
+        graph.addSeries(series4);
+
+
 
 
     } //end of data
-
-    public void convertTimeMilliseconds(){
-
-        String[]time; //it store the split string
-
-
-        // This for loop converts the hours that is in string to double
-        // so, it can be convert it to milliseconds
-        for (int i = 0; i < array_StringTS.size(); i++)
-        {
-            //split the string every time it find the token ":"
-            time = array_StringTS.get(i).split(":");
-
-            // convert the string to double and store it in to a list
-            for (int j = 0; j < time.length; j++ )
-                array_DoubleTS.add(Double.parseDouble(time[j]));
-        }
-
-
-        // convert the time in milliseconds
-        for (int i = 0; i < array_DoubleTS.size(); i+=4)
-            Dtest.add((array_DoubleTS.get(i)*60*60*60 )+(array_DoubleTS.get(i+1) * 60*60) +(array_DoubleTS.get(i+2) *60 ) + array_DoubleTS.get(i+3));
-
-    }
-
-    public void accelerationMagnitude() {
-
-        double HA_total;
-        double BA_total;
-
-        for (int i = 0; i < array_HAz.size(); i++) {
-
-            HA_total = Math.sqrt((Math.pow(array_HAx.get(i), 2)) + (Math.pow(array_HAy.get(i), 2)) + (Math.pow(array_HAz.get(i), 2)));
-
-            BA_total = Math.sqrt((Math.pow(array_BAx.get(i), 2)) + (Math.pow(array_BAy.get(i), 2)) + (Math.pow(array_BAz.get(i), 2)));
-
-            // add to the array
-            array_HA_AccelMagnitude.add(HA_total);
-            array_BA_AccelMagnitude.add(BA_total);
-
-        }
-    }
-
-
-
-    //Rotational Velocity Magnitude
-    public void rotationalVelocityMagnitude(){
-
-        double G_total;
-
-        for (int i =0; i < array_Gx.size(); i++){
-
-            G_total = Math.sqrt((Math.pow(array_Gx.get(i), 2)) + (Math.pow(array_Gy.get(i), 2)) + (Math.pow(array_Gz.get(i), 2)));
-            array_RotationalVelocityMag.add(G_total);
-        }
-    }
-
-
-
-    //  gripPressureSum
-    public void gripPressureSum (){
-
-        double sum;
-
-        for (int i =0; i < array_f0.size(); i++){
-
-            sum = array_f0.get(i) + array_f1.get(i) + array_f2.get(i) + array_f3.get(i) + array_f4.get(i) + array_f5.get(i) + array_f6.get(i) + array_f7.get(i);
-
-            array_gripPressureSum.add(sum);
-        }
-
-    }
-
-
-
-    public void TransPlaneRotatVelocMag (){
-
-        double Gt_total;
-
-        for (int i =0; i < array_Gx.size(); i++) {
-
-            Gt_total = Math.sqrt((Math.pow(array_Gx.get(i), 2)) + (Math.pow(array_Gy.get(i), 2)) );
-            array_TranvPlaneRotVelocMag.add(Gt_total);
-        }
-    }
-
-
-
-    public void transversePlaneAccelerationMagnitude(){
-
-        double HAt_total;
-        double BAt_total;
-
-        for (int i =0; i < array_HAx.size(); i++){
-
-            HAt_total = Math.sqrt( (Math.pow(array_HAx.get(i), 2)) + (Math.pow(array_HAy.get(i), 2))  );
-            BAt_total = Math.sqrt( (Math.pow(array_BAx.get(i), 2)) + (Math.pow(array_BAy.get(i), 2))  );
-
-            // add to the array
-            array_HA_TransvPlaneAccelMagn.add(HAt_total);
-            array_BA_TransvPlaneAccelMagn.add(BAt_total);
-        }
-
-    }
-
-
 
     public double mean (ArrayList arrayMean){
 
@@ -522,7 +540,6 @@ public class Data_visualization extends AppCompatActivity {
 
     public double standardDeviation (ArrayList arraySD){
 
-
         double mean1 = mean(arraySD);
         double n = (arraySD.size()-1);
         double num=0;
@@ -536,22 +553,18 @@ public class Data_visualization extends AppCompatActivity {
 
 
     public double median(ArrayList arrayMedian){
-
-        Collections.sort(arrayMedian);
-
         int size = arrayMedian.size()/2;
 
         if (arrayMedian.size() % 2 == 0)
 
-           return ((Double) arrayMedian.get(size) + (Double)arrayMedian.get(size - 1));
+            return ((Double) arrayMedian.get(size) + (Double)arrayMedian.get(size - 1));
 
         else
             return ((Double)arrayMedian.get(size));
 
     }
 
-
-
+/*
     //  the Collection min and max returns a maximum or minimum number of the array list.
     public double min (ArrayList arrayMin){
 
@@ -568,7 +581,5 @@ public class Data_visualization extends AppCompatActivity {
         return max;
     }
 
-
-
-
+*/
 }// end of data_visualisation
