@@ -25,8 +25,8 @@
     <string name="sessionLocationLabelTextView">Session Location</string>
     <string name="patientIdLabelTextView">Patient ID</string>
 
-    <string name="transverseAccelerationLabelTextView">Transverse</string>
-    <string name="absoluteAccelerationLabelTextView">Absolute</string>
+    <string name="transverseAccelerationLabelTextView">Transverse \n Acceleration</string>
+    <string name="absoluteAccelerationLabelTextView">Absolute \n Acceleration</string>
 
     <string name="meanLabelTextView">Mean</string>
     <string name="sdLabelTextView">SD</string>
