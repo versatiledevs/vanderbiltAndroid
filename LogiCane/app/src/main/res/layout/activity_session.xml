@@ -43,21 +43,15 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_span="2"
+                        android:text="Handle Acceleration"
 
                         />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_span="2"
+                        android:text="Base Acceleration"
 
                         />
 
@@ -69,27 +63,39 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/transverseAccelerationLabelTextView"
+                        android:padding="@dimen/accelerationHeaderPadding"
+                        android:background="@color/HandleTransverse"
+                        android:gravity="center"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/absoluteAccelerationLabelTextView"
+                        android:padding="@dimen/accelerationHeaderPadding"
+                        android:background="@color/HandleAbsolute"
+                        android:gravity="center"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/transverseAccelerationLabelTextView"
+                        android:padding="@dimen/accelerationHeaderPadding"
+                        android:background="@color/baseTransverse"
+                        android:gravity="center"
 
                         />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-
+                        android:text="@string/absoluteAccelerationLabelTextView"
+                        android:padding="@dimen/accelerationHeaderPadding"
+                        android:background="@color/baseAbsolute"
+                        android:gravity="center"
                         />
 
                 </TableRow>
@@ -116,6 +122,7 @@
                         android:gravity="center"
                         android:padding="@dimen/defaultPadding"
                         />
+
                     <TextView
                         android:id="@+id/meanHandleAbsolute"
                         android:text=""
@@ -124,6 +131,7 @@
                         android:gravity="center"
                         android:padding="@dimen/defaultPadding"
                         />
+
                     <TextView
                         android:id="@+id/meanBaseTransverse"
                         android:layout_width="wrap_content"
@@ -296,12 +304,14 @@
                         android:gravity="center"
                         android:padding="@dimen/defaultPadding"
                         />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:padding="@dimen/defaultPadding"
-                        />
+                        android:id="@+id/textView" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -536,6 +546,7 @@
                 android:layout_weight="1"
                 />
             <Button
+                android:onClick="data"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/orientationTextView"
