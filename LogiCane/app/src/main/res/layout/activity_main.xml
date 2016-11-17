@@ -17,22 +17,6 @@
         android:text="@string/welcome_message"
         android:textStyle="bold" />
 
-    <!-- Temporary button for data visualization activity -->
-    <Button
-        android:id="@+id/buttonData"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="16dp"
-        android:background="@color/colorPrimary"
-        android:onClick="DataVisualizationPublic"
-        android:text="@string/data_button_text"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"
-        />
-
-
-
     <Button
         android:id="@+id/buttonSignOut"
         android:layout_width="match_parent"
