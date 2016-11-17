@@ -26,7 +26,7 @@ import java.util.Iterator;
 
 public class Data_visualization extends AppCompatActivity {
 
-    //struct to hold data of a patient
+    //struct to hold data
     private final class Signal{
         //time
         public double time;
@@ -55,36 +55,46 @@ public class Data_visualization extends AppCompatActivity {
                 m_GripPressureSum;
     }
 
+
+
     //create an array of signal
     private ArrayList<Signal> patientInfo= new ArrayList<>();
+
+    // temporary array
+   // private ArrayList<Double> Dtest = new ArrayList<>();
+    //private ArrayList<String> Stest = new ArrayList<>();
+
+
 
     /** mean **/
     private TextView meanHandleTrans,
                     meanHandleAbsolute,
                     meanBaseTrans,
-                    meanBaseAbsolute;
+                meanBaseAbsolute;
 
     /*** SD ***/
-    private TextView sdHandleTrans,
-                     sdHandleAbsolute,
-                     sdBaseTrans,
-                     sdBaseAbsolute;
+    private TextView sdHandleTrans;
+    private TextView sdHandleAbsolute;
+    private TextView sdBaseTrans;
+    private TextView sdBaseAbsolute;
 
-    private TextView medianHandleTrans,
-                     medianHandleAbsolute,
-                     medianBaseTrans,
-                     medianBaseAbsolute;
+    private TextView medianHandleTrans;
+    private TextView medianHandleAbsolute;
+    private TextView medianBaseTrans;
+    private TextView medianBaseAbsolute;
+
 
     /***  min  ***/
-    private TextView minHandleTrans,
-                     minHandleAbsolute,
-                     minBaseTrans,
-                     minBaseAbsolute;
+    private TextView minHandleTrans;
+    private TextView minHandleAbsolute;
+    private TextView minBaseTrans;
+    private TextView minBaseAbsolute;
 
-    private TextView maxHandleTrans,
-                     maxHandleAbsolute,
-                     maxBaseTrans,
-                     maxBaseAbsolute;
+    private TextView maxHandleTrans;
+    private TextView maxHandleAbsolute;
+    private TextView maxBaseTrans;
+    private TextView maxBaseAbsolute;
+
 
     private GraphView graph;
 
@@ -143,6 +153,7 @@ public class Data_visualization extends AppCompatActivity {
         super.onStart();
 
         DatabaseReference myRefDouble = database.getReferenceFromUrl("https://logicane-cf98b.firebaseio.com/Data/M11/DGI/item1");
+
         myRefDouble.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -347,6 +358,7 @@ public class Data_visualization extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {   }
         });
 
+
     }// end of onStart
 
 
@@ -361,8 +373,6 @@ public class Data_visualization extends AppCompatActivity {
         ArrayList<Double> sortedBy_BA_TAceel= new ArrayList<>();
         ArrayList<Double> sortedBy_HA_Aceel= new ArrayList<>();
         ArrayList<Double> sortedBy_HA_TAceel= new ArrayList<>();
-
-        double meanBA_T, meanBA_A, meanHA_T, meanHA_A;
 
         //make a copy ...
         for(int i=0; i< patientInfo.size(); i++){
@@ -380,43 +390,60 @@ public class Data_visualization extends AppCompatActivity {
 
 
         // mean
-        meanHA_T=mean(sortedBy_HA_TAceel);
-        meanHA_A=mean(sortedBy_HA_Aceel);
-        meanBA_T=mean(sortedBy_BA_TAceel);
-        meanBA_A=mean(sortedBy_BA_Aceel);
+        meanHandleTrans.setText(decimalFormat.format(mean(sortedBy_HA_TAceel)));
 
-        meanHandleTrans.setText(decimalFormat.format(meanHA_T));
-        meanHandleAbsolute.setText(decimalFormat.format(meanHA_A));
-        meanBaseTrans.setText(decimalFormat.format(meanBA_T));
-        meanBaseAbsolute.setText(decimalFormat.format(meanBA_A));
+        meanHandleAbsolute.setText(decimalFormat.format(mean(sortedBy_HA_Aceel)));
+
+        meanBaseTrans.setText(decimalFormat.format(mean(sortedBy_BA_TAceel)));
+
+        meanBaseAbsolute.setText(decimalFormat.format(mean(sortedBy_BA_Aceel)));
 
         //SD
-        sdHandleTrans.setText(decimalFormat.format(standardDeviation(sortedBy_HA_TAceel, meanHA_T)));
-        sdHandleAbsolute.setText(decimalFormat.format(standardDeviation(sortedBy_HA_Aceel, meanHA_A)));
-        sdBaseTrans.setText(decimalFormat.format(standardDeviation(sortedBy_BA_TAceel,meanBA_T )));
-        sdBaseAbsolute.setText(decimalFormat.format(standardDeviation(sortedBy_BA_Aceel,meanBA_A )));
+        sdHandleTrans.setText(decimalFormat.format(standardDeviation(sortedBy_HA_TAceel)));
+
+        sdHandleAbsolute.setText(decimalFormat.format(standardDeviation(sortedBy_HA_Aceel)));
+
+        sdBaseTrans.setText(decimalFormat.format(standardDeviation(sortedBy_BA_TAceel)));
+
+        sdBaseAbsolute.setText(decimalFormat.format(standardDeviation(sortedBy_BA_Aceel)));
+
 
         // median
         medianHandleTrans.setText(decimalFormat.format(median(sortedBy_HA_TAceel)));
+
         medianHandleAbsolute.setText(decimalFormat.format(median(sortedBy_HA_Aceel)));
+
         medianBaseTrans.setText(decimalFormat.format(median(sortedBy_BA_TAceel)));
+
         medianBaseAbsolute.setText(decimalFormat.format(median(sortedBy_BA_Aceel)));
 
 
         // min
         minHandleTrans.setText(decimalFormat.format(sortedBy_HA_TAceel.get(0)));
+
         minHandleAbsolute.setText(decimalFormat.format(sortedBy_HA_Aceel.get(0)));
+
         minBaseTrans.setText(decimalFormat.format(sortedBy_BA_TAceel.get(0)));
+
         minBaseAbsolute.setText(decimalFormat.format(sortedBy_BA_Aceel.get(0)));
 
         // max
         maxHandleTrans.setText(decimalFormat.format(sortedBy_HA_TAceel.get(sortedBy_HA_TAceel.size()-1)));
+
         maxHandleAbsolute.setText(decimalFormat.format(sortedBy_HA_Aceel.get(sortedBy_HA_TAceel.size()-1)));
+
         maxBaseTrans.setText(decimalFormat.format(sortedBy_BA_TAceel.get(sortedBy_BA_TAceel.size()-1)));
+
         maxBaseAbsolute.setText(decimalFormat.format(sortedBy_BA_Aceel.get(sortedBy_BA_Aceel.size()-1)));
+
+
 
         //meanHandleTrans.setText(decimalFormat.format( mean(array_HA_TransvPlaneAccelMagn) ));
         //meanHandleAbsolulte.setText(decimalFormat.format(mean(array_BA_TransvPlaneAccelMagn)));
+
+
+
+
 
     } //end of data
 
@@ -425,20 +452,23 @@ public class Data_visualization extends AppCompatActivity {
         double array=0;
 
         for (int i = 0; i < arrayMean.size(); i++) {
+
             array += (Double) arrayMean.get(i);
         }
+
         return (array/arrayMean.size());
     }
 
-    public double standardDeviation (ArrayList arraySD, double mean){
+    public double standardDeviation (ArrayList arraySD){
 
-        double mean1 = mean;
+        double mean1 = mean(arraySD);
         double n = (arraySD.size()-1);
         double num=0;
 
         for (int i = 0; i < arraySD.size(); i++){
             num += Math.pow(((Double)arraySD.get(i) - mean1),2);
         }
+
         return (Math.sqrt(num/n));
     }
 
@@ -447,9 +477,30 @@ public class Data_visualization extends AppCompatActivity {
         int size = arrayMedian.size()/2;
 
         if (arrayMedian.size() % 2 == 0)
+
            return ((Double) arrayMedian.get(size) + (Double)arrayMedian.get(size - 1));
+
         else
             return ((Double)arrayMedian.get(size));
+
     }
 
+/*
+    //  the Collection min and max returns a maximum or minimum number of the array list.
+    public double min (ArrayList arrayMin){
+
+        double min;
+        min = (Double) Collections.min(arrayMin);
+        return min;
+    }
+
+
+    public double max (ArrayList arrayMax){
+
+        double max;
+        max = (Double) Collections.max(arrayMax);
+        return max;
+    }
+
+*/
 }// end of data_visualisation
