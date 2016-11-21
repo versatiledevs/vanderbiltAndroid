@@ -3,9 +3,8 @@
     xmlns:rsb="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/tools"
-    android:orientation="horizontal">
-
+    android:orientation="horizontal"
+    >
     <RelativeLayout
         android:layout_width="550dp"
         android:layout_height="match_parent"
@@ -111,7 +110,6 @@
                         android:id="@+id/meanLabelTextView"
                         android:text="@string/meanLabelTextView"
                         android:gravity="center"
-                        android:onClick="data"
                         android:padding="@dimen/defaultPadding"
                         />
                     <TextView
@@ -122,7 +120,6 @@
                         android:gravity="center"
                         android:padding="@dimen/defaultPadding"
                         />
-
                     <TextView
                         android:id="@+id/meanHandleAbsolute"
                         android:text=""
@@ -131,7 +128,6 @@
                         android:gravity="center"
                         android:padding="@dimen/defaultPadding"
                         />
-
                     <TextView
                         android:id="@+id/meanBaseTransverse"
                         android:layout_width="wrap_content"
@@ -148,6 +144,7 @@
                         android:padding="@dimen/defaultPadding"
 
                         />
+
 
                 </TableRow>
                 <TableRow
@@ -193,6 +190,7 @@
                         android:padding="@dimen/defaultPadding"
                         />
 
+
                 </TableRow>
                 <TableRow
                     android:layout_width="match_parent"
@@ -235,6 +233,7 @@
                         android:gravity="center"
                         android:padding="@dimen/defaultPadding"
                         />
+
 
                 </TableRow>
                 <TableRow
@@ -304,14 +303,12 @@
                         android:gravity="center"
                         android:padding="@dimen/defaultPadding"
                         />
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:padding="@dimen/defaultPadding"
-                        android:id="@+id/textView" />
-
+                        />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -365,6 +362,7 @@
                         android:padding="@dimen/defaultPadding"
                         />
 
+
                 </TableRow>
                 <TableRow
                     android:layout_width="match_parent"
@@ -380,6 +378,7 @@
                         android:text="@string/maxLabelTextView"
                         android:padding="@dimen/defaultPadding"
                         />
+
                     <TextView
                         android:id="@+id/maxHandleTransverse"
                         android:layout_width="wrap_content"
@@ -408,6 +407,7 @@
                         android:gravity="center"
                         android:padding="@dimen/defaultPadding"
                         />
+
 
                 </TableRow>
 
@@ -447,13 +447,13 @@
                         android:layout_height="28dp"
                         android:id="@+id/sessionIdLabelTextView"
                         android:text="@string/sessionIdLabelTextView"
-                        android:gravity="left|center"
+                        android:gravity="start|center"
                         />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="28dp"
                         android:id="@+id/sessionIdTextView"
-                        android:gravity="left|center"
+                        android:gravity="start|center"
                         />
                 </LinearLayout>
                 <LinearLayout
@@ -466,13 +466,13 @@
                         android:layout_height="28dp"
                         android:id="@+id/sessionDateLabelTextView"
                         android:text="@string/sessionDateLabelTextView"
-                        android:gravity="left|center"
+                        android:gravity="start|center"
                         />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="28dp"
                         android:id="@+id/sessionDateTextView"
-                        android:gravity="left|center"
+                        android:gravity="start|center"
                         />
                 </LinearLayout>
                 <LinearLayout
@@ -486,13 +486,13 @@
                         android:layout_height="28dp"
                         android:id="@+id/sessionLocationLabelTextView"
                         android:text="@string/sessionLocationLabelTextView"
-                        android:gravity="left|center"
+                        android:gravity="start|center"
                         />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="28dp"
                         android:id="@+id/sessionLocationTextView"
-                        android:gravity="left|center"
+                        android:gravity="start|center"
                         />
                 </LinearLayout>
                 <LinearLayout
@@ -505,23 +505,22 @@
                         android:layout_height="28dp"
                         android:id="@+id/patientLabelTextView"
                         android:text="@string/patientIdLabelTextView"
-                        android:gravity="left|center"
+                        android:gravity="start|center"
                         />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="28dp"
                         android:id="@+id/patientIdTextView"
-                        android:gravity="left|center"
+                        android:gravity="start|center"
                         />
                 </LinearLayout>
 
             </LinearLayout>
 
-
-
         </RelativeLayout>
 
     </RelativeLayout>
+
 
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -540,16 +539,15 @@
             <Button
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/weightBearingTextView"
+                android:id="@+id/weightBearingButton"
                 android:text="@string/weightBearingText"
                 android:gravity="center"
                 android:layout_weight="1"
                 />
             <Button
-                android:onClick="data"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/orientationTextView"
+                android:id="@+id/orientationButton"
                 android:text="@string/orientationText"
                 android:gravity="center"
                 android:layout_weight="1"
@@ -557,7 +555,7 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/speedTextView"
+                android:id="@+id/speedButton"
                 android:text="@string/SpeedText"
                 android:gravity="center"
                 android:layout_weight="1"
@@ -566,7 +564,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/predictionText"
-                android:id="@+id/predictionTextView"
+                android:id="@+id/predictionButton"
                 android:gravity="center"
                 android:layout_weight="1"
                 />
@@ -581,7 +579,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/displayView"
-                app:seriesColor="#ee0000"
                 />
 
         </RelativeLayout>

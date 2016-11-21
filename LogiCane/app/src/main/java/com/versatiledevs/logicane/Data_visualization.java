@@ -1,8 +1,11 @@
+
 package com.versatiledevs.logicane;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.firebase.database.ChildEventListener;
@@ -13,10 +16,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
+import android.view.View.OnClickListener;
 
-import org.w3c.dom.Text;
 
-import java.lang.reflect.Array;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,7 +28,7 @@ import java.util.Iterator;
 
 public class Data_visualization extends AppCompatActivity {
 
-    //struct to hold data of a patient
+    //struct to hold data
     private final class Signal{
         //time
         public double time;
@@ -55,40 +57,39 @@ public class Data_visualization extends AppCompatActivity {
                 m_GripPressureSum;
     }
 
+
     //create an array of signal
     private ArrayList<Signal> patientInfo= new ArrayList<>();
 
+
     /** mean **/
     private TextView meanHandleTrans,
-                    meanHandleAbsolute,
-                    meanBaseTrans,
-                    meanBaseAbsolute;
+            meanHandleAbsolute,
+            meanBaseTrans,
+            meanBaseAbsolute;
 
     /*** SD ***/
     private TextView sdHandleTrans,
-                     sdHandleAbsolute,
-                     sdBaseTrans,
-                     sdBaseAbsolute;
+            sdHandleAbsolute,
+            sdBaseTrans,
+            sdBaseAbsolute;
 
     private TextView medianHandleTrans,
-                     medianHandleAbsolute,
-                     medianBaseTrans,
-                     medianBaseAbsolute;
+            medianHandleAbsolute,
+            medianBaseTrans,
+            medianBaseAbsolute;
+
 
     /***  min  ***/
     private TextView minHandleTrans,
-                     minHandleAbsolute,
-                     minBaseTrans,
-                     minBaseAbsolute;
+            minHandleAbsolute,
+            minBaseTrans,
+            minBaseAbsolute;
 
     private TextView maxHandleTrans,
-                     maxHandleAbsolute,
-                     maxBaseTrans,
-                     maxBaseAbsolute;
-
-    private GraphView graph;
-
-
+            maxHandleAbsolute,
+            maxBaseTrans,
+            maxBaseAbsolute;
 
 
     // this is for debugging purpose
@@ -96,6 +97,7 @@ public class Data_visualization extends AppCompatActivity {
 
     // firebase database
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private String urlDatabase = "https://logicane-cf98b.firebaseio.com/Data/M11/DGI/";
 
     DecimalFormat decimalFormat = new DecimalFormat("#.###");
 
@@ -132,17 +134,19 @@ public class Data_visualization extends AppCompatActivity {
         maxBaseTrans        = (TextView) findViewById(R.id.maxBaseTransverse);
         maxBaseAbsolute     = (TextView) findViewById(R.id.maxBaseAbsolute);
 
+        final Button weightBearingButton1 = (Button)  findViewById(R.id.weightBearingButton);
+        final Button orientationButton1   = (Button)  findViewById(R.id.orientationButton);
+        final Button speedButton1         = (Button)  findViewById(R.id.speedButton);
+        final Button predictionButton1    = (Button)  findViewById(R.id.predictionButton);
 
-        //GraphView graph = (GraphView) findViewById(R.id.displayView);
 
-    }
+        weightBearingButton1.setOnClickListener(weightBearingButtonListener);
+        orientationButton1.setOnClickListener( orientationButtonListener );
+        speedButton1.setOnClickListener(speedButtonListener);
+        predictionButton1.setOnClickListener(predictionButtonListener);
 
+        DatabaseReference myRefDouble = database.getReferenceFromUrl(urlDatabase + "item1");
 
-    @Override
-    protected void onStart(){
-        super.onStart();
-
-        DatabaseReference myRefDouble = database.getReferenceFromUrl("https://logicane-cf98b.firebaseio.com/Data/M11/DGI/item1");
         myRefDouble.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -162,7 +166,7 @@ public class Data_visualization extends AppCompatActivity {
                 Signal userSignal= new Signal();
                 Signal userSignalCopy= new Signal();
 
-                double HA_total,
+                double  HA_total,
                         BA_total,
                         G_total,
                         grip_sum,
@@ -326,9 +330,9 @@ public class Data_visualization extends AppCompatActivity {
                 userSignal.m_BA_TransvPlaneAccelMag= BAtrans_total;
 
                 //compute gripPressureSum
-                grip_sum = (userSignal.m_F0 + userSignal.m_F1 + userSignal.m_F2 + userSignal.m_F3 + userSignal.m_F4 + userSignal.m_F5 + userSignal.m_F6 +userSignal.m_F7);
+                grip_sum = (userSignal.m_F0 + userSignal.m_F1 + userSignal.m_F2 + userSignal.m_F3 + userSignal.m_F4 + userSignal.m_F5 + userSignal.m_F6 + userSignal.m_F7);
 
-                userSignal.m_GripPressureSum= grip_sum;
+                userSignal.m_GripPressureSum = grip_sum;
 
                 //Add the object to the list
                 patientInfo.add(userSignal);
@@ -347,109 +351,481 @@ public class Data_visualization extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {   }
         });
 
-    }// end of onStart
+    } // end of onCreate
 
 
-    public void data (View view){
 
 
-        /***  FILLING THE TABLE: HANDLE ****/
+    public OnClickListener weightBearingButtonListener = new OnClickListener() {
+        @Override
+        public void onClick (View v){
 
-        /***  Traverse Plane Acceleration Magnitude ( Traverse Acceleration "blue")  ***/
-        /***  Acceleration Magnitude  ( Absolute Acceleration "Green" ) ***/
-        ArrayList<Double> sortedBy_BA_Aceel= new ArrayList<>();
-        ArrayList<Double> sortedBy_BA_TAceel= new ArrayList<>();
-        ArrayList<Double> sortedBy_HA_Aceel= new ArrayList<>();
-        ArrayList<Double> sortedBy_HA_TAceel= new ArrayList<>();
 
-        double meanBA_T, meanBA_A, meanHA_T, meanHA_A;
+            GraphView graph = (GraphView) findViewById(R.id.displayView);
 
-        //make a copy ...
-        for(int i=0; i< patientInfo.size(); i++){
-            sortedBy_BA_Aceel.add(patientInfo.get(i).m_BA_AccelMagnitude);
-            sortedBy_BA_TAceel.add(patientInfo.get(i).m_BA_TransvPlaneAccelMag);
-            sortedBy_HA_Aceel.add(patientInfo.get(i).m_HA_AccelMagnitude);
-            sortedBy_HA_TAceel.add(patientInfo.get(i).m_HA_TransvPlaneAccelMag);
+
+            /***  FILLING THE TABLE: HANDLE ****/
+
+            /***  Traverse Plane Acceleration Magnitude ( Traverse Acceleration "blue")  ***/
+            /***  Acceleration Magnitude  ( Absolute Acceleration "Green" ) ***/
+            ArrayList<Double> sortedBy_gripPressuresum= new ArrayList<>();
+            ArrayList<Double> sortedBy_L_VC= new ArrayList<>();
+
+            //make a copy ...
+            for(int i=0; i< patientInfo.size(); i++){
+                sortedBy_gripPressuresum.add(patientInfo.get(i).m_GripPressureSum);
+                sortedBy_L_VC.add(patientInfo.get(i).m_V_LC);
+
+            }
+            Collections.sort(sortedBy_gripPressuresum);
+            Collections.sort(sortedBy_L_VC);
+
+            // it cleans the table from previous data
+            clearTable ();
+
+            // mean
+            meanHandleTrans.setText(decimalFormat.format(mean(sortedBy_gripPressuresum)));
+
+            meanHandleAbsolute.setText(decimalFormat.format(mean(sortedBy_L_VC)));
+
+
+            //SD
+            sdHandleTrans.setText(decimalFormat.format(standardDeviation(sortedBy_gripPressuresum)));
+
+            sdHandleAbsolute.setText(decimalFormat.format(standardDeviation(sortedBy_L_VC)));
+
+
+            // median
+            medianHandleTrans.setText(decimalFormat.format(median(sortedBy_gripPressuresum)));
+
+            medianHandleAbsolute.setText(decimalFormat.format(median(sortedBy_L_VC)));
+
+
+            // min
+            minHandleTrans.setText(decimalFormat.format(sortedBy_gripPressuresum.get(0)));
+
+            minHandleAbsolute.setText(decimalFormat.format(sortedBy_L_VC.get(0)));
+
+
+            // max
+            maxHandleTrans.setText(decimalFormat.format(sortedBy_gripPressuresum.get(sortedBy_gripPressuresum.size()-1)));
+
+            maxHandleAbsolute.setText(decimalFormat.format(sortedBy_L_VC.get(sortedBy_L_VC.size()-1)));
+
+
+
+
+            LineGraphSeries <DataPoint> series1 = new LineGraphSeries<>();
+            for(int i =0; i< sortedBy_gripPressuresum.size(); i++)
+                series1.appendData(new DataPoint(i, patientInfo.get(i).m_GripPressureSum), true, sortedBy_gripPressuresum.size());
+
+
+
+
+            LineGraphSeries <DataPoint> series2 = new LineGraphSeries<>();
+            for(int i =0; i<sortedBy_L_VC.size(); i++)
+                series2.appendData(new DataPoint(i, patientInfo.get(i).m_V_LC), true, sortedBy_L_VC.size());
+
+
+
+            // set manual X bounds
+            graph.getViewport().setYAxisBoundsManual(true);
+            graph.getViewport().setMinY(0);
+            graph.getViewport().setMaxY(sortedBy_gripPressuresum.get(sortedBy_gripPressuresum.size()-1));
+
+            graph.getViewport().setXAxisBoundsManual(true);
+            graph.getViewport().setMinX(0);
+            graph.getViewport().setMaxX(sortedBy_L_VC.size());
+
+
+            // This option does not work in my laptop
+            graph.getViewport().setScrollable(true);    // enables horizontal scrolling
+            graph.getViewport().setScrollableY(true);   // enables vertical scrolling
+            graph.getViewport().setScalable(true);      // enables horizontal zooming and scrolling
+            graph.getViewport().setScalableY(true);     // enables vertical zooming and scrolling
+
+
+
+            series1.setColor(Color.BLACK);
+            series2.setColor(Color.RED);
+
+            series1.setThickness(3);
+            series2.setThickness(3);
+
+            series1.setTitle(" Curve 1");
+            series1.setTitle(" Curve 2");
+
+            graph.addSeries(series1);
+            // graph.addSeries(series2);
+
         }
-        Collections.sort(sortedBy_BA_Aceel);
-        Collections.sort(sortedBy_BA_TAceel);
-        Collections.sort(sortedBy_HA_Aceel);
-        Collections.sort(sortedBy_HA_TAceel);
+    };  // end of weightBearing listener
+
+
+    public OnClickListener orientationButtonListener = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+
+            /***  FILLING THE TABLE: HANDLE ****/
+
+            /***  Traverse Plane Acceleration Magnitude ( Traverse Acceleration "blue")  ***/
+            /***  Acceleration Magnitude  ( Absolute Acceleration "Green" ) ***/
+
+            GraphView graph = (GraphView) findViewById(R.id.displayView);
+
+
+            ArrayList<Double> sortedBy_BA_Aceel= new ArrayList<>();
+            ArrayList<Double> sortedBy_BA_TAceel= new ArrayList<>();
+            ArrayList<Double> sortedBy_HA_Aceel= new ArrayList<>();
+            ArrayList<Double> sortedBy_HA_TAceel= new ArrayList<>();
+
+            //make a copy ...
+            for(int i=0; i< patientInfo.size(); i++){
+                sortedBy_HA_TAceel.add(patientInfo.get(i).m_HA_TransvPlaneAccelMag );
+                sortedBy_HA_Aceel.add(patientInfo.get(i).m_HA_AccelMagnitude);
+                sortedBy_BA_TAceel.add(patientInfo.get(i).m_BA_TransvPlaneAccelMag);
+                sortedBy_BA_Aceel.add(patientInfo.get(i).m_BA_AccelMagnitude);
+            }
+            Collections.sort(sortedBy_HA_TAceel);
+            Collections.sort(sortedBy_HA_Aceel);
+            Collections.sort(sortedBy_BA_TAceel);
+            Collections.sort(sortedBy_BA_Aceel);
+
+
+            // mean
+            meanHandleTrans.setText(decimalFormat.format(mean(sortedBy_HA_TAceel)));
+
+            meanHandleAbsolute.setText(decimalFormat.format(mean(sortedBy_HA_Aceel)));
+
+            meanBaseTrans.setText(decimalFormat.format(mean(sortedBy_BA_TAceel)));
+
+            meanBaseAbsolute.setText(decimalFormat.format(mean(sortedBy_BA_Aceel)));
+
+            //SD
+            sdHandleTrans.setText(decimalFormat.format(standardDeviation(sortedBy_HA_TAceel)));
+
+            sdHandleAbsolute.setText(decimalFormat.format(standardDeviation(sortedBy_HA_Aceel)));
+
+            sdBaseTrans.setText(decimalFormat.format(standardDeviation(sortedBy_BA_TAceel)));
+
+            sdBaseAbsolute.setText(decimalFormat.format(standardDeviation(sortedBy_BA_Aceel)));
+
+
+            // median
+            medianHandleTrans.setText(decimalFormat.format(median(sortedBy_HA_TAceel)));
+
+            medianHandleAbsolute.setText(decimalFormat.format(median(sortedBy_HA_Aceel)));
+
+            medianBaseTrans.setText(decimalFormat.format(median(sortedBy_BA_TAceel)));
+
+            medianBaseAbsolute.setText(decimalFormat.format(median(sortedBy_BA_Aceel)));
+
+
+            // min
+            minHandleTrans.setText(decimalFormat.format(sortedBy_HA_TAceel.get(0)));
+
+            minHandleAbsolute.setText(decimalFormat.format(sortedBy_HA_Aceel.get(0)));
+
+            minBaseTrans.setText(decimalFormat.format(sortedBy_BA_TAceel.get(0)));
+
+            minBaseAbsolute.setText(decimalFormat.format(sortedBy_BA_Aceel.get(0)));
+
+            // max
+            maxHandleTrans.setText(decimalFormat.format(sortedBy_HA_TAceel.get(sortedBy_HA_TAceel.size()-1)));
+
+            maxHandleAbsolute.setText(decimalFormat.format(sortedBy_HA_Aceel.get(sortedBy_HA_Aceel.size()-1)));
+
+            maxBaseTrans.setText(decimalFormat.format(sortedBy_BA_TAceel.get(sortedBy_BA_TAceel.size()-1)));
+
+            maxBaseAbsolute.setText(decimalFormat.format(sortedBy_BA_Aceel.get(sortedBy_BA_Aceel.size()-1)));
+
+
+            LineGraphSeries <DataPoint> series3 = new LineGraphSeries<>();
+            for(int i =0; i< sortedBy_HA_TAceel.size(); i++)
+                series3.appendData(new DataPoint(i, patientInfo.get(i).m_BA_AccelMagnitude), true, sortedBy_HA_TAceel.size());
+
+
+            LineGraphSeries <DataPoint> series4 = new LineGraphSeries<>();
+            for(int i =0; i<sortedBy_HA_Aceel.size(); i++)
+                series4.appendData(new DataPoint(i, patientInfo.get(i).m_BA_TransvPlaneAccelMag), true, sortedBy_HA_Aceel.size());
+
+
+            LineGraphSeries <DataPoint> series5 = new LineGraphSeries<>();
+            for(int i =0; i<sortedBy_BA_TAceel.size(); i++)
+                series5.appendData(new DataPoint(i, patientInfo.get(i).m_HA_AccelMagnitude), true, sortedBy_BA_TAceel.size());
+
+
+            LineGraphSeries <DataPoint> series6 = new LineGraphSeries<>();
+            for(int i =0; i<sortedBy_BA_Aceel.size(); i++)
+                series6.appendData(new DataPoint(i, patientInfo.get(i).m_HA_TransvPlaneAccelMag), true, sortedBy_BA_Aceel.size());
+
+
+            // set manual X bounds
+            graph.getViewport().setYAxisBoundsManual(true);
+            graph.getViewport().setMinY(0);
+            graph.getViewport().setMaxY(3);
+
+            graph.getViewport().setXAxisBoundsManual(true);
+            graph.getViewport().setMinX(0);
+            graph.getViewport().setMaxX(sortedBy_BA_Aceel.size());
+
+
+            // This option does not work in my laptop
+            graph.getViewport().setScrollable(true);    // enables horizontal scrolling
+            graph.getViewport().setScrollableY(true);   // enables vertical scrolling
+            graph.getViewport().setScalable(true);      // enables horizontal zooming and scrolling
+            graph.getViewport().setScalableY(true);     // enables vertical zooming and scrolling
+
+            series3.setTitle(" Curve 1");
+
+            series3.setColor(Color.BLUE);
+            series4.setColor(Color.GREEN);
+            series5.setColor(Color.YELLOW);
+            series6.setColor(Color.RED);
+
+            series3.setThickness(3);
+            series4.setThickness(3);
+            series5.setThickness(3);
+            series6.setThickness(3);
+
+            graph.addSeries(series3);
+            graph.addSeries(series4);
+            graph.addSeries(series5);
+            graph.addSeries(series6);
+
+
+        }
+    }; // end of orientation listener
 
 
 
 
-        // mean
-        meanHA_T=mean(sortedBy_HA_TAceel);
-        meanHA_A=mean(sortedBy_HA_Aceel);
-        meanBA_T=mean(sortedBy_BA_TAceel);
-        meanBA_A=mean(sortedBy_BA_Aceel);
 
-        meanHandleTrans.setText(decimalFormat.format(meanHA_T));
-        meanHandleAbsolute.setText(decimalFormat.format(meanHA_A));
-        meanBaseTrans.setText(decimalFormat.format(meanBA_T));
-        meanBaseAbsolute.setText(decimalFormat.format(meanBA_A));
+    public OnClickListener speedButtonListener = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
 
-        //SD
-        sdHandleTrans.setText(decimalFormat.format(standardDeviation(sortedBy_HA_TAceel, meanHA_T)));
-        sdHandleAbsolute.setText(decimalFormat.format(standardDeviation(sortedBy_HA_Aceel, meanHA_A)));
-        sdBaseTrans.setText(decimalFormat.format(standardDeviation(sortedBy_BA_TAceel,meanBA_T )));
-        sdBaseAbsolute.setText(decimalFormat.format(standardDeviation(sortedBy_BA_Aceel,meanBA_A )));
+            /***  FILLING THE TABLE: HANDLE ****/
 
-        // median
-        medianHandleTrans.setText(decimalFormat.format(median(sortedBy_HA_TAceel)));
-        medianHandleAbsolute.setText(decimalFormat.format(median(sortedBy_HA_Aceel)));
-        medianBaseTrans.setText(decimalFormat.format(median(sortedBy_BA_TAceel)));
-        medianBaseAbsolute.setText(decimalFormat.format(median(sortedBy_BA_Aceel)));
+            /***  Traverse Plane Acceleration Magnitude ( Traverse Acceleration "blue")  ***/
+            /***  Acceleration Magnitude  ( Absolute Acceleration "Green" ) ***/
+            ArrayList<Double> sortedBy_BA_Aceel= new ArrayList<>();
+            ArrayList<Double> sortedBy_BA_TAceel= new ArrayList<>();
+            ArrayList<Double> sortedBy_HA_Aceel= new ArrayList<>();
+            ArrayList<Double> sortedBy_HA_TAceel= new ArrayList<>();
+
+            //make a copy ...
+            for(int i=0; i< patientInfo.size(); i++){
+                sortedBy_BA_Aceel.add(patientInfo.get(i).m_BA_AccelMagnitude);
+                sortedBy_BA_TAceel.add(patientInfo.get(i).m_BA_TransvPlaneAccelMag);
+                sortedBy_HA_Aceel.add(patientInfo.get(i).m_HA_AccelMagnitude);
+                sortedBy_HA_TAceel.add(patientInfo.get(i).m_HA_TransvPlaneAccelMag);
+            }
+            Collections.sort(sortedBy_BA_Aceel);
+            Collections.sort(sortedBy_BA_TAceel);
+            Collections.sort(sortedBy_HA_Aceel);
+            Collections.sort(sortedBy_HA_TAceel);
 
 
-        // min
-        minHandleTrans.setText(decimalFormat.format(sortedBy_HA_TAceel.get(0)));
-        minHandleAbsolute.setText(decimalFormat.format(sortedBy_HA_Aceel.get(0)));
-        minBaseTrans.setText(decimalFormat.format(sortedBy_BA_TAceel.get(0)));
-        minBaseAbsolute.setText(decimalFormat.format(sortedBy_BA_Aceel.get(0)));
 
-        // max
-        maxHandleTrans.setText(decimalFormat.format(sortedBy_HA_TAceel.get(sortedBy_HA_TAceel.size()-1)));
-        maxHandleAbsolute.setText(decimalFormat.format(sortedBy_HA_Aceel.get(sortedBy_HA_TAceel.size()-1)));
-        maxBaseTrans.setText(decimalFormat.format(sortedBy_BA_TAceel.get(sortedBy_BA_TAceel.size()-1)));
-        maxBaseAbsolute.setText(decimalFormat.format(sortedBy_BA_Aceel.get(sortedBy_BA_Aceel.size()-1)));
 
-        //meanHandleTrans.setText(decimalFormat.format( mean(array_HA_TransvPlaneAccelMagn) ));
-        //meanHandleAbsolulte.setText(decimalFormat.format(mean(array_BA_TransvPlaneAccelMagn)));
+            // mean
+            meanHandleTrans.setText(decimalFormat.format(mean(sortedBy_HA_TAceel)));
 
-    } //end of data
+            meanHandleAbsolute.setText(decimalFormat.format(mean(sortedBy_HA_Aceel)));
+
+            meanBaseTrans.setText(decimalFormat.format(mean(sortedBy_BA_TAceel)));
+
+            meanBaseAbsolute.setText(decimalFormat.format(mean(sortedBy_BA_Aceel)));
+
+            //SD
+            sdHandleTrans.setText(decimalFormat.format(standardDeviation(sortedBy_HA_TAceel)));
+
+            sdHandleAbsolute.setText(decimalFormat.format(standardDeviation(sortedBy_HA_Aceel)));
+
+            sdBaseTrans.setText(decimalFormat.format(standardDeviation(sortedBy_BA_TAceel)));
+
+            sdBaseAbsolute.setText(decimalFormat.format(standardDeviation(sortedBy_BA_Aceel)));
+
+
+            // median
+            medianHandleTrans.setText(decimalFormat.format(median(sortedBy_HA_TAceel)));
+
+            medianHandleAbsolute.setText(decimalFormat.format(median(sortedBy_HA_Aceel)));
+
+            medianBaseTrans.setText(decimalFormat.format(median(sortedBy_BA_TAceel)));
+
+            medianBaseAbsolute.setText(decimalFormat.format(median(sortedBy_BA_Aceel)));
+
+
+            // min
+            minHandleTrans.setText(decimalFormat.format(sortedBy_HA_TAceel.get(0)));
+
+            minHandleAbsolute.setText(decimalFormat.format(sortedBy_HA_Aceel.get(0)));
+
+            minBaseTrans.setText(decimalFormat.format(sortedBy_BA_TAceel.get(0)));
+
+            minBaseAbsolute.setText(decimalFormat.format(sortedBy_BA_Aceel.get(0)));
+
+            // max
+            maxHandleTrans.setText(decimalFormat.format(sortedBy_HA_TAceel.get(sortedBy_HA_TAceel.size()-1)));
+
+            maxHandleAbsolute.setText(decimalFormat.format(sortedBy_HA_Aceel.get(sortedBy_HA_Aceel.size()-1)));
+
+            maxBaseTrans.setText(decimalFormat.format(sortedBy_BA_TAceel.get(sortedBy_BA_TAceel.size()-1)));
+
+            maxBaseAbsolute.setText(decimalFormat.format(sortedBy_BA_Aceel.get(sortedBy_BA_Aceel.size()-1)));
+
+
+
+            GraphView graph = (GraphView) findViewById(R.id.displayView);
+
+            LineGraphSeries <DataPoint> series2 = new LineGraphSeries<>();
+            LineGraphSeries <DataPoint> series1 = new LineGraphSeries<>();
+            LineGraphSeries <DataPoint> series3 = new LineGraphSeries<>();
+            LineGraphSeries <DataPoint> series4 = new LineGraphSeries<>();
+            for(int i =0; i< sortedBy_HA_TAceel.size(); i++) {
+                series1.appendData(new DataPoint(i, patientInfo.get(i).m_BA_AccelMagnitude), true, 100);
+                series2.appendData(new DataPoint(i, patientInfo.get(i).m_BA_TransvPlaneAccelMag), true, 100);
+                series3.appendData(new DataPoint(i, patientInfo.get(i).m_HA_AccelMagnitude), true, 100);
+                series4.appendData(new DataPoint(i, patientInfo.get(i).m_HA_TransvPlaneAccelMag), true, 100);
+            }
+/*
+            LineGraphSeries <DataPoint> series2 = new LineGraphSeries<>();
+            for(int i =0; i<sortedBy_HA_Aceel.size(); i++)
+                series2.appendData(new DataPoint(i, patientInfo.get(i).m_BA_TransvPlaneAccelMag), true, 100);
+
+
+            LineGraphSeries <DataPoint> series3 = new LineGraphSeries<>();
+            for(int i =0; i<sortedBy_BA_TAceel.size(); i++)
+                series3.appendData(new DataPoint(i, patientInfo.get(i).m_HA_AccelMagnitude), true, 100);
+
+
+            LineGraphSeries <DataPoint> series4 = new LineGraphSeries<>();
+            for(int i =0; i<sortedBy_BA_Aceel.size(); i++)
+                series4.appendData(new DataPoint(i, patientInfo.get(i).m_HA_TransvPlaneAccelMag), true, 100);
+
+*/
+            // set manual X bounds
+            graph.getViewport().setYAxisBoundsManual(true);
+            graph.getViewport().setMinY(0);
+            graph.getViewport().setMaxY(3);
+
+            graph.getViewport().setXAxisBoundsManual(true);
+            graph.getViewport().setMinX(0);
+            graph.getViewport().setMaxX(sortedBy_BA_Aceel.size());
+
+
+            // This option does not work in my laptop
+            graph.getViewport().setScrollable(true);    // enables horizontal scrolling
+            graph.getViewport().setScrollableY(true);   // enables vertical scrolling
+            graph.getViewport().setScalable(true);      // enables horizontal zooming and scrolling
+            graph.getViewport().setScalableY(true);     // enables vertical zooming and scrolling
+
+            series1.setTitle(" Curve 1");
+
+            series2.setColor(Color.BLACK);
+            series1.setColor(Color.RED);
+            series3.setColor(Color.BLUE);
+            series4.setColor(Color.GREEN);
+
+            series1.setThickness(3);
+            series2.setThickness(3);
+            series3.setThickness(3);
+            series4.setThickness(3);
+
+            graph.addSeries(series1);
+            graph.addSeries(series2);
+            graph.addSeries(series3);
+            graph.addSeries(series4);
+        }
+    }; // end of speed listener
+
+
+
+
+    public OnClickListener predictionButtonListener = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+        }
+    }; // end of prediction listener
 
     public double mean (ArrayList arrayMean){
 
         double array=0;
 
         for (int i = 0; i < arrayMean.size(); i++) {
+
             array += (Double) arrayMean.get(i);
         }
+
         return (array/arrayMean.size());
     }
 
-    public double standardDeviation (ArrayList arraySD, double mean){
+    public double standardDeviation (ArrayList arraySD){
 
-        double mean1 = mean;
+        double mean1 = mean(arraySD);
         double n = (arraySD.size()-1);
         double num=0;
 
         for (int i = 0; i < arraySD.size(); i++){
             num += Math.pow(((Double)arraySD.get(i) - mean1),2);
         }
+
         return (Math.sqrt(num/n));
     }
-
 
     public double median(ArrayList arrayMedian){
         int size = arrayMedian.size()/2;
 
         if (arrayMedian.size() % 2 == 0)
-           return ((Double) arrayMedian.get(size) + (Double)arrayMedian.get(size - 1));
+
+            return ((Double) arrayMedian.get(size) + (Double)arrayMedian.get(size - 1));
+
         else
             return ((Double)arrayMedian.get(size));
+
     }
 
+
+    public void clearTable (){
+
+
+        // mean
+        meanHandleTrans.setText("");
+        meanHandleAbsolute.setText("");
+        meanBaseTrans.setText("");
+        meanBaseAbsolute.setText("");
+
+        //SD
+        sdHandleTrans.setText("");
+        sdHandleAbsolute.setText("");
+        sdBaseTrans.setText("");
+        sdBaseAbsolute.setText("");
+
+
+        // median
+        medianHandleTrans.setText("");
+        medianHandleAbsolute.setText("");
+        medianBaseTrans.setText("");
+        medianBaseAbsolute.setText("");
+
+        // min
+        minHandleTrans.setText("");
+        minHandleAbsolute.setText("");
+        minBaseTrans.setText("");
+        minBaseAbsolute.setText("");
+
+        // max
+        maxHandleTrans.setText("");
+        maxHandleAbsolute.setText("");
+        maxBaseTrans.setText("");
+        maxBaseAbsolute.setText("");
+
+    }// end of clear table
+
 }// end of data_visualisation
+
+
