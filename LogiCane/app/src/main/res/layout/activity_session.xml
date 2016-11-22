@@ -3,9 +3,8 @@
     xmlns:rsb="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/tools"
-    android:orientation="horizontal">
-
+    android:orientation="horizontal"
+    >
     <RelativeLayout
         android:layout_width="550dp"
         android:layout_height="match_parent"
@@ -105,7 +104,6 @@
                         android:id="@+id/meanLabelTextView"
                         android:text="@string/meanLabelTextView"
                         android:gravity="center"
-                        android:onClick="data"
                         android:padding="@dimen/defaultPadding"
                         />
                     <TextView
@@ -140,6 +138,7 @@
                         android:padding="@dimen/defaultPadding"
 
                         />
+
 
                 </TableRow>
                 <TableRow
@@ -185,6 +184,7 @@
                         android:padding="@dimen/defaultPadding"
                         />
 
+
                 </TableRow>
                 <TableRow
                     android:layout_width="match_parent"
@@ -227,6 +227,7 @@
                         android:gravity="center"
                         android:padding="@dimen/defaultPadding"
                         />
+
 
                 </TableRow>
                 <TableRow
@@ -355,6 +356,7 @@
                         android:padding="@dimen/defaultPadding"
                         />
 
+
                 </TableRow>
                 <TableRow
                     android:layout_width="match_parent"
@@ -370,6 +372,7 @@
                         android:text="@string/maxLabelTextView"
                         android:padding="@dimen/defaultPadding"
                         />
+
                     <TextView
                         android:id="@+id/maxHandleTransverse"
                         android:layout_width="wrap_content"
@@ -398,6 +401,7 @@
                         android:gravity="center"
                         android:padding="@dimen/defaultPadding"
                         />
+
 
                 </TableRow>
 
@@ -530,7 +534,7 @@
             <Button
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/weightBearingTextView"
+                android:id="@+id/weightBearingButton"
                 android:text="@string/weightBearingText"
                 android:gravity="center"
                 android:layout_weight="1"
@@ -538,7 +542,7 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/orientationTextView"
+                android:id="@+id/orientationButton"
                 android:text="@string/orientationText"
                 android:gravity="center"
                 android:layout_weight="1"
@@ -546,7 +550,7 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/speedTextView"
+                android:id="@+id/speedButton"
                 android:text="@string/SpeedText"
                 android:gravity="center"
                 android:layout_weight="1"
@@ -555,7 +559,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/predictionText"
-                android:id="@+id/predictionTextView"
+                android:id="@+id/predictionButton"
                 android:gravity="center"
                 android:layout_weight="1"
                 />
@@ -570,7 +574,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/displayView"
-                app:seriesColor="#ee0000"
                 />
 
         </RelativeLayout>

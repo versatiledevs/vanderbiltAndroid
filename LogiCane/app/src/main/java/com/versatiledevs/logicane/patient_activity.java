@@ -67,6 +67,7 @@ public class patient_activity extends AppCompatActivity {
 
     }
 
+
 }
 /*
     <item android:id="@+id/action_search"
