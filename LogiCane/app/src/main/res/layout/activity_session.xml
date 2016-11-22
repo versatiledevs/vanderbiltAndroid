@@ -6,7 +6,7 @@
     android:orientation="horizontal"
     >
     <RelativeLayout
-        android:layout_width="550dp"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         >
@@ -523,7 +523,7 @@
 
 
     <RelativeLayout
-        android:layout_width="fill_parent"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:id="@+id/visualLayout"
         android:layout_weight="2"
