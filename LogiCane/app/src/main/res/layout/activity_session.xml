@@ -12,12 +12,13 @@
         >
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:id="@+id/sessionTextView"
             android:text="@string/sessionTextView"
             android:gravity="center"
             android:background="@color/headers"
             android:layout_alignParentTop="true"
+            android:padding="@dimen/textViewPadding"
             />
         <RelativeLayout
             android:layout_width="match_parent"
@@ -100,7 +101,7 @@
                 </TableRow>
                 <TableRow
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
                     >
@@ -113,25 +114,25 @@
                         android:padding="@dimen/defaultPadding"
                         />
                     <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:id="@+id/meanHandleTransverse"
                         android:text=""
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
                         android:gravity="center"
                         android:padding="@dimen/defaultPadding"
                         />
                     <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:id="@+id/meanHandleAbsolute"
                         android:text=""
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
                         android:gravity="center"
                         android:padding="@dimen/defaultPadding"
                         />
                     <TextView
-                        android:id="@+id/meanBaseTransverse"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:id="@+id/meanBaseTransverse"
                         android:gravity="center"
                         android:padding="@dimen/defaultPadding"
 
@@ -423,16 +424,17 @@
             >
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:id="@+id/sessionInfoTextView"
                 android:text="@string/sessionInfoTextView"
                 android:gravity="center"
                 android:background="@color/headers"
+                android:padding="@dimen/textViewPadding"
                 />
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/sessionLabel"
                 android:orientation="vertical"
                 android:layout_below="@+id/sessionInfoTextView"
@@ -444,16 +446,18 @@
                     >
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="28dp"
+                        android:layout_height="wrap_content"
                         android:id="@+id/sessionIdLabelTextView"
                         android:text="@string/sessionIdLabelTextView"
                         android:gravity="start|center"
+                        android:padding="@dimen/textViewPadding"
                         />
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="28dp"
+                        android:layout_height="wrap_content"
                         android:id="@+id/sessionIdTextView"
                         android:gravity="start|center"
+                        android:padding="@dimen/textViewPadding"
                         />
                 </LinearLayout>
                 <LinearLayout
@@ -463,16 +467,18 @@
                     >
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="28dp"
+                        android:layout_height="wrap_content"
                         android:id="@+id/sessionDateLabelTextView"
                         android:text="@string/sessionDateLabelTextView"
                         android:gravity="start|center"
+                        android:padding="@dimen/textViewPadding"
                         />
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="28dp"
+                        android:layout_height="wrap_content"
                         android:id="@+id/sessionDateTextView"
                         android:gravity="start|center"
+                        android:padding="@dimen/textViewPadding"
                         />
                 </LinearLayout>
                 <LinearLayout
@@ -483,16 +489,18 @@
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="28dp"
+                        android:layout_height="wrap_content"
                         android:id="@+id/sessionLocationLabelTextView"
                         android:text="@string/sessionLocationLabelTextView"
                         android:gravity="start|center"
+                        android:padding="@dimen/textViewPadding"
                         />
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="28dp"
+                        android:layout_height="wrap_content"
                         android:id="@+id/sessionLocationTextView"
                         android:gravity="start|center"
+                        android:padding="@dimen/textViewPadding"
                         />
                 </LinearLayout>
                 <LinearLayout
@@ -502,16 +510,18 @@
                     >
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="28dp"
+                        android:layout_height="wrap_content"
                         android:id="@+id/patientLabelTextView"
                         android:text="@string/patientIdLabelTextView"
                         android:gravity="start|center"
+                        android:padding="@dimen/textViewPadding"
                         />
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="28dp"
+                        android:layout_height="wrap_content"
                         android:id="@+id/patientIdTextView"
                         android:gravity="start|center"
+                        android:padding="@dimen/textViewPadding"
                         />
                 </LinearLayout>
 
