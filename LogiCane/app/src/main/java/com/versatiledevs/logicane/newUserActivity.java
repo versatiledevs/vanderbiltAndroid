@@ -32,6 +32,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 
 import static android.R.attr.name;
@@ -40,6 +47,8 @@ import static android.R.attr.name;
 public class newUserActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth firebaseAuth;
+    private RadioGroup radioGroup;
+    private RadioButton radioButton;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -65,13 +74,18 @@ public class newUserActivity extends AppCompatActivity {
         EditText edit_text_password = (EditText) findViewById(R.id.newUserPassword);
         EditText edit_text_first_name = (EditText) findViewById(R.id.fName);
         EditText edit_text_last_name = (EditText) findViewById(R.id.lName);
+        radioGroup = (RadioGroup) findViewById(R.id.radio);
+
+        int selectedId = radioGroup.getCheckedRadioButtonId();
+        radioButton = (RadioButton) findViewById(selectedId);
 
 
         // Converting all of the EditText fields into strings.
-        String email = edit_text_email.getText().toString();
-        String password = edit_text_password.getText().toString();
-        String first_name = edit_text_first_name.getText().toString();
-        String last_name = edit_text_last_name.getText().toString();
+        final String email = edit_text_email.getText().toString();
+        final String password = edit_text_password.getText().toString();
+        final String first_name = edit_text_first_name.getText().toString();
+        final String last_name = edit_text_last_name.getText().toString();
+        final String role = radioButton.getText().toString();
 
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -88,6 +102,8 @@ public class newUserActivity extends AppCompatActivity {
                             firebaseAuth = FirebaseAuth.getInstance();
                             final FirebaseUser user = firebaseAuth.getCurrentUser();
                             String uid = user.getUid();
+                            writeNewUser (uid, first_name, last_name, email, role);
+
 
                             Toast.makeText(newUserActivity.this, "New User Created Successfully!", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(newUserActivity.this, Admin.class);
@@ -140,7 +156,7 @@ public class newUserActivity extends AppCompatActivity {
         String lName;
         String email;
         String role;
-        int uid;
+        //int uid;
 
         public User() {
             // Default constructor required for calls to DataSnapshot.getValue(User.class)
