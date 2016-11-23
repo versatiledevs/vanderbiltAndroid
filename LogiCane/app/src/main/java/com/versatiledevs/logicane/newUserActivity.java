@@ -49,6 +49,8 @@ public class newUserActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private RadioGroup radioGroup;
     private RadioButton radioButton;
+
+    String uid = "no uid";
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -87,6 +89,7 @@ public class newUserActivity extends AppCompatActivity {
         final String last_name = edit_text_last_name.getText().toString();
         final String role = radioButton.getText().toString();
 
+
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
 
@@ -99,9 +102,15 @@ public class newUserActivity extends AppCompatActivity {
                             Toast.makeText(newUserActivity.this, "A user with this email already exist.",
                                     Toast.LENGTH_SHORT).show();
                         } else {
+
+                            //This will get the new uid for the newly created user.
+                            //String tempUid = getNewUserUID();
                             firebaseAuth = FirebaseAuth.getInstance();
                             final FirebaseUser user = firebaseAuth.getCurrentUser();
-                            String uid = user.getUid();
+                            uid = user.getUid();
+
+
+
                             writeNewUser (uid, first_name, last_name, email, role);
 
 
@@ -177,8 +186,37 @@ public class newUserActivity extends AppCompatActivity {
             final FirebaseDatabase database = FirebaseDatabase.getInstance();
             DatabaseReference myRef = database.getReference("Users");
 
-            User user = new User(fName, lName, email, role);
-            myRef.child("Users").child(uid).setValue(user);
+            //User user = new User(fName, lName, email, role);
+            myRef.child(uid).child("email").setValue(email);
+            myRef.child(uid).child("fName").setValue(fName);
+            myRef.child(uid).child("lName").setValue(lName);
+            myRef.child(uid).child("role").setValue(role);
+        }
+
+
+        public String getNewUserUID(){
+            FirebaseAuth.getInstance().signOut();
+            firebaseAuth = FirebaseAuth.getInstance();
+            EditText edit_text_email = (EditText) findViewById(R.id.newUserEmail);
+            EditText edit_text_password = (EditText) findViewById(R.id.newUserPassword);
+
+
+            final String email = edit_text_email.getText().toString();
+            final String password = edit_text_password.getText().toString();
+
+
+            firebaseAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(newUserActivity.this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            firebaseAuth = FirebaseAuth.getInstance();
+                            final FirebaseUser user = firebaseAuth.getCurrentUser();
+                            //This will set the uid for the new user so that we can create an entry
+                            // in the database for them.
+                            uid = user.getUid();
+                        }
+                    });
+            return uid;
         }
 
 }

@@ -62,18 +62,21 @@
         <RadioButton android:id="@+id/physical_therapist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Physical Therapist  "
+            android:padding="8dp"
+            android:text="Doctor"
             />
         <RadioButton android:id="@+id/patient"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Patient  "
+            android:padding="8dp"
+            android:text="Patient"
             />
         <RadioButton
             android:id="@+id/admin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Admin  "
+            android:padding="8dp"
+            android:text="Admin"
 
             />
     </RadioGroup>
