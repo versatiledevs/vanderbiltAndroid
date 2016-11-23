@@ -26,6 +26,7 @@ import static android.R.attr.name;
 public class newUserActivity extends AppCompatActivity {
     //private FirebaseAuth mAuth;
     private FirebaseAuth firebaseAuth;
+    //Test
 
 
     String uid = "no uid";
