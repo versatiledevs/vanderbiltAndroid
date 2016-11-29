@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -26,6 +27,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import static android.R.attr.button;
+
 public class patient_activity extends AppCompatActivity {
 
     String patient;
@@ -33,7 +36,8 @@ public class patient_activity extends AppCompatActivity {
     String test;
     String test_value;
     final List<String> patient_list = new ArrayList<String>();
-    final List<String> test_list = new ArrayList<String>();
+    //final List<String> test_list = new ArrayList<String>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,11 +67,16 @@ public class patient_activity extends AppCompatActivity {
                 spinner_value = dropdown.getSelectedItem().toString();
 
                 //test spinner
+                Spinner spinner_test = (Spinner) findViewById(R.id.test_spinner);
+                String[] test_list = {"DGI", "SM"};
+                ArrayAdapter<String> test_adapter = new ArrayAdapter<String>(patient_activity.this, android.R.layout.simple_spinner_dropdown_item, test_list);
+                test_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinner_test.setAdapter(adapter);
 
                 //pass spinner value to next intent
-                /*Intent intent = new Intent(patient_activity.this, Data_visualization.class);
+                Intent intent = new Intent(patient_activity.this, Data_visualization.class);
                 intent.putExtra("patient", spinner_value);
-                startActivity(intent);  */
+                startActivity(intent);
             }
 
 
@@ -76,29 +85,18 @@ public class patient_activity extends AppCompatActivity {
                 //error handling
             }
         });
-
-        FirebaseDatabase db = FirebaseDatabase.getInstance();
-        DatabaseReference test_ref = db.getReferenceFromUrl("https://logicane-cf98b.firebaseio.com/Data"+spinner_value);
-        test_ref.addValueEventListener(new ValueEventListener() {
+        Button button;
+        button = (Button)findViewById(R.id.submit_button);
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Long count = dataSnapshot.getChildrenCount();
-                Iterator iter = dataSnapshot.getChildren().iterator();
-                for (int x = 0; x < count; x++) {
-                    test = ((DataSnapshot) iter.next()).getKey();
-                    test_list.add(test);
-                }
-                Spinner spinner_test = (Spinner) findViewById(R.id.test_spinner);
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(patient_activity.this, android.R.layout.simple_spinner_dropdown_item, test_list);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                spinner_test.setAdapter(adapter);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
+            public void onClick(View v) {
+                Intent intent = new Intent(patient_activity.this, Data_visualization.class);
+                intent.putExtra("patient", spinner_value);
+                startActivity(intent);
             }
         });
+
+
     }             //end onCreate
 
         @Override
