@@ -9,73 +9,141 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.firebase.auth.api.model.StringList;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import static android.R.attr.button;
+
 public class patient_activity extends AppCompatActivity {
+
+    String patient;
+    String spinner_value;
+    String test;
+    String test_value;
+    final List<String> patient_list = new ArrayList<String>();
+    //final List<String> test_list = new ArrayList<String>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.patient_activity);
 
-        Spinner dropdown = (Spinner)findViewById(R.id.patient_spinner);
-        String[] items = new String[]{"Patient 1", "Patient 2", "Patient 3"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items);
-        dropdown.setAdapter(adapter);
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReferenceFromUrl("https://logicane-cf98b.firebaseio.com/Data");
 
-        //getActionBar().setDisplayHomeAsUpEnabled(true);
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                Long count = snapshot.getChildrenCount();
+                Iterator iter = snapshot.getChildren().iterator();
+                for (int x = 0; x < count; x++) {
+                    patient = ((DataSnapshot) iter.next()).getKey();
+                    //Getting the data from snapshot
+                    //patient = postSnapshot.child("Data").getValue(String.class);
+                    patient_list.add(patient);
+                }
+                final Spinner dropdown = (Spinner) findViewById(R.id.patient_spinner);
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(patient_activity.this, android.R.layout.simple_spinner_dropdown_item, patient_list);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                dropdown.setAdapter(adapter);
 
-    }
+                //get value chosen in spinner
+                spinner_value = dropdown.getSelectedItem().toString();
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_patient, menu);
-        return true;
+                //test spinner
+                Spinner spinner_test = (Spinner) findViewById(R.id.test_spinner);
+                String[] test_list = {"DGI", "SM"};
+                ArrayAdapter<String> test_adapter = new ArrayAdapter<String>(patient_activity.this, android.R.layout.simple_spinner_dropdown_item, test_list);
+                test_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinner_test.setAdapter(adapter);
 
-    }
+                //pass spinner value to next intent
+                Intent intent = new Intent(patient_activity.this, Data_visualization.class);
+                intent.putExtra("patient", spinner_value);
+                startActivity(intent);
+            }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
-        switch (item.getItemId()) {
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                //error handling
+            }
+        });
+        Button button;
+        button = (Button)findViewById(R.id.submit_button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(patient_activity.this, Data_visualization.class);
+                intent.putExtra("patient", spinner_value);
+                startActivity(intent);
+            }
+        });
+
+
+    }             //end onCreate
+
+        @Override
+        public boolean onCreateOptionsMenu (Menu menu){
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.menu_patient, menu);
+            return true;
+
+        }
+
+        @Override
+        public boolean onOptionsItemSelected (MenuItem item){
+            // Handle item selection
+            switch (item.getItemId()) {
             /*case R.id.action_back:
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
             */
-            case R.id.action_search:
-                //startActivity(new Intent(this, SearchPatients.class));
-                return true;
+                case R.id.action_search:
+                    //startActivity(new Intent(this, SearchPatients.class));
+                    return true;
             /*case R.id.action_settings:
                 startActivity(new Intent(this, Settings.class));
                 return true;
                 */
-            case R.id.action_signout:
-                startActivity(new Intent(patient_activity.this, LoginActivity.class));
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+                case R.id.action_signout:
+                    startActivity(new Intent(patient_activity.this, LoginActivity.class));
+                    return true;
+                default:
+                    return super.onOptionsItemSelected(item);
+            }
         }
-    }
 
     public void DataVisualizationPublic(View view) {
 
         String key = "item1";   //this is the item that is send to data visualisation
         Intent intent = new Intent(patient_activity.this, Data_visualization.class);
         intent.putExtra("item", key);
-        Toast.makeText(this, "Data Visualization "+key, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Data Visualization " + key, Toast.LENGTH_SHORT).show();
         startActivity(intent);
 
-       // Toast.makeText(this, "Data Visualization ", Toast.LENGTH_SHORT).show();
+        // Toast.makeText(this, "Data Visualization ", Toast.LENGTH_SHORT).show();
         //startActivity(new Intent(this, Data_visualization.class));
         //finish();
-
     }
-
-
 }
+
 /*
     <item android:id="@+id/action_search"
         android:title="@string/action_search"
