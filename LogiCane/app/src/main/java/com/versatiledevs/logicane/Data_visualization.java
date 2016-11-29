@@ -775,10 +775,10 @@ public class Data_visualization extends AppCompatActivity {
 
             series1.setTitle(" Curve 1");
 
-            series2.setColor(Color.BLACK);
-            series1.setColor(Color.RED);
-            series3.setColor(Color.BLUE);
-            series4.setColor(Color.GREEN);
+            series1.setColor(Color.BLUE);
+            series2.setColor(Color.GREEN);
+            series3.setColor(Color.YELLOW);
+            series4.setColor(Color.RED);
 
             series1.setThickness(3);
             series2.setThickness(3);
@@ -886,11 +886,11 @@ public class Data_visualization extends AppCompatActivity {
         skewnessBaseTrans.setText("");
         skewnessBaseAbsolute.setText("");
         //kurtosis
-      /*  skewnessHandleTrans.setText("");
-        skewnessHandleAbsolute.setText("");
-        skewnessBaseTrans.setText("");
-        skewnessBaseAbsolute.setText("");
-     */   // min
+        kurtosisHandleTrans.setText("");
+        kurtosisHandleAbsolute.setText("");
+        kurtosisBaseTrans.setText("");
+        kurtosisBaseAbsolute.setText("");
+        // min
         minHandleTrans.setText("");
         minHandleAbsolute.setText("");
         minBaseTrans.setText("");

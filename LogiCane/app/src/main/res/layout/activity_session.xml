@@ -598,7 +598,11 @@
             android:layout_above="@+id/rangerSelector"
             android:layout_below="@+id/graphProperties"
             >
-
+            <com.jjoe64.graphview.GraphView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/displayView"
+                />
         </RelativeLayout>
 
         <org.florescu.android.rangeseekbar.RangeSeekBar
@@ -674,15 +678,6 @@
                     />
             </LinearLayout>
         </RelativeLayout>
-
-        <com.jjoe64.graphview.GraphView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/displayView"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="190dp"
-            android:layout_marginTop="55dp" />
 
     </RelativeLayout>
 
