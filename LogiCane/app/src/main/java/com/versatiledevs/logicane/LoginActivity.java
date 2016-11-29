@@ -146,32 +146,44 @@ public class LoginActivity extends AppCompatActivity {
         final FirebaseUser user = firebaseAuth.getCurrentUser();
         String uid = user.getUid();
 
+        //String email = editTextEmail.getText().toString();
+
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("Users").child(uid);
-        DatabaseReference fName = myRef.child("role");
-        fName.addValueEventListener(new ValueEventListener() {
+        DatabaseReference roleRef = myRef.child("role");
+        roleRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String admin = "admin";
+                String Admin = "Admin";
                 String doctor = "doctor";
+                String Doctor = "Doctor";
                 String patient = "patient";
+                String Patient = "Patient";
                 String role = "";
                 role = dataSnapshot.getValue(String.class);
 
-                if (role.equals(admin)) //Admin Activity
+                if (role.equals(admin) || role.equals(Admin)) //Admin Activity
                 {
                     Intent intent = new Intent(LoginActivity.this, Admin.class);
                     startActivity(intent);
                     finish();
 
-                }else if(role.equals(patient))  //Patient Activity
+                }else if(role.equals(patient) || role.equals(Patient))  //Patient Activity
                 {
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
-                }else if(role.equals(doctor)) //Doctor Activity
+                }else if(role.equals(doctor) || role.equals(Doctor)) //Doctor Activity
                 {
                     Intent intent = new Intent(LoginActivity.this, patient_activity.class);
+                    startActivity(intent);
+                    finish();
+                }else
+                {
+                    //Need an error here that tells the user that the role is not set.
+                    //Because the app crashes right here if there is no role.
+                    Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
                     startActivity(intent);
                     finish();
                 }

@@ -1,53 +1,46 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_admin"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.versatiledevs.logicane.Admin">
-
+    android:orientation="vertical"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:weightSum="3">
     <TextView
-        android:id="@+id/adminText"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:gravity="center"
+        android:layout_gravity="center"
+        android:padding="16dp"
         android:text="Admin"
-        android:layout_margin="16dp"
-        android:textSize="35dp"
+        android:textAllCaps="true"
+        android:textSize="36dp"
         />
-
     <Button
         android:id="@+id/buttonNewUser"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/adminText"
-        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
         android:layout_margin="16dp"
-        android:onClick="newUser"
-        android:text="New User"/>
+        android:layout_weight=".1"
+        android:hint="New User"
+        android:onClick="newUser" />
     <Button
         android:id="@+id/buttonDeleteUser"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/buttonNewUser"
-        android:layout_centerHorizontal="true"
-        android:onClick="deleteUser"
+        android:layout_gravity="center"
         android:layout_margin="16dp"
-        android:text="Delete User"/>
-
+        android:layout_weight=".1"
+        android:hint="Delete User"
+        android:onClick="deleteUser" />
     <Button
-        android:id="@+id/bTest"
+        android:id="@+id/buttonDeleteData"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/buttonDeleteUser"
-        android:layout_centerHorizontal="true"
-        android:onClick="deleteData"
-        android:layout_margin="16dp"
-        android:text="Delete Data"/>
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="30dp"
+        android:layout_weight=".1"
+        android:hint="Delete Data"
+        android:onClick="deleteData" />
 
-</RelativeLayout>
+</LinearLayout>
