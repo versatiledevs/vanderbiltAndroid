@@ -19,14 +19,14 @@ public class Admin extends AppCompatActivity {
         finish();
 
     }
-    //If user clicks delete user then we will go to the deleteUserActivity.
+    //Delete User view which is currently commented out in the .xml file.
     public void deleteUser(View view){
         Intent intent = new Intent(Admin.this, deleteUserActivity.class);
         startActivity(intent);
         finish();
 
     }
-
+    //Delete Data view which is currently commented out in the .xml file.
     public void deleteData(View view){
         Intent intent = new Intent(Admin.this, deleteDataActivity.class);
         startActivity(intent);

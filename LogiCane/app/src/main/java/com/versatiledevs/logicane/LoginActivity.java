@@ -128,8 +128,6 @@ public class LoginActivity extends AppCompatActivity {
                             }
                         } else {
                             progressDialog.dismiss();
-                            // MainActivity = sign out
-
                             DetermineRole();
                             Toast.makeText(LoginActivity.this, "WELCOME!", Toast.LENGTH_SHORT).show();
                         }
@@ -137,16 +135,12 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
-    /************************
-     *This is the class that is getting the role information from the database.
-     *
-     */
+    //This is the class that is getting the role information from the database.
     private void DetermineRole()
     {
+        //Getting the current users Uid so that I can put the info into the database.
         final FirebaseUser user = firebaseAuth.getCurrentUser();
         String uid = user.getUid();
-
-        //String email = editTextEmail.getText().toString();
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("Users").child(uid);
