@@ -15,6 +15,7 @@
 package com.versatiledevs.logicane;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +23,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -82,8 +84,6 @@ public class LoginActivity extends AppCompatActivity {
     // this method will log user into firebase
     private void login() {
 
-
-
         editTextEmail = (EditText) findViewById(R.id.edit_email_text);
         editTextPassword = (EditText) findViewById(R.id.edit_password_text);
         buttonSignIN = (Button) findViewById(R.id.sign_in_button);
@@ -100,6 +100,11 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Enter password!", Toast.LENGTH_SHORT).show();
             return;
         }
+
+        // hide the keyboard after user enter his password
+        ((InputMethodManager) getSystemService(
+                Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(
+                editTextPassword.getWindowToken(), 0);
 
         progressDialog.setMessage("Logging in....");
         progressDialog.show();

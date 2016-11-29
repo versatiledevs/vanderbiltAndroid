@@ -33,7 +33,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
             android:hint="@string/hint_enter_password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:imeOptions="actionDone"/>
 
 
         <Button

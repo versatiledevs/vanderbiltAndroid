@@ -2,13 +2,16 @@ package com.versatiledevs.logicane;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class patient_activity extends AppCompatActivity {
 
@@ -55,6 +58,20 @@ public class patient_activity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void DataVisualizationPublic(View view) {
+
+        String key = "item1";   //this is the item that is send to data visualisation
+        Intent intent = new Intent(patient_activity.this, Data_visualization.class);
+        intent.putExtra("item", key);
+        Toast.makeText(this, "Data Visualization "+key, Toast.LENGTH_SHORT).show();
+        startActivity(intent);
+
+       // Toast.makeText(this, "Data Visualization ", Toast.LENGTH_SHORT).show();
+        //startActivity(new Intent(this, Data_visualization.class));
+        //finish();
+
     }
 
 
