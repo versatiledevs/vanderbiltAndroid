@@ -99,25 +99,7 @@ public class newUserActivity extends AppCompatActivity {
                 });
     }
 
-    public class User {
 
-        String fName;
-        String lName;
-        String email;
-        String role;
-
-        public User() {
-            // Default constructor required for calls to DataSnapshot.getValue(User.class)
-        }
-
-        public User(String fName, String lName, String email, String role) {
-            this.fName = fName;
-            this.lName = lName;
-            this.email = email;
-            this.role = role;
-        }
-
-    }
         //This method is for writing data to the database about the user.
         private void writeNewUser (String uid, String fName, String lName, String email, String role){
 
