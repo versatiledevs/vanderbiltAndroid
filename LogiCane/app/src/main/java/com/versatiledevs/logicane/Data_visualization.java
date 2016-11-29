@@ -1,4 +1,3 @@
-
 package com.versatiledevs.logicane;
 
 import android.graphics.Color;
@@ -17,17 +16,12 @@ import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.DataPointInterface;
 import com.jjoe64.graphview.series.LineGraphSeries;
-<<<<<<< HEAD
 import com.jjoe64.graphview.series.OnDataPointTapListener;
 import com.jjoe64.graphview.series.Series;
 
 import android.view.View.OnClickListener;
 import android.widget.Toast;
 
-=======
-import android.view.View.OnClickListener;
-
->>>>>>> luiss
 import org.florescu.android.rangeseekbar.RangeSeekBar;
 
 import java.text.DecimalFormat;
@@ -63,10 +57,7 @@ public class Data_visualization extends AppCompatActivity {
         public double m_F0,m_F1, m_F2, m_F3, m_F4, m_F5, m_F6, m_F7,
                 m_V_US,
                 m_V_LC,
-<<<<<<< HEAD
                 m_roll,
-=======
->>>>>>> luiss
                 m_Pitch,
                 m_Sstat,
                 m_GripPressureSum;
@@ -89,7 +80,6 @@ public class Data_visualization extends AppCompatActivity {
             sdBaseTrans,
             sdBaseAbsolute;
 
-<<<<<<< HEAD
     /** median **/
     private TextView skewnessHandleTrans,
             skewnessHandleAbsolute,
@@ -102,16 +92,10 @@ public class Data_visualization extends AppCompatActivity {
             kurtosisBaseTrans,
             kurtosisBaseAbsolute;
     /** K**/
-=======
->>>>>>> luiss
     private TextView medianHandleTrans,
             medianHandleAbsolute,
             medianBaseTrans,
             medianBaseAbsolute;
-<<<<<<< HEAD
-=======
-
->>>>>>> luiss
 
     /***  min  ***/
     private TextView minHandleTrans,
@@ -123,21 +107,11 @@ public class Data_visualization extends AppCompatActivity {
             maxHandleAbsolute,
             maxBaseTrans,
             maxBaseAbsolute;
-<<<<<<< HEAD
-=======
-
-    private RangeSeekBar  seekBarDouble;
-    private TextView minTextDouble,
-            maxTextDouble;
->>>>>>> luiss
 
     private RangeSeekBar  seekBarDouble;
 
-<<<<<<< HEAD
     private TextView minTextDouble,
             maxTextDouble;
-=======
->>>>>>> luiss
     private TextView startTime, endTime;
 
     final Double min = 0.0;
@@ -152,23 +126,12 @@ public class Data_visualization extends AppCompatActivity {
     DecimalFormat decimalFormat = new DecimalFormat("#.###");
 
 
-<<<<<<< HEAD
     
-=======
-    private GraphView graph;
->>>>>>> luiss
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_session);
-<<<<<<< HEAD
         
-=======
-
-
-         graph = (GraphView) findViewById(R.id.displayView);
-
->>>>>>> luiss
         // initialize
         meanHandleTrans     = (TextView) findViewById(R.id.meanHandleTransverse);
         meanHandleAbsolute  = (TextView) findViewById(R.id.meanHandleAbsolute);
@@ -214,12 +177,7 @@ public class Data_visualization extends AppCompatActivity {
         final Button predictionButton1    = (Button)  findViewById(R.id.predictionButton);
 
 
-        weightBearingButton1.setOnClickListener(weightBearingButtonListener);
-        orientationButton1.setOnClickListener( orientationButtonListener );
-        speedButton1.setOnClickListener(speedButtonListener);
-        predictionButton1.setOnClickListener(predictionButtonListener);
 
-<<<<<<< HEAD
         weightBearingButton1.setOnClickListener(weightBearingButtonListener);
         orientationButton1.setOnClickListener( orientationButtonListener );
         speedButton1.setOnClickListener(speedButtonListener);
@@ -232,12 +190,6 @@ public class Data_visualization extends AppCompatActivity {
         DatabaseReference myRefDouble = database.getReferenceFromUrl(urlDatabase + item);
 
 
-=======
-
-
-
-        DatabaseReference myRefDouble = database.getReferenceFromUrl(urlDatabase + "item1");
->>>>>>> luiss
 
         myRefDouble.addChildEventListener(new ChildEventListener() {
             @Override
@@ -256,10 +208,6 @@ public class Data_visualization extends AppCompatActivity {
                 double [] timeToDouble=new double[4];
 
                 Signal userSignal= new Signal();
-<<<<<<< HEAD
-=======
-                Signal userSignalCopy= new Signal();
->>>>>>> luiss
 
                 double  HA_total,
                         BA_total,
@@ -373,11 +321,7 @@ public class Data_visualization extends AppCompatActivity {
 
                         case "V_US":
                             value = dataSnapshot.child(key).getValue(Double.class);
-<<<<<<< HEAD
                             userSignal.m_V_US= value;
-=======
-                            userSignal.m_F7= value;
->>>>>>> luiss
                             break;
 
                         case "V_LC":
@@ -387,11 +331,7 @@ public class Data_visualization extends AppCompatActivity {
 
                         case "roll":
                             value = dataSnapshot.child(key).getValue(Double.class);
-<<<<<<< HEAD
                             userSignal.m_roll= value;
-=======
-                            userSignal.m_V_US= value;
->>>>>>> luiss
                             break;
 
                         case "pitch":
@@ -465,7 +405,6 @@ public class Data_visualization extends AppCompatActivity {
         seekBarDouble.setOnRangeSeekBarChangeListener(new RangeSeekBar.OnRangeSeekBarChangeListener() {
             @Override
             public void onRangeSeekBarValuesChanged(RangeSeekBar bar, Object minValue, Object maxValue) {
-<<<<<<< HEAD
 
 
              //   if (min != minValue) {
@@ -484,76 +423,36 @@ public class Data_visualization extends AppCompatActivity {
         })*/
     } // end of onCreate
 
-=======
-
-
-             //   if (min != minValue) {
-               //     Toast.makeText(Data_visualization.this, "Min border changed" + minValue, Toast.LENGTH_SHORT).show();
-                    //startTime.setText(patientInfo.get(.time));
-
-              //  }
-
-               /* if (max != maxValue ) {
-                    Toast.makeText(Data_visualization.this, "Max border changed", Toast.LENGTH_SHORT).show();
-                }
-
-             //  min =  minValue;
-              //  max = (Double) maxValue;
-            }
-        })*/
-    } // end of onCreate
->>>>>>> luiss
 
 
 
 
 
-<<<<<<< HEAD
     public OnClickListener weightBearingButtonListener = new OnClickListener() {
         @Override
         public void onClick (View v){
 
             GraphView graph = (GraphView) findViewById(R.id.displayView);
-=======
 
-    public OnClickListener weightBearingButtonListener = new OnClickListener() {
-        @Override
-        public void onClick (View v){
->>>>>>> luiss
-
-            GraphView graph = (GraphView) findViewById(R.id.displayView);
 
             LineGraphSeries <DataPoint> series1 = new LineGraphSeries<>();
             LineGraphSeries <DataPoint> series2 = new LineGraphSeries<>();
 
-<<<<<<< HEAD
             ArrayList<Double> sortedby_gripPressureSum= new ArrayList<>();
-=======
-            ArrayList<Double> sortedBy_gripPressuresum= new ArrayList<>();
->>>>>>> luiss
             ArrayList<Double> sortedBy_L_VC= new ArrayList<>();
 
             //make a copy ...
             for(int i=0; i< patientInfo.size(); i++){
-<<<<<<< HEAD
                 sortedby_gripPressureSum.add(patientInfo.get(i).m_GripPressureSum);
                 sortedBy_L_VC.add(patientInfo.get(i).m_V_LC);
 
             }
             Collections.sort(sortedby_gripPressureSum);
-=======
-                sortedBy_gripPressuresum.add(patientInfo.get(i).m_GripPressureSum);
-                sortedBy_L_VC.add(patientInfo.get(i).m_V_LC);
-
-            }
-            Collections.sort(sortedBy_gripPressuresum);
->>>>>>> luiss
             Collections.sort(sortedBy_L_VC);
 
             clearTable ();
 
             // mean
-<<<<<<< HEAD
             meanHandleTrans.setText(decimalFormat.format(mean(sortedby_gripPressureSum)));
             meanHandleAbsolute.setText(decimalFormat.format(mean(sortedBy_L_VC)));
             //SD
@@ -586,26 +485,10 @@ public class Data_visualization extends AppCompatActivity {
             minHandleAbsolute.setText(decimalFormat.format(sortedBy_L_VC.get(0)));
             // max
             maxHandleTrans.setText(decimalFormat.format(sortedby_gripPressureSum.get(sortedby_gripPressureSum.size()-1)));
-=======
-            meanHandleTrans.setText(decimalFormat.format(mean(sortedBy_gripPressuresum)));
-            meanHandleAbsolute.setText(decimalFormat.format(mean(sortedBy_L_VC)));
-            //SD
-            sdHandleTrans.setText(decimalFormat.format(standardDeviation(sortedBy_gripPressuresum)));
-            sdHandleAbsolute.setText(decimalFormat.format(standardDeviation(sortedBy_L_VC)));
-            // median
-            medianHandleTrans.setText(decimalFormat.format(median(sortedBy_gripPressuresum)));
-            medianHandleAbsolute.setText(decimalFormat.format(median(sortedBy_L_VC)));
-            // min
-            minHandleTrans.setText(decimalFormat.format(sortedBy_gripPressuresum.get(0)));
-            minHandleAbsolute.setText(decimalFormat.format(sortedBy_L_VC.get(0)));
-            // max
-            maxHandleTrans.setText(decimalFormat.format(sortedBy_gripPressuresum.get(sortedBy_gripPressuresum.size()-1)));
->>>>>>> luiss
             maxHandleAbsolute.setText(decimalFormat.format(sortedBy_L_VC.get(sortedBy_L_VC.size()-1)));
 
             graph.removeAllSeries();
 
-<<<<<<< HEAD
             for(int i =0; i< sortedby_gripPressureSum.size(); i++) {
                 series1.appendData(new DataPoint(i, patientInfo.get(i).m_GripPressureSum), true, sortedby_gripPressureSum.size());
                 series2.appendData(new DataPoint(i, patientInfo.get(i).m_V_LC), true, sortedBy_L_VC.size());
@@ -633,21 +516,6 @@ public class Data_visualization extends AppCompatActivity {
             graph.getViewport().setXAxisBoundsManual(true);
             graph.getViewport().setMinX(0);
             graph.getViewport().setMaxX(sortedby_gripPressureSum.size());
-=======
-            for(int i =0; i< sortedBy_gripPressuresum.size(); i++) {
-                series1.appendData(new DataPoint(i, patientInfo.get(i).m_GripPressureSum), true, sortedBy_gripPressuresum.size());
-                series2.appendData(new DataPoint(i, patientInfo.get(i).m_V_LC), true, sortedBy_L_VC.size());
-            }
-
-            // set manual X bounds
-            graph.getViewport().setYAxisBoundsManual(true);
-            graph.getViewport().setMinY(sortedBy_gripPressuresum.get(0));
-            graph.getViewport().setMaxY(sortedBy_gripPressuresum.get(sortedBy_gripPressuresum.size()-1));
-
-            graph.getViewport().setXAxisBoundsManual(true);
-            graph.getViewport().setMinX(0);
-            graph.getViewport().setMaxX(sortedBy_L_VC.size());
->>>>>>> luiss
 
 
             // This option does not work in my laptop
@@ -687,7 +555,6 @@ public class Data_visualization extends AppCompatActivity {
             LineGraphSeries<DataPoint> series3 = new LineGraphSeries<>();
             LineGraphSeries<DataPoint> series4 = new LineGraphSeries<>();
             LineGraphSeries<DataPoint> series5 = new LineGraphSeries<>();
-<<<<<<< HEAD
             LineGraphSeries<DataPoint> series6 = new LineGraphSeries<>();
 
             ArrayList<Double> sortedBy_3D_RotationalVelocityMag = new ArrayList<>();
@@ -759,97 +626,26 @@ public class Data_visualization extends AppCompatActivity {
             maxHandleAbsolute.setText(decimalFormat.format(sortedBy_3D_RotationalVelocityMag.get(sortedBy_3D_RotationalVelocityMag.size() - 1)));
             maxBaseTrans.setText(decimalFormat.format(sortedBy_2D_TranvPlaneRotVelocMag.get(sortedBy_2D_TranvPlaneRotVelocMag.size() - 1)));
             maxBaseAbsolute.setText(decimalFormat.format(sortedBy_roll.get(sortedBy_roll.size() - 1)));
-=======
-            LineGraphSeries<DataPoint> series2 = new LineGraphSeries<>();
-
-            ArrayList<Double> sortedBy_BA_Aceel = new ArrayList<>();
-            ArrayList<Double> sortedBy_BA_TAceel = new ArrayList<>();
-            ArrayList<Double> sortedBy_HA_Aceel = new ArrayList<>();
-            ArrayList<Double> sortedBy_HA_TAceel = new ArrayList<>();
-
-            //make a copy ...
-            for (int i = 0; i < patientInfo.size(); i++) {
-                sortedBy_HA_TAceel.add(patientInfo.get(i).m_HA_TransvPlaneAccelMag);
-                sortedBy_HA_Aceel.add(patientInfo.get(i).m_HA_AccelMagnitude);
-                sortedBy_BA_TAceel.add(patientInfo.get(i).m_BA_TransvPlaneAccelMag);
-                sortedBy_BA_Aceel.add(patientInfo.get(i).m_BA_AccelMagnitude);
-            }
-            Collections.sort(sortedBy_HA_TAceel);
-            Collections.sort(sortedBy_HA_Aceel);
-            Collections.sort(sortedBy_BA_TAceel);
-            Collections.sort(sortedBy_BA_Aceel);
-
-
-            // mean
-            meanHandleTrans.setText(decimalFormat.format(mean(sortedBy_HA_TAceel)));
-            meanHandleAbsolute.setText(decimalFormat.format(mean(sortedBy_HA_Aceel)));
-            meanBaseTrans.setText(decimalFormat.format(mean(sortedBy_BA_TAceel)));
-            meanBaseAbsolute.setText(decimalFormat.format(mean(sortedBy_BA_Aceel)));
-            //SD
-            sdHandleTrans.setText(decimalFormat.format(standardDeviation(sortedBy_HA_TAceel)));
-            sdHandleAbsolute.setText(decimalFormat.format(standardDeviation(sortedBy_HA_Aceel)));
-            sdBaseTrans.setText(decimalFormat.format(standardDeviation(sortedBy_BA_TAceel)));
-            sdBaseAbsolute.setText(decimalFormat.format(standardDeviation(sortedBy_BA_Aceel)));
-            // median
-            medianHandleTrans.setText(decimalFormat.format(median(sortedBy_HA_TAceel)));
-            medianHandleAbsolute.setText(decimalFormat.format(median(sortedBy_HA_Aceel)));
-            medianBaseTrans.setText(decimalFormat.format(median(sortedBy_BA_TAceel)));
-            medianBaseAbsolute.setText(decimalFormat.format(median(sortedBy_BA_Aceel)));
-            //skew
-       /*     medianHandleTrans.setText(decimalFormat.format(skew(sortedBy_HA_TAceel)));
-            medianHandleAbsolute.setText(decimalFormat.format(skew(sortedBy_HA_Aceel)));
-            medianBaseTrans.setText(decimalFormat.format(skew(sortedBy_BA_TAceel)));
-            medianBaseAbsolute.setText(decimalFormat.format(skew(sortedBy_BA_Aceel)));
-*/
-            // min
-            minHandleTrans.setText(decimalFormat.format(sortedBy_HA_TAceel.get(0)));
-            minHandleAbsolute.setText(decimalFormat.format(sortedBy_HA_Aceel.get(0)));
-            minBaseTrans.setText(decimalFormat.format(sortedBy_BA_TAceel.get(0)));
-            minBaseAbsolute.setText(decimalFormat.format(sortedBy_BA_Aceel.get(0)));
-            // max
-            maxHandleTrans.setText(decimalFormat.format(sortedBy_HA_TAceel.get(sortedBy_HA_TAceel.size() - 1)));
-            maxHandleAbsolute.setText(decimalFormat.format(sortedBy_HA_Aceel.get(sortedBy_HA_Aceel.size() - 1)));
-            maxBaseTrans.setText(decimalFormat.format(sortedBy_BA_TAceel.get(sortedBy_BA_TAceel.size() - 1)));
-            maxBaseAbsolute.setText(decimalFormat.format(sortedBy_BA_Aceel.get(sortedBy_BA_Aceel.size() - 1)));
->>>>>>> luiss
 
             graph.clearSecondScale();
             graph.removeAllSeries();
 
-<<<<<<< HEAD
             for (int i = 0; i < sortedBy_roll.size(); i++){
                 series3.appendData(new DataPoint(i, patientInfo.get(i).m_RotationalVelocityMag), true, sortedBy_3D_RotationalVelocityMag.size());
                 series4.appendData(new DataPoint(i, patientInfo.get(i).m_TranvPlaneRotVelocMag), true, sortedBy_2D_TranvPlaneRotVelocMag.size());
                 series5.appendData(new DataPoint(i, patientInfo.get(i).m_Pitch), true, sortedBy_pitch.size());
                 series6.appendData(new DataPoint(i, patientInfo.get(i).m_roll), true, sortedBy_roll.size());
-=======
-
-            for (int i = 0; i < sortedBy_HA_TAceel.size(); i++){
-                series3.appendData(new DataPoint(i, patientInfo.get(i).m_BA_AccelMagnitude), true, sortedBy_HA_TAceel.size());
-                series4.appendData(new DataPoint(i, patientInfo.get(i).m_BA_TransvPlaneAccelMag), true, sortedBy_HA_Aceel.size());
-                series5.appendData(new DataPoint(i, patientInfo.get(i).m_HA_AccelMagnitude), true, sortedBy_BA_TAceel.size());
-                series2.appendData(new DataPoint(i, patientInfo.get(i).m_HA_TransvPlaneAccelMag), true, sortedBy_BA_Aceel.size());
->>>>>>> luiss
 
             }
 
             // set manual X bounds
             graph.getViewport().setYAxisBoundsManual(true);
-<<<<<<< HEAD
             graph.getViewport().setMinY(sortedBy_3D_RotationalVelocityMag.get(0));
             graph.getViewport().setMaxY(sortedBy_2D_TranvPlaneRotVelocMag.get(sortedBy_2D_TranvPlaneRotVelocMag.size() - 1));
 
             graph.getViewport().setXAxisBoundsManual(true);
             graph.getViewport().setMinX(0);
             graph.getViewport().setMaxX(sortedBy_roll.size());
-=======
-            graph.getViewport().setMinY(0);
-            graph.getViewport().setMaxY(3);
-
-            graph.getViewport().setXAxisBoundsManual(true);
-            graph.getViewport().setMinX(0);
-            graph.getViewport().setMaxX(sortedBy_BA_Aceel.size());
->>>>>>> luiss
 
 
             // This option does not work in my laptop
@@ -863,34 +659,21 @@ public class Data_visualization extends AppCompatActivity {
             series3.setColor(Color.BLUE);
             series4.setColor(Color.GREEN);
             series5.setColor(Color.YELLOW);
-<<<<<<< HEAD
             series6.setColor(Color.RED);
-=======
-            series2.setColor(Color.RED);
->>>>>>> luiss
 
             series3.setThickness(3);
             series4.setThickness(3);
             series5.setThickness(3);
-<<<<<<< HEAD
             series6.setThickness(3);
-=======
-            series2.setThickness(3);
->>>>>>> luiss
 
             graph.addSeries(series3);
             graph.addSeries(series4);
             graph.addSeries(series5);
-<<<<<<< HEAD
             graph.addSeries(series6);
-=======
-            graph.addSeries(series2);
->>>>>>> luiss
 
 
         }
     }; // end of orientation listener
-<<<<<<< HEAD
 
 
 
@@ -1022,120 +805,6 @@ public class Data_visualization extends AppCompatActivity {
             graph.removeAllSeries();
             clearTable();
 
-=======
-
-
-
-
-
-    public OnClickListener speedButtonListener = new OnClickListener() {
-        @Override
-        public void onClick(View v) {
-
-            GraphView graph = (GraphView) findViewById(R.id.displayView);
-
-            LineGraphSeries <DataPoint> series1 = new LineGraphSeries<>();
-            LineGraphSeries <DataPoint> series2 = new LineGraphSeries<>();
-            LineGraphSeries <DataPoint> series3 = new LineGraphSeries<>();
-            LineGraphSeries <DataPoint> series4 = new LineGraphSeries<>();
-
-            ArrayList<Double> sortedBy_BA_Aceel= new ArrayList<>();
-            ArrayList<Double> sortedBy_BA_TAceel= new ArrayList<>();
-            ArrayList<Double> sortedBy_HA_Aceel= new ArrayList<>();
-            ArrayList<Double> sortedBy_HA_TAceel= new ArrayList<>();
-
-            //make a copy ...
-            for(int i=0; i< patientInfo.size(); i++){
-                sortedBy_BA_Aceel.add(patientInfo.get(i).m_BA_AccelMagnitude);
-                sortedBy_BA_TAceel.add(patientInfo.get(i).m_BA_TransvPlaneAccelMag);
-                sortedBy_HA_Aceel.add(patientInfo.get(i).m_HA_AccelMagnitude);
-                sortedBy_HA_TAceel.add(patientInfo.get(i).m_HA_TransvPlaneAccelMag);
-            }
-            Collections.sort(sortedBy_BA_Aceel);
-            Collections.sort(sortedBy_BA_TAceel);
-            Collections.sort(sortedBy_HA_Aceel);
-            Collections.sort(sortedBy_HA_TAceel);
-
-            // mean
-            meanHandleTrans.setText(decimalFormat.format(mean(sortedBy_HA_TAceel)));
-            meanHandleAbsolute.setText(decimalFormat.format(mean(sortedBy_HA_Aceel)));
-            meanBaseTrans.setText(decimalFormat.format(mean(sortedBy_BA_TAceel)));
-            meanBaseAbsolute.setText(decimalFormat.format(mean(sortedBy_BA_Aceel)));
-            //SD
-            sdHandleTrans.setText(decimalFormat.format(standardDeviation(sortedBy_HA_TAceel)));
-            sdHandleAbsolute.setText(decimalFormat.format(standardDeviation(sortedBy_HA_Aceel)));
-            sdBaseTrans.setText(decimalFormat.format(standardDeviation(sortedBy_BA_TAceel)));
-            sdBaseAbsolute.setText(decimalFormat.format(standardDeviation(sortedBy_BA_Aceel)));
-            // median
-            medianHandleTrans.setText(decimalFormat.format(median(sortedBy_HA_TAceel)));
-            medianHandleAbsolute.setText(decimalFormat.format(median(sortedBy_HA_Aceel)));
-            medianBaseTrans.setText(decimalFormat.format(median(sortedBy_BA_TAceel)));
-            medianBaseAbsolute.setText(decimalFormat.format(median(sortedBy_BA_Aceel)));
-            // min
-            minHandleTrans.setText(decimalFormat.format(sortedBy_HA_TAceel.get(0)));
-            minHandleAbsolute.setText(decimalFormat.format(sortedBy_HA_Aceel.get(0)));
-            minBaseTrans.setText(decimalFormat.format(sortedBy_BA_TAceel.get(0)));
-            minBaseAbsolute.setText(decimalFormat.format(sortedBy_BA_Aceel.get(0)));
-            // max
-            maxHandleTrans.setText(decimalFormat.format(sortedBy_HA_TAceel.get(sortedBy_HA_TAceel.size()-1)));
-            maxHandleAbsolute.setText(decimalFormat.format(sortedBy_HA_Aceel.get(sortedBy_HA_Aceel.size()-1)));
-            maxBaseTrans.setText(decimalFormat.format(sortedBy_BA_TAceel.get(sortedBy_BA_TAceel.size()-1)));
-            maxBaseAbsolute.setText(decimalFormat.format(sortedBy_BA_Aceel.get(sortedBy_BA_Aceel.size()-1)));
-
-            graph.clearSecondScale();
-            graph.removeAllSeries();
-
-            for(int i =0; i< sortedBy_HA_TAceel.size(); i++) {
-                series1.appendData(new DataPoint(i, patientInfo.get(i).m_BA_AccelMagnitude), true, sortedBy_HA_TAceel.size());
-                series2.appendData(new DataPoint(i, patientInfo.get(i).m_BA_TransvPlaneAccelMag), true, sortedBy_HA_TAceel.size());
-                series3.appendData(new DataPoint(i, patientInfo.get(i).m_HA_AccelMagnitude), true, sortedBy_HA_TAceel.size());
-                series4.appendData(new DataPoint(i, patientInfo.get(i).m_HA_TransvPlaneAccelMag), true, sortedBy_HA_TAceel.size());
-            }
-
-            // set manual X bounds
-            graph.getViewport().setYAxisBoundsManual(true);
-            graph.getViewport().setMinY(0);
-            graph.getViewport().setMaxY(3);
-
-            graph.getViewport().setXAxisBoundsManual(true);
-            graph.getViewport().setMinX(0);
-            graph.getViewport().setMaxX(sortedBy_BA_Aceel.size());
-
-            // This option does not work in my laptop
-            graph.getViewport().setScrollable(true);    // enables horizontal scrolling
-            graph.getViewport().setScrollableY(true);   // enables vertical scrolling
-            graph.getViewport().setScalable(true);      // enables horizontal zooming and scrolling
-            graph.getViewport().setScalableY(true);     // enables vertical zooming and scrolling
-
-            series1.setTitle(" Curve 1");
-
-            series2.setColor(Color.BLACK);
-            series1.setColor(Color.RED);
-            series3.setColor(Color.BLUE);
-            series4.setColor(Color.GREEN);
-
-            series1.setThickness(3);
-            series2.setThickness(3);
-            series3.setThickness(3);
-            series4.setThickness(3);
-
-            graph.addSeries(series1);
-            graph.addSeries(series2);
-            graph.addSeries(series3);
-            graph.addSeries(series4);
-
-
-        }
-    }; // end of speed listener
-
-
-
-
-    public OnClickListener predictionButtonListener = new OnClickListener() {
-        @Override
-        public void onClick(View v) {
-
->>>>>>> luiss
         }
     }; // end of prediction listener
 
@@ -1181,89 +850,18 @@ public class Data_visualization extends AppCompatActivity {
 
     public static double skew (Double mean, Double SD) {
 
-<<<<<<< HEAD
         // formula used ( mean^3 / SD^4)
         return ((Math.pow(( mean ),3))/(Math.pow(( SD ),3)));
     }
-=======
-  /*  public static double skew (ArrayList data) {
 
->>>>>>> luiss
 
-        //skewness = [n / (n -1) (n - 2)] sum[(x_i - mean)^3] / std^3
-        int i, n = data.size();
-
-<<<<<<< HEAD
     public static double kurtosis (Double mean, Double SD) {
 
         //formula used ( mean^4 / SD^4 ) -
         return ((( Math.pow(( mean ),4))/(Math.pow(( SD ),4)))  - 3);
-=======
-        if (n == 0)
-            return n;
-
-        double d, avg = MISSG;
-        int count = 0;
-
-        for (i=0; i<n; i++) {
-            d = (Double)data.get(i);
-            if (d != MISSG) {
-                avg = Calculator.add (avg, d);
-                count ++;
-            }
-        }
-
-        if (count < 3)
-            return MISSG;
-
-        avg = avg / count;
-
-        double stdev = 0.;
-        for (i=0; i<n; i++) {
-            d = (Double)data.get(i);
-            if (d != MISSG) {
-                d = d - avg;
-                stdev = stdev + d * d;
-            }
-        }
-
-        stdev = Math.sqrt (stdev / (count - 1));
-
-        if (stdev == 0)
-            return 0;
-
-        double skew = 0;
-        for (i=0; i < data.size() ; i++) {
-            d = (Double)data.get(i);
-            //if (d != MISSG) {
-                d = d - avg;
-                d = d / stdev;
-                skew = skew + d * d * d;
-            //}
-        }
-
-        return skew * count / ((count - 1) * (count - 2));
->>>>>>> luiss
     }
-*/
-
-    public void clearTable (){
 
 
-        // mean
-        meanHandleTrans.setText("");
-        meanHandleAbsolute.setText("");
-        meanBaseTrans.setText("");
-        meanBaseAbsolute.setText("");
-
-        //SD
-        sdHandleTrans.setText("");
-        sdHandleAbsolute.setText("");
-        sdBaseTrans.setText("");
-        sdBaseAbsolute.setText("");
-
-
-<<<<<<< HEAD
     public void clearTable (){
 
 
@@ -1277,14 +875,11 @@ public class Data_visualization extends AppCompatActivity {
         sdHandleAbsolute.setText("");
         sdBaseTrans.setText("");
         sdBaseAbsolute.setText("");
-=======
->>>>>>> luiss
         // median
         medianHandleTrans.setText("");
         medianHandleAbsolute.setText("");
         medianBaseTrans.setText("");
         medianBaseAbsolute.setText("");
-<<<<<<< HEAD
         // skew
         skewnessHandleTrans.setText("");
         skewnessHandleAbsolute.setText("");
@@ -1295,19 +890,11 @@ public class Data_visualization extends AppCompatActivity {
         kurtosisHandleAbsolute.setText("");
         kurtosisBaseTrans.setText("");
         kurtosisBaseAbsolute.setText("");
-=======
-
-
->>>>>>> luiss
         // min
         minHandleTrans.setText("");
         minHandleAbsolute.setText("");
         minBaseTrans.setText("");
         minBaseAbsolute.setText("");
-<<<<<<< HEAD
-=======
-
->>>>>>> luiss
         // max
         maxHandleTrans.setText("");
         maxHandleAbsolute.setText("");
@@ -1319,11 +906,3 @@ public class Data_visualization extends AppCompatActivity {
 
 }// end of data_visualisation
 
-<<<<<<< HEAD
-=======
-
-/***  FILLING THE TABLE: HANDLE ****/
-
-/***  Traverse Plane Acceleration Magnitude ( Traverse Acceleration "blue")  ***/
-/***  Acceleration Magnitude  ( Absolute Acceleration "Green" ) ***/
->>>>>>> luiss

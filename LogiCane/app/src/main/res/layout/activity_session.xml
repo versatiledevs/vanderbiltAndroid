@@ -4,10 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-<<<<<<< HEAD
     android:weightSum="3"
-=======
->>>>>>> luiss
     >
     <RelativeLayout
         android:layout_width="0dp"
@@ -606,7 +603,6 @@
                 android:layout_height="match_parent"
                 android:id="@+id/displayView"
                 />
-
         </RelativeLayout>
 
         <org.florescu.android.rangeseekbar.RangeSeekBar
@@ -682,8 +678,6 @@
                     />
             </LinearLayout>
         </RelativeLayout>
-
-
 
     </RelativeLayout>
 
