@@ -9,10 +9,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.firebase.auth.api.model.StringList;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,7 +29,11 @@ import java.util.List;
 public class patient_activity extends AppCompatActivity {
 
     String patient;
+    String spinner_value;
+    String test;
+    String test_value;
     final List<String> patient_list = new ArrayList<String>();
+    final List<String> test_list = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,25 +54,52 @@ public class patient_activity extends AppCompatActivity {
                     //patient = postSnapshot.child("Data").getValue(String.class);
                     patient_list.add(patient);
                 }
-                Spinner dropdown = (Spinner) findViewById(R.id.patient_spinner);
+                final Spinner dropdown = (Spinner) findViewById(R.id.patient_spinner);
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(patient_activity.this, android.R.layout.simple_spinner_dropdown_item, patient_list);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 dropdown.setAdapter(adapter);
+
+                //get value chosen in spinner
+                spinner_value = dropdown.getSelectedItem().toString();
+
+                //test spinner
+
+                //pass spinner value to next intent
+                /*Intent intent = new Intent(patient_activity.this, Data_visualization.class);
+                intent.putExtra("patient", spinner_value);
+                startActivity(intent);  */
             }
+
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 //error handling
             }
         });
-    }
-       /* Spinner dropdown = (Spinner)findViewById(R.id.patient_spinner);
-        String[] items = new String[]{"Patient 1", "Patient 2", "Patient 3"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items);
-        dropdown.setAdapter(adapter);
-        //getActionBar().setDisplayHomeAsUpEnabled(true);
 
-*/
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        DatabaseReference test_ref = db.getReferenceFromUrl("https://logicane-cf98b.firebaseio.com/Data"+spinner_value);
+        test_ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Long count = dataSnapshot.getChildrenCount();
+                Iterator iter = dataSnapshot.getChildren().iterator();
+                for (int x = 0; x < count; x++) {
+                    test = ((DataSnapshot) iter.next()).getKey();
+                    test_list.add(test);
+                }
+                Spinner spinner_test = (Spinner) findViewById(R.id.test_spinner);
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(patient_activity.this, android.R.layout.simple_spinner_dropdown_item, test_list);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinner_test.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }             //end onCreate
 
         @Override
         public boolean onCreateOptionsMenu (Menu menu){
