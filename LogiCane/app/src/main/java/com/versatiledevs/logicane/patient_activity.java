@@ -30,7 +30,7 @@ import java.util.List;
 import static android.R.attr.button;
 
 public class patient_activity extends AppCompatActivity {
-
+    //variables for spinner strings and lists
     String patient;
     String spinner_value;
     String test;
@@ -44,9 +44,12 @@ public class patient_activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.patient_activity);
 
+        ////create a path to connect to database, create an object based on database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReferenceFromUrl("https://logicane-cf98b.firebaseio.com/Data");
 
+        //loop through the list of patients
+        //add them to patient list
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
@@ -58,6 +61,7 @@ public class patient_activity extends AppCompatActivity {
                     //patient = postSnapshot.child("Data").getValue(String.class);
                     patient_list.add(patient);
                 }
+                //spinner for the patient list
                 final Spinner dropdown = (Spinner) findViewById(R.id.patient_spinner);
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(patient_activity.this, android.R.layout.simple_spinner_dropdown_item, patient_list);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -66,17 +70,15 @@ public class patient_activity extends AppCompatActivity {
                 //get value chosen in spinner
                 spinner_value = dropdown.getSelectedItem().toString();
 
-                //test spinner
+                //test spinner ------------not complete!!!!!
                 Spinner spinner_test = (Spinner) findViewById(R.id.test_spinner);
                 String[] test_list = {"DGI", "SM"};
                 ArrayAdapter<String> test_adapter = new ArrayAdapter<String>(patient_activity.this, android.R.layout.simple_spinner_dropdown_item, test_list);
                 test_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinner_test.setAdapter(adapter);
 
-                //pass spinner value to next intent
-                Intent intent = new Intent(patient_activity.this, Data_visualization.class);
-                intent.putExtra("patient", spinner_value);
-                startActivity(intent);
+
+
             }
 
 
@@ -85,6 +87,8 @@ public class patient_activity extends AppCompatActivity {
                 //error handling
             }
         });
+        //on button click
+        //pass spinner value to next intent
         Button button;
         button = (Button)findViewById(R.id.submit_button);
         button.setOnClickListener(new View.OnClickListener() {
@@ -94,11 +98,11 @@ public class patient_activity extends AppCompatActivity {
                 intent.putExtra("patient", spinner_value);
                 startActivity(intent);
             }
-        });
+        });  //end setOnCLickListener
 
 
     }             //end onCreate
-
+        //menu inflater used for the back button and settings/signout
         @Override
         public boolean onCreateOptionsMenu (Menu menu){
             MenuInflater inflater = getMenuInflater();
@@ -111,17 +115,9 @@ public class patient_activity extends AppCompatActivity {
         public boolean onOptionsItemSelected (MenuItem item){
             // Handle item selection
             switch (item.getItemId()) {
-            /*case R.id.action_back:
-                NavUtils.navigateUpFromSameTask(this);
-                return true;
-            */
                 case R.id.action_search:
                     //startActivity(new Intent(this, SearchPatients.class));
                     return true;
-            /*case R.id.action_settings:
-                startActivity(new Intent(this, Settings.class));
-                return true;
-                */
                 case R.id.action_signout:
                     startActivity(new Intent(patient_activity.this, LoginActivity.class));
                     return true;
@@ -129,7 +125,7 @@ public class patient_activity extends AppCompatActivity {
                     return super.onOptionsItemSelected(item);
             }
         }
-
+    //this button will send you directly to a data view for testing
     public void DataVisualizationPublic(View view) {
 
         String key = "item1";   //this is the item that is send to data visualisation
@@ -143,9 +139,3 @@ public class patient_activity extends AppCompatActivity {
         //finish();
     }
 }
-
-/*
-    <item android:id="@+id/action_search"
-        android:title="@string/action_search"
-        android:icon="@drawable/action_search"
-        app:showAsAction = "ifRoom"/>*/
