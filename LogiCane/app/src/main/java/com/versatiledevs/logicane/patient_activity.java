@@ -94,8 +94,13 @@ public class patient_activity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bundle b = new Bundle();
+                b.putString("patient", spinner_value);
+                b.putString("DGI", "DGI");
+                b.putString("item", "item1");
+
                 Intent intent = new Intent(patient_activity.this, Data_visualization.class);
-                intent.putExtra("patient", spinner_value);
+                intent.putExtras(b);
                 startActivity(intent);
             }
         });  //end setOnCLickListener

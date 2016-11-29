@@ -121,7 +121,7 @@ public class Data_visualization extends AppCompatActivity {
 
     // firebase database
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
-    private String urlDatabase = "https://logicane-cf98b.firebaseio.com/Data/M11/DGI/";
+    private String urlDatabase = "https://logicane-cf98b.firebaseio.com/Data/";
 
     DecimalFormat decimalFormat = new DecimalFormat("#.###");
 
@@ -185,9 +185,11 @@ public class Data_visualization extends AppCompatActivity {
 
         // get the item number
         Bundle bundle = getIntent().getExtras();
+        String patient = bundle.getString("patient");
+        String DGI = bundle.getString("DGI");
         String item = bundle.getString("item");
 
-        DatabaseReference myRefDouble = database.getReferenceFromUrl(urlDatabase + item);
+        DatabaseReference myRefDouble = database.getReferenceFromUrl(urlDatabase+patient+"/" + DGI +"/"+ item);
 
 
 
